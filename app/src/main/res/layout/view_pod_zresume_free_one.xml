@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.smtz.cvgenius.presentation.preview.templateViewPods.ResumeFreeOneViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/templateone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/firstRootView"
+        android:layout_width="353.5dp"
+        android:layout_height="499.79dp"
+        android:padding="@dimen/margin_medium_3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_weight="3.5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bebas_neue_regular"
+                    android:text="Mariana Anderson"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_name_resume_free_one" />
+
+                <TextView
+                    android:id="@+id/tvPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:fontFamily="@font/nunito_medium"
+                    android:text="Android Developer"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_heading_resume_free_one"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:text="Address: 123 Anywhere St. Any city"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_content_resume_free_one" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:text="Phone: +123 456 789"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_content_resume_free_one" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:text="Email: abcd@gmail.com"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_content_resume_free_one" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivProfileImage"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1.5"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_image" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/line" />
+
+        <!--   Objective   -->
+        <LinearLayout
+            android:id="@+id/containerObjective"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:fontFamily="@font/nunito_medium"
+                android:text="Carrier Overview"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_heading_resume_free_one"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvObjective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_medium"
+                android:text="lausfadsfjlajsfhjsdfaslifjasfdhaasfdasdfasfdasdfasfdasdfasfdasfdasdadsfasdihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslifjasfdhaihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslifjasfdhaihsausdfhausfhlajsfhjsdfaslifjasfdhaihsausdfhausf"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_content_resume_free_one" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewBelowObjective"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:background="@drawable/line" />
+
+        <LinearLayout
+            android:id="@+id/containerFirstPageBothSides"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <LinearLayout
+                android:id="@+id/containerFirstPageLeftSide"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_weight="2.4"
+                android:orientation="vertical">
+
+                <!--   Education   -->
+                <LinearLayout
+                    android:id="@+id/containerEducation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="@string/lbl_education"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_heading_resume_free_one"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/containerSingleEdu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvDegreeName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_medium"
+                                android:text="Bachelor of Computer Science"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_content_resume_free_one" />
+
+                            <TextView
+                                android:id="@+id/tvUniversityName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/nunito_medium"
+                                android:text="Harvard University"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_content_resume_free_one" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvEducationDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:fontFamily="@font/nunito_medium"
+                            android:gravity="center"
+                            android:text="04/2018 - 04/2022"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_content_resume_free_one" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--   Skills   -->
+                <LinearLayout
+                    android:id="@+id/containerSkill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="Skills"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_heading_resume_free_one"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/containerSingleSkill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="&#9679; Basic computer"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_content_resume_free_one" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="&#9679; Organization skill"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_content_resume_free_one" />
+
+                </LinearLayout>
+
+                <!--   Achievements   -->
+                <LinearLayout
+                    android:id="@+id/containerAchievement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="Achievements"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_heading_resume_free_one"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/containerSingleAchievement"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="&#9679; asdfasdfasd"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_content_resume_free_one" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="&#9679; adfssffsdfasfaasfd"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_content_resume_free_one" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/containerFirstPageRightSide"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.6"
+                android:orientation="vertical">
+
+                <!--   Experience   -->
+                <LinearLayout
+                    android:id="@+id/containerWorkExp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="Experience"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_heading_resume_free_one"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/containerSingleWorkExp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvWorkPosition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_medium"
+                            android:text="Office Staff"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_heading_resume_free_one" />
+
+                            <TextView
+                                android:id="@+id/tvCompanyNameAndDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:fontFamily="@font/nunito_medium"
+                                android:text="Borcelle  | 04/2018 - 04/2022"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_content_resume_free_one" />
+
+
+                        <TextView
+                            android:id="@+id/tvWorkDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:fontFamily="@font/nunito_medium"
+                            android:text="- lausfadsfjlajsfhjsdfaslifjasfdhaasfdasdfasfdasdfasfdasdfasfdasfdasdadsfasdihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslf"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_content_resume_free_one" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--   Project   -->
+                <LinearLayout
+                    android:id="@+id/containerProject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:fontFamily="@font/nunito_medium"
+                        android:text="Project"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_heading_resume_free_one"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/containerSingleProject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvProjectTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/nunito_medium"
+                            android:text="Wechat"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_heading_resume_free_one" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small">
+
+                            <TextView
+                                android:id="@+id/tvProjectPosition"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/margin_small"
+                                android:fontFamily="@font/nunito_medium"
+                                android:text="Main Developer |"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_content_resume_free_one" />
+
+                            <TextView
+                                android:id="@+id/tvProjectDuration"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/tvProjectPosition"
+                                android:fontFamily="@font/nunito_medium"
+                                android:text="04/2018 - 04/2022"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_content_resume_free_one" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tvProjectDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:fontFamily="@font/nunito_medium"
+                            android:text="- lausfadsfjlajsfhjsdfaslifjasfdhaasfdasdfasfdasdfasfdasdfasfdasfdasdadsfasdihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslf"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_content_resume_free_one" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewFirstBottomost"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:background="@drawable/line" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondRootView"
+        android:layout_width="353.5dp"
+        android:layout_height="499.79dp"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_medium_3"
+        android:background="@color/white"
+        android:visibility="gone">
+
+    <LinearLayout
+        android:id="@+id/containerSecondPageBothSides"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:id="@+id/containerSecondPageLeftSide"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_weight="2.4"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/containerSecondPageRightSide"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.6"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewSecondBottomost"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/line" />
+
+
+    </LinearLayout>
+
+</com.smtz.cvgenius.presentation.preview.templateViewPods.ResumeFreeOneViewPod>

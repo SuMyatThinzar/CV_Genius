@@ -1,0 +1,302 @@
+package com.smtz.cvgenius.presentation.details.personalDetails
+
+import android.animation.ValueAnimator
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.nfc.NfcAdapter.EXTRA_ID
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import android.view.ViewTreeObserver.OnScrollChangedListener
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.widget.AdapterView
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import com.smtz.cvgenius.R
+import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.core.BaseActivity
+import com.smtz.cvgenius.data.repository.CvModelImpl
+import com.smtz.cvgenius.databinding.ActivityPersonalDetailBinding
+import com.smtz.cvgenius.domain.model.CvVO
+import com.smtz.cvgenius.domain.model.PersonalDetailVO
+import com.smtz.cvgenius.domain.repository.CvModel
+import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
+import com.smtz.cvgenius.utils.setUpTitleAndButton
+
+
+class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
+
+    private val ANIMATION_DURATION = 200L
+    private var mToolbarHeight = 330
+    private var isExpanded = true
+
+    private var mCvId: Long? = null
+    private var mCvVO: CvVO? = null
+    private var mPersonalDetail: PersonalDetailVO? = null
+    private var personalId: Long = 0
+
+    private var mCvModel: CvModel = CvModelImpl
+    private var gender: String? = null
+
+    override val binding: ActivityPersonalDetailBinding by lazy {
+        ActivityPersonalDetailBinding.inflate(layoutInflater)
+    }
+
+    companion object {
+        const val REQUEST_CODE = 100
+        const val EXTRA_CV = "EXTRA CV"
+        const val EXTRA_RESULT = "EXTRA RESULT"
+
+        fun newIntent(context: Context): Intent {
+            val intent = Intent(context, PersonalDetailActivity::class.java)
+//            intent.putExtra(EXTRA_CV, cvVO)
+            return intent
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+//        mCvVO = intent.getSerializableExtra(EXTRA_CV) as CvVO
+
+        mCvVO = CvSingleton.instance.cvVO
+
+        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
+        setUpListener()
+        requestData()
+        setUpData()
+    }
+
+    private fun requestData() {
+//        mCvModel.getCv(mCvId?:0L)?.observe(this) {
+//            mCvVO = it
+//            if (it?.personalDetails != null) {
+//                mPersonalDetail = it.personalDetails
+//                setUpData()
+//            }
+//        }
+    }
+
+    private fun setUpData() {
+        // set up Id
+        personalId = if (mCvVO?.personalDetails != null) mCvVO?.personalDetails!!.id else System.currentTimeMillis()
+
+        // set up editText
+        mCvVO?.personalDetails?.let {
+            binding.etFirstName.setText(it.firstName)
+            binding.etContact.setText(it.contact)
+            binding.etLastName.setText(it.lastName)
+            binding.etNationality.setText(it.nationality)
+            binding.etDateOfBirth.setText(it.dateOfBirth)
+            binding.etEmail.setText(it.email)
+            binding.etAddress.setText(it.address)
+            binding.etProfessionalTitle.setText(it.professionalTitle)
+        }
+    }
+
+    private fun setUpListener() {
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.btnSave.setOnClickListener {
+            val firstName = binding.etFirstName.text.toString().trim()
+            val lastName = binding.etLastName.text.toString().trim()
+            val contact = binding.etContact.text.toString().trim()
+            val nationality = binding.etNationality.text.toString().trim()
+            val dateOfBirth = binding.etDateOfBirth.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val address = binding.etAddress.text.toString().trim()
+            val professionalTitle = binding.etProfessionalTitle.text.toString().trim()
+
+
+            if (firstName.isNotEmpty() && contact.isNotEmpty()) {
+
+                val personalDetailVO = PersonalDetailVO(
+                    id = personalId,
+                    firstName = firstName,
+                    lastName = lastName,
+                    contact = contact,
+                    nationality = nationality,
+                    dateOfBirth = dateOfBirth,
+                    gender = gender,
+                    email = email,
+                    address = address,
+                    professionalTitle = professionalTitle
+                )
+                mCvVO?.personalDetails = personalDetailVO
+
+                mCvVO?.let { it1 -> mCvModel.insertCV(it1) }
+
+//                val intent = Intent(this,CreateCvActivity::class.java)
+//                    .putExtra(EXTRA_RESULT, mCvVO)
+//                setResult(Activity.RESULT_OK, intent)
+
+            }
+
+            if (firstName.isEmpty()) binding.errorName.visibility = View.VISIBLE
+            if (contact.isEmpty()) binding.errorContact.visibility = View.VISIBLE
+
+            finish()
+        }
+        setUpError(binding.etFirstName, binding.errorName)
+        setUpError(binding.etContact, binding.errorContact)
+
+        binding.spinnerGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                (view as TextView).setTextColor(resources.getColor(R.color.colorSecondaryText)) //Change selected text color
+                gender = view.text as String?
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+//        binding.nestedScrollView.setOnTouchListener(object : View.OnTouchListener {
+//            var y0 = 0f
+//            var y1 = 0f
+//            override fun onTouch(view: View?, motionEvent: MotionEvent): Boolean {
+//                if (motionEvent.action == MotionEvent.ACTION_MOVE) {
+//                    y0 = motionEvent.y
+//                    if (y1 - y0 > 0) {
+//                        collapseToolbar()
+//                        isExpanded = false
+//                    }
+//
+//                    else if (y1 - y0 < 0 && binding.nestedScrollView.scrollY == 0) {   // binding.nestedScrollView.scrollY == 0 makes sure it's the top of nestedScrollView to expand
+//                        expandToolbar()
+//                        isExpanded = true
+//                    }
+//                    y1 = motionEvent.y
+//                }
+//                return false
+//            }
+//        })
+
+        binding.nestedScrollView.viewTreeObserver
+            .addOnScrollChangedListener(object : OnScrollChangedListener {
+                var y = 0f
+                override fun onScrollChanged() {
+                    if (binding.nestedScrollView.scrollY > y && mToolbarHeight == binding.frameLayout.height) {
+                        collapseToolbar()
+                        isExpanded = false
+                    }
+                    if (mToolbarHeight > binding.frameLayout.height && binding.nestedScrollView.scrollY == 0 && !isExpanded) {
+                        expandToolbar()
+                        isExpanded = true
+                    }
+                    y = binding.nestedScrollView.scrollY.toFloat()
+                }
+            })
+
+//        binding.nestedScrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollY, oldScrollX ->
+//            if ( mToolbarHeight > binding.frameLayout.height && binding.nestedScrollView.scrollY == 0 ) {
+//                // Scroll view is at the top, expand the toolbar
+//                if (!isExpanded && !hasScrolled) {
+//                    expandToolbar()
+//                    isExpanded = true
+//                }
+//                hasScrolled = true
+//            } else if (scrollY > 0 && mToolbarHeight == binding.frameLayout.height && !hasScrolled) {
+//                // Scroll view has been scrolled, collapse the toolbar
+//                if (isExpanded) {
+//                    collapseToolbar()
+//                    isExpanded = false
+//                }
+//                hasScrolled = true
+//            }
+
+//            if (scrollY > oldScrollY && isExpanded ) {
+//                collapseToolbar()
+//                    isExpanded = false
+//            }
+//            if (scrollY < oldScrollY && !isExpanded ) {
+//                    expandToolbar()
+//                    isExpanded = true
+//            }
+//        }
+
+    }
+
+    private fun collapseToolbar() {
+
+        if (mToolbarHeight == binding.frameLayout.height) {
+
+            setUpTitleAndButton(
+                expand = false,
+                binding.tvTitle,
+                binding.btnBack,
+                binding.frameLayout
+            )
+
+            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight / 2)
+            animator.duration = ANIMATION_DURATION
+            animator.interpolator = AccelerateInterpolator()
+            animator.addUpdateListener {
+                val value = it.animatedValue as Int
+                binding.frameLayout.layoutParams.height = value
+                binding.frameLayout.requestLayout()
+            }
+            animator.start()
+        }
+    }
+
+    private fun expandToolbar() {
+
+        if (mToolbarHeight > binding.frameLayout.height) {
+
+            setUpTitleAndButton(
+                expand = true,
+                binding.tvTitle,
+                binding.btnBack,
+                binding.frameLayout
+            )
+
+            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight)
+            animator.duration = ANIMATION_DURATION
+            animator.interpolator = DecelerateInterpolator()
+            animator.addUpdateListener {
+                val value = it.animatedValue as Int
+                binding.frameLayout.layoutParams.height = value
+                binding.frameLayout.requestLayout()
+            }
+//            animator.addListener(object : AnimatorListenerAdapter() {
+//                override fun onAnimationEnd(animation: Animator) {
+//                    isAnimating = false
+//                }
+//            })
+            animator.start()
+        }
+    }
+
+//    private fun setUpEditorActionListener(firstEt: TextInputEditText, secondEt: TextInputEditText) {
+//        firstEt.setOnEditorActionListener { _, actionId, _ ->
+//            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+//                secondEt.requestFocus()
+//                return@setOnEditorActionListener true
+//            }
+//            return@setOnEditorActionListener false
+//        }
+//    }
+
+    private fun setUpError(editText: EditText, error: TextView) {
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.isNullOrEmpty()) error.visibility = View.VISIBLE
+                else error.visibility = View.INVISIBLE
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+}

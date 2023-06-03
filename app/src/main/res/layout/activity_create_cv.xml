@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".presentation.createcv.CreateCvActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_toolbar"
+            app:collapsedTitleTextColor="@color/colorToolbar"
+            app:contentScrim="@color/colorAccent"
+            app:expandedTitleTextColor="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@android:color/transparent"
+            app:title="@string/lbl_create_my_cv">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="@dimen/width_back_btn"
+                android:layout_height="@dimen/height_back_btn"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_medium_3"
+                android:background="@drawable/background_back"
+                android:padding="@dimen/margin_card_medium"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_card_medium"
+                android:layout_gravity="center"
+                android:text="@string/lbl_create_my_cv"
+                android:textColor="@color/colorToolbar"
+                android:textSize="@dimen/text_heading_1x"
+                android:textStyle="bold" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:paddingTop="@dimen/margin_medium"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_medium_3_n"
+        android:background="@drawable/background_half_card"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_medium_2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:text="@string/lbl_select_your_profile_photo"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/text_regular_2x" />
+
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/margin_medium_3"
+                android:layout_gravity="center_horizontal">
+
+                <com.smtz.cvgenius.common.delegates.RoundedCornerImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/background_select_photo"
+                    app:cornerRadius="40dp"/>
+
+                <com.smtz.cvgenius.common.delegates.RoundedCornerImageView
+                    android:id="@+id/ivSelectedImage"
+                    android:layout_width="74dp"
+                    android:layout_height="74dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_select_photo"
+                    android:scaleType="centerCrop"
+                    app:cornerRadius="40dp"/>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_medium_3">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUploadPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_button"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:background="@drawable/background_upload_photo"
+                    android:paddingStart="@dimen/margin_medium_3"
+                    android:paddingEnd="@dimen/margin_medium_3"
+                    android:text="@string/lbl_upload_photo"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRemovePhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_button"
+                    android:background="@drawable/background_remove"
+                    android:text="@string/lbl_remove"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorSecondaryText" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDetailButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xlarge"
+                android:layout_marginBottom="@dimen/margin_medium_2"
+                android:paddingStart="@dimen/margin_medium_2"
+                android:overScrollMode="never"
+                android:clipToPadding="false"/>
+
+            <!--        <GridLayout-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:columnCount="3"-->
+            <!--            android:layout_marginTop="@dimen/margin_xlarge"-->
+            <!--            android:layout_marginBottom="@dimen/margin_medium_2">-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpPersonalDetails"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"-->
+            <!--                android:layout_marginEnd="@dimen/margin_card_medium_2"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpEducationDetails"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"-->
+            <!--                android:layout_marginEnd="@dimen/margin_card_medium_2"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpWorkExperience"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpSkillDetails"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"-->
+            <!--                android:layout_marginEnd="@dimen/margin_card_medium_2"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpAchievements"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"-->
+            <!--                android:layout_marginEnd="@dimen/margin_card_medium_2"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpObjectives"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpProjectDetails"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"-->
+            <!--                android:layout_marginEnd="@dimen/margin_card_medium_2"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpReferences"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"-->
+            <!--                android:layout_marginEnd="@dimen/margin_card_medium_2"/>-->
+
+            <!--            <include-->
+            <!--                android:id="@+id/vpSignature"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                layout="@layout/view_holder_detail_button"-->
+            <!--                android:layout_columnWeight="1"/>-->
+
+            <!--        </GridLayout>-->
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/btnPreviewCv"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:backgroundTint="#FFFAE8">
+
+        <ImageView
+            android:layout_width="@dimen/size_drawer_icon"
+            android:layout_height="@dimen/size_drawer_icon"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:src="@drawable/ic_view"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/lbl_view_my_cv"/>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

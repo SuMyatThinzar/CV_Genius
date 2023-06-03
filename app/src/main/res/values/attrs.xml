@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CollapsibleHeaderView">
+        <attr name="expandedHeight" format="dimension" />
+        <attr name="collapsedHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundedCornerImageView">
+        <attr name="cornerRadius" format="dimension"/>
+    </declare-styleable>
+
+</resources>

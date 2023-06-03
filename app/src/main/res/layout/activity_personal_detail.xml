@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    tools:context=".presentation.details.personalDetails.PersonalDetailActivity">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/colorAccent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/width_back_btn"
+            android:layout_height="@dimen/height_back_btn"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:background="@drawable/background_back"
+            android:elevation="1dp"
+            android:padding="@dimen/margin_card_medium"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="1dp"
+            android:text="@string/lbl_personal_details"
+            android:textColor="@color/colorToolbar"
+            android:textSize="@dimen/text_heading_1x"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_medium_2_n"
+        android:background="@drawable/background_half_card"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- First Name, Last Name -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_medium_3"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_card_medium"
+                        android:text="@string/lbl_first_name"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="@dimen/text_regular" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_edit_text"
+                        android:hint="Mary"
+                        android:inputType="text"
+                        android:padding="@dimen/margin_medium"
+                        android:singleLine="true"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textColorHint="@color/colorProfileText"
+                        android:textCursorDrawable="@drawable/custom_cursor"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/errorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/margin_small"
+                        android:text="@string/lbl_field_is_mandatory"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="@dimen/text_small"
+                        android:visibility="invisible"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_card_medium"
+                        android:text="@string/lbl_last_name"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="@dimen/text_regular" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_edit_text"
+                        android:hint="Janes"
+                        android:inputType="text"
+                        android:padding="@dimen/margin_medium"
+                        android:singleLine="true"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textColorHint="@color/colorProfileText"
+                        android:textCursorDrawable="@drawable/custom_cursor"
+                        android:textSize="@dimen/text_small" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <!-- Date of Birth, Nationality -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium_n"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3">
+
+                <!-- Contact -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_medium_3"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_card_medium"
+                        android:text="@string/lbl_contact"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="@dimen/text_regular" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_edit_text"
+                        android:digits="01234567890.+"
+                        android:hint="+95 9791234567"
+                        android:inputType="number"
+                        android:padding="@dimen/margin_medium"
+                        android:singleLine="true"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textColorHint="@color/colorProfileText"
+                        android:textCursorDrawable="@drawable/custom_cursor"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/errorContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/margin_small"
+                        android:text="@string/lbl_field_is_mandatory"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="@dimen/text_small"
+                        android:visibility="invisible"/>
+
+                </LinearLayout>
+
+                <!-- Nationality -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_card_medium"
+                        android:text="@string/lbl_nationality"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="@dimen/text_regular" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNationality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_edit_text"
+                        android:hint="American"
+                        android:inputType="text"
+                        android:padding="@dimen/margin_medium"
+                        android:singleLine="true"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textColorHint="@color/colorProfileText"
+                        android:textCursorDrawable="@drawable/custom_cursor"
+                        android:textSize="@dimen/text_small" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Gender, Contact-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium_n"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3">
+
+                <!-- Gender -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_medium_3"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_card_medium"
+                        android:text="@string/lbl_gender"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="@dimen/text_regular" />
+
+                    <Spinner
+                        android:id="@+id/spinnerGender"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_xlarge"
+                        android:background="@drawable/background_spinner"
+                        android:entries="@array/gender" />
+
+                </LinearLayout>
+
+                <!-- DOB -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_card_medium"
+                        android:text="@string/lbl_date_of_birth"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textSize="@dimen/text_regular" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDateOfBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_edit_text"
+                        android:digits="01234567890.+"
+                        android:hint="1.11.2011"
+                        android:inputType="number"
+                        android:padding="@dimen/margin_medium"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorProfileText"
+                        android:textCursorDrawable="@drawable/custom_cursor"
+                        android:textSize="@dimen/text_small" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Email -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_card_medium"
+                    android:text="@string/lbl_email"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/text_regular" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_edit_text"
+                    android:hint="maryjanes1500@gmail.com"
+                    android:inputType="text"
+                    android:padding="@dimen/margin_medium"
+                    android:singleLine="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textColorHint="@color/colorProfileText"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:textSize="@dimen/text_small" />
+
+            </LinearLayout>
+
+            <!-- Address -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_card_medium"
+                    android:text="@string/lbl_address"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/text_regular" />
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_edit_text"
+                    android:gravity="top|start"
+                    android:hint="United States"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:maxLines="10"
+                    android:padding="@dimen/margin_medium"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textColorHint="@color/colorProfileText"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:textSize="@dimen/text_small" />
+
+            </LinearLayout>
+
+            <!-- Professional Title -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_card_medium"
+                    android:text="@string/lbl_professional_title"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/text_regular" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfessionalTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_edit_text"
+                    android:hint="UI/UX Designer"
+                    android:inputType="text"
+                    android:padding="@dimen/margin_medium"
+                    android:singleLine="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textColorHint="@color/colorProfileText"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:textSize="@dimen/text_small" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_xxlarge"
+                android:background="@drawable/background_upload_photo"
+                android:paddingStart="@dimen/margin_medium_3"
+                android:paddingEnd="@dimen/margin_medium_3"
+                android:text="@string/lbl_save"
+                android:textAllCaps="false"
+                android:textColor="@color/colorSecondaryText" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

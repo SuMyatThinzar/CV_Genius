@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="SameThemeDarkLight" parent="Theme.CVGenius.TransparentStatusBar">
+        <!-- Disable automatic color adaptation -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <!--  Spinner drop down color  -->
+<!--    <style name="MySpinnerStyle" parent="Widget.AppCompat.Spinner.DropDown">-->
+<!--        <item name="android:textColor">@color/colorProfileText</item>-->
+<!--        <item name="android:textSize">16sp</item>-->
+<!--    </style>-->
+
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Dialog button color -->
+    <style name="CustomAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/colorSecondaryText</item>
+        <item name="colorOnPrimary">@color/colorSecondaryText</item>
+        <item name="android:textColorSecondary">@color/colorSecondaryText</item>
+    </style>
+
+</resources>

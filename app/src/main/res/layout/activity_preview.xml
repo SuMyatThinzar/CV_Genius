@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/colorCardView"
+    tools:context=".presentation.preview.PreviewActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/btnDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/background_upload_photo"
+                android:padding="@dimen/margin_card_medium_2"
+                android:src="@drawable/ic_download" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="Download"
+                android:textColor="@color/colorSecondaryText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnSend"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/background_upload_photo"
+                android:padding="@dimen/margin_medium_2"
+                android:src="@drawable/ic_send" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="Send"
+                android:textColor="@color/colorSecondaryText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnPrint"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/background_upload_photo"
+                android:padding="@dimen/margin_medium_2"
+                android:src="@drawable/ic_print" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="Print"
+                android:textColor="@color/colorSecondaryText"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnShare"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/background_upload_photo"
+                android:padding="@dimen/margin_medium_2"
+                android:src="@drawable/baseline_share_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="Share"
+                android:textColor="@color/colorSecondaryText"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewFirst"
+        android:layout_width="353.5dp"
+        android:layout_height="499.79dp"
+        android:elevation="@dimen/margin_card_medium_2"
+        app:cardCornerRadius="@dimen/margin_card_medium"
+        android:layout_margin="@dimen/margin_medium_2"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/vpResumeFreeOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/view_pod_zresume_free_one"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSecond"
+        android:layout_width="353.5dp"
+        android:layout_height="499.79dp"
+        android:elevation="@dimen/margin_card_medium_2"
+        app:cardCornerRadius="@dimen/margin_card_medium"
+        android:layout_margin="@dimen/margin_medium_2"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/vpResumeSecondOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/view_pod_zresume_second_one"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSecondTwo"
+        android:layout_width="353.5dp"
+        android:layout_height="499.79dp"
+        android:elevation="@dimen/margin_card_medium_2"
+        app:cardCornerRadius="@dimen/margin_card_medium"
+        android:layout_margin="@dimen/margin_medium_2"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/vpResumeSecondTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/view_pod_zresume_second_two"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnChangeTemplate"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_xxlarge"
+        android:background="@drawable/background_upload_photo"
+        android:paddingStart="@dimen/margin_medium_3"
+        android:paddingEnd="@dimen/margin_medium_3"
+        android:text="@string/lbl_change_template"
+        android:textAllCaps="false"
+        android:textColor="@color/colorSecondaryText" />
+
+</LinearLayout>
