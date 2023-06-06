@@ -50,6 +50,7 @@ class EducationDetailViewPod @JvmOverloads constructor(
     fun setUpEducationDetailViewPod(delegate: ButtonSaveEducationDelegate, changeBtnAdd: Boolean){
         if (changeBtnAdd) {
             binding.btnDelete.setImageResource(R.drawable.ic_add)
+            binding.btnDelete.isClickable = false                  // make btnDelete unclickable
         }
         setDelegate(delegate)
     }
@@ -138,11 +139,10 @@ class EducationDetailViewPod @JvmOverloads constructor(
 //            if (checked) binding.endDate.text = "Nowadays"
 //            else         binding.endDate.text = selectedEndDate
 
-
             if (checked) {
                 binding.endDate.apply {
                     text = "Nowadays"
-                    isClickable = false          // make btnDelete unclickable
+                    isClickable = false          // make cbEndDate unclickable
                 }
             } else {
                 binding.endDate.apply {

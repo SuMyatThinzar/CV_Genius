@@ -19,4 +19,6 @@
     <color name="colorCardView">#FFF5D0</color>
 
     <color name="colorResumeSecondOne">#323b4c</color>
+    <color name="colorResumeSecondTwo">#3f3d86</color>
+    <color name="colorResumeSecondThree">#545454</color>
 </resources>

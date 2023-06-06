@@ -75,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/margin_large"
-                        android:layout_marginBottom="@dimen/margin_medium_3"
+                        android:layout_marginBottom="@dimen/margin_medium"
                         android:background="@color/colorCardView"
                         android:text="@string/lbl_objective"
                         android:textColor="@color/colorSecondaryText"
@@ -86,14 +86,15 @@
                         android:id="@+id/etObjective"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
-                        android:layout_margin="@dimen/margin_medium_2"
-                        android:maxLines="50"
-                        android:background="@drawable/background_edit_text"/>
+                        android:layout_margin="@dimen/margin_medium_3"
+                        android:gravity="top|start"
+                        android:background="@drawable/background_edit_text"
+                        android:maxLines="50" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_medium_2"
+                        android:layout_marginTop="@dimen/margin_medium"
                         android:orientation="horizontal"
                         android:gravity="center_horizontal">
 

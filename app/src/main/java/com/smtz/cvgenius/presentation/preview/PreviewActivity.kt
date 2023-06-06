@@ -62,19 +62,39 @@ class PreviewActivity : BaseActivity<ActivityPreviewBinding>() {
     }
 
     private fun setUpTemplate() {
+
+//        if (mCvVO?.templateId in 2..6) {
+//            setUpViewPod(R.id.vpResumeSecondTwo)
+//            binding.cardViewFirst.visibility = View.GONE
+//            binding.cardViewSecond.visibility = View.VISIBLE
+//        }
+//        if (mCvVO?.templateId == 0) {
+//            setUpViewPod(R.id.vpResumeFreeOne)
+//            binding.cardViewFirst.visibility = View.VISIBLE
+//        }
         when (mCvVO?.templateId) {
             0 -> {
                 setUpViewPod(R.id.vpResumeFreeOne)
                 binding.cardViewFirst.visibility = View.VISIBLE
             }
             2 -> {
-                setUpViewPod(R.id.vpResumeSecondOne)
-                binding.cardViewFirst.visibility = View.GONE
-                binding.cardViewSecond.visibility = View.VISIBLE
+                setUpViewPod(R.id.vpResumeSecondTwo)
+                binding.cardViewSecondTwo.visibility = View.VISIBLE
             }
             3 -> {
                 setUpViewPod(R.id.vpResumeSecondTwo)
-                binding.cardViewSecond.visibility = View.GONE
+                binding.cardViewSecondTwo.visibility = View.VISIBLE
+            }
+            4 -> {
+                setUpViewPod(R.id.vpResumeSecondTwo)
+                binding.cardViewSecondTwo.visibility = View.VISIBLE
+            }
+            5 -> {
+                setUpViewPod(R.id.vpResumeSecondTwo)
+                binding.cardViewSecondTwo.visibility = View.VISIBLE
+            }
+            6 -> {
+                setUpViewPod(R.id.vpResumeSecondTwo)
                 binding.cardViewSecondTwo.visibility = View.VISIBLE
             }
         }
@@ -90,11 +110,11 @@ class PreviewActivity : BaseActivity<ActivityPreviewBinding>() {
             startActivity(Intent(ChangeTemplateActivity.newIntent(this)))
         }
         binding.btnDownload.setOnClickListener {
-            val pageInfo = PdfDocument.PageInfo.Builder(
-                PageSize.A4.width.toInt(),
-                PageSize.A4.height.toInt(),
-                1
-            ).create()
+//            val pageInfo = PdfDocument.PageInfo.Builder(
+//                PageSize.A4.width.toInt(),
+//                PageSize.A4.height.toInt(),
+//                1
+//            ).create()
 
             convertViewPodToPdf(this)
         }

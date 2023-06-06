@@ -55,11 +55,11 @@ class ProjectDetailActivity : BaseActivity<ActivityProjectDetailBinding>(),
         setUpViewPods()
         setUpListeners()
         setUpAdapters()
-        requestData()
+        setUpData()
 
     }
 
-    private fun requestData() {
+    private fun setUpData() {
         if (mCvVO?.projectDetails != null) {
             mProjectDetailList = mCvVO?.projectDetails!!
 
@@ -147,7 +147,7 @@ class ProjectDetailActivity : BaseActivity<ActivityProjectDetailBinding>(),
         }
         mProjectDetailList.add(projectDetailVO)
         mCvVO!!.projectDetails = mProjectDetailList
-        mCvModel.insertCV(mCvVO!!)
+//        mCvModel.insertCV(mCvVO!!)
         mAddDetailAdapter.setNewData(mProjectDetailList)
         Toast.makeText(applicationContext, "saved", Toast.LENGTH_SHORT).show()
     }
@@ -160,7 +160,7 @@ class ProjectDetailActivity : BaseActivity<ActivityProjectDetailBinding>(),
                 iterator.remove()
             }
         }
-        mCvModel.insertCV(mCvVO!!)
+//        mCvModel.insertCV(mCvVO!!)
         mAddDetailAdapter.setNewData(mProjectDetailList)
         Toast.makeText(applicationContext, "Deleted", Toast.LENGTH_SHORT).show()
     }

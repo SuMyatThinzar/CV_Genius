@@ -59,12 +59,12 @@ class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
         setUpViewPods()
         setUpListeners()
         setUpAdapters()
-        requestData()
+        setUpData()
     }
 
-    private fun requestData() {
+    private fun setUpData() {
         if (mCvVO?.educationDetails != null) {
-            mEducationList = mCvVO?.educationDetails!!
+            mEducationList = mCvVO?.educationDetails?: mutableListOf()
 
                 mEducationDetailAdapter.setNewData(mEducationList)
         }
@@ -149,7 +149,7 @@ class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
         }
         mEducationList.add(educationDetailVO)
         mCvVO!!.educationDetails = mEducationList
-        mCvModel.insertCV(mCvVO!!)
+//        mCvModel.insertCV(mCvVO!!)
         mEducationDetailAdapter.setNewData(mEducationList)
         Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
     }
@@ -172,9 +172,8 @@ class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
                 iterator.remove()
             }
         }
-        mCvModel.insertCV(mCvVO!!)
+//        mCvModel.insertCV(mCvVO!!)
         mEducationDetailAdapter.setNewData(mEducationList)
         Toast.makeText(applicationContext, "Deleted", Toast.LENGTH_SHORT).show()
     }
-
 }

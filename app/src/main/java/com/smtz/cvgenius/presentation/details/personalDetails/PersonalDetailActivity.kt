@@ -47,9 +47,6 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
     }
 
     companion object {
-        const val REQUEST_CODE = 100
-        const val EXTRA_CV = "EXTRA CV"
-        const val EXTRA_RESULT = "EXTRA RESULT"
 
         fun newIntent(context: Context): Intent {
             val intent = Intent(context, PersonalDetailActivity::class.java)
@@ -67,18 +64,7 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
 
         setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
         setUpListener()
-        requestData()
         setUpData()
-    }
-
-    private fun requestData() {
-//        mCvModel.getCv(mCvId?:0L)?.observe(this) {
-//            mCvVO = it
-//            if (it?.personalDetails != null) {
-//                mPersonalDetail = it.personalDetails
-//                setUpData()
-//            }
-//        }
     }
 
     private fun setUpData() {
@@ -113,7 +99,6 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
             val address = binding.etAddress.text.toString().trim()
             val professionalTitle = binding.etProfessionalTitle.text.toString().trim()
 
-
             if (firstName.isNotEmpty() && contact.isNotEmpty()) {
 
                 val personalDetailVO = PersonalDetailVO(
@@ -130,19 +115,20 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
                 )
                 mCvVO?.personalDetails = personalDetailVO
 
-                mCvVO?.let { it1 -> mCvModel.insertCV(it1) }
+//                mCvVO?.let { it1 -> mCvModel.insertCV(it1) }
 
 //                val intent = Intent(this,CreateCvActivity::class.java)
 //                    .putExtra(EXTRA_RESULT, mCvVO)
 //                setResult(Activity.RESULT_OK, intent)
 
+                finish()
             }
 
             if (firstName.isEmpty()) binding.errorName.visibility = View.VISIBLE
             if (contact.isEmpty()) binding.errorContact.visibility = View.VISIBLE
 
-            finish()
         }
+
         setUpError(binding.etFirstName, binding.errorName)
         setUpError(binding.etContact, binding.errorContact)
 

@@ -8,7 +8,9 @@ class CvSingleton private constructor() {
     var cvVO: CvVO? = null
 
     companion object {
-        val instance: CvSingleton by lazy { Holder.INSTANCE }
+        val instance: CvSingleton by lazy {
+            Holder.INSTANCE
+        }
     }
 
     private object Holder {

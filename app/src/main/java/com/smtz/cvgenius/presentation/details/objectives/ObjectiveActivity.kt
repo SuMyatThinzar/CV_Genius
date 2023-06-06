@@ -60,7 +60,7 @@ class ObjectiveActivity : BaseActivity<ActivityObjectiveBinding>() {
         }
         binding.btnSave.setOnClickListener {
             mCvVO?.objective = binding.etObjective.text.toString().trim()
-            mCvModel.insertCV(mCvVO!!)
+//            mCvModel.insertCV(mCvVO!!)
             finish()
         }
         binding.btnClear.setOnClickListener {
@@ -71,7 +71,7 @@ class ObjectiveActivity : BaseActivity<ActivityObjectiveBinding>() {
     override fun onBackPressed() {
         if (binding.etObjective.text.toString().isEmpty()) {
             mCvVO?.objective = null
-            mCvModel.insertCV(mCvVO!!)
+//            mCvModel.insertCV(mCvVO!!)
         }
         super.onBackPressed()
     }

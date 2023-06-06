@@ -262,5 +262,4 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
 //        binding.root.layoutParams = layoutParams
 //    }
 
-
 }

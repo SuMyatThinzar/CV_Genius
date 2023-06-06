@@ -53,6 +53,7 @@ class WorkExperienceViewPod @JvmOverloads constructor(
     fun setUpWorkExperienceViewPod(delegate: ButtonSaveWorkExpDelegate, changeBtnAdd: Boolean){
         if (changeBtnAdd) {
             binding.btnDelete.setImageResource(R.drawable.ic_add)
+            binding.btnDelete.isClickable = false                  // make btnDelete unclickable
         }
         setDelegate(delegate)
     }

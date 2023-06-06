@@ -2,17 +2,14 @@ package com.smtz.cvgenius.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import com.smtz.cvgenius.R
+import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.databinding.ActivityChangeTemplateBinding
-import com.smtz.cvgenius.databinding.ActivityPreviewBinding
 import com.smtz.cvgenius.domain.model.CvVO
-import com.smtz.cvgenius.presentation.preview.PreviewActivity
 import com.smtz.cvgenius.presentation.preview.templateViewPods.BaseViewPod
-import com.smtz.cvgenius.presentation.preview.templateViewPods.ResumeFreeOneViewPod
 
 class ChangeTemplateActivity : BaseActivity<ActivityChangeTemplateBinding>() {
 
@@ -32,14 +29,47 @@ class ChangeTemplateActivity : BaseActivity<ActivityChangeTemplateBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mCvVO = CvSingleton.instance.cvVO!!
+        setUpTemplate()
+    }
 
-        mTemplateViewPod = binding.root.findViewById(R.id.vp)
+    private fun setUpTemplate() {
+        when (mCvVO?.templateId) {
+            0 -> {
+                setUpViewPod(R.id.vpFreeOne)
+                binding.flFreeOne.visibility = View.VISIBLE
+            }
+            2 -> {
+                setUpViewPod(R.id.vpSecondTwo)
+                binding.flSecondTwo.visibility = View.VISIBLE
+            }
+            3 -> {
+                setUpViewPod(R.id.vpSecondTwo)
+                binding.flSecondTwo.visibility = View.VISIBLE
+            }
+            4 -> {
+                setUpViewPod(R.id.vpSecondTwo)
+                binding.flSecondTwo.visibility = View.VISIBLE
+            }
+            5 -> {
+                setUpViewPod(R.id.vpSecondTwo)
+                binding.flSecondTwo.visibility = View.VISIBLE
+            }
+            6 -> {
+                setUpViewPod(R.id.vpSecondTwo)
+                binding.flSecondTwo.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setUpViewPod(resumeId: Int) {
+        mTemplateViewPod = binding.root.findViewById(resumeId)
     }
 
     override fun onPause() {
         super.onPause()
 
         // 2159, 2748 (1374 * 2 page)
-        Log.d("afasfasfda", "${binding.root.height} ${findViewById<ResumeFreeOneViewPod>(R.id.vp).height}")
+//        Log.d("afasfasfda", "${binding.root.height} ${findViewById<ResumeFreeOneViewPod>(R.id.vp).height}")
     }
 }

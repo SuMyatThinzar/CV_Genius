@@ -94,7 +94,7 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding>() {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
                     mCvVO?.signature = imagePath
-                    mCvModel.insertCV(mCvVO!!)
+//                    mCvModel.insertCV(mCvVO!!)
                 }
             }
             Toast.makeText(applicationContext, "saved", Toast.LENGTH_SHORT).show()
@@ -105,7 +105,7 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding>() {
     override fun onBackPressed() {
         if (drawingView.isDrawingEmpty() && drawingView.background == AppCompatResources.getDrawable(this, R.drawable.background_edit_text)) {
             mCvVO?.signature = null
-            mCvModel.insertCV(mCvVO!!)
+//            mCvModel.insertCV(mCvVO!!)
         }
         super.onBackPressed()
     }

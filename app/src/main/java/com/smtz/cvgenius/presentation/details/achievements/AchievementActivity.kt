@@ -58,10 +58,10 @@ class AchievementActivity : BaseActivity<ActivityAchievementBinding>(),
         setUpViewPods()
         setUpListeners()
         setUpAdapters()
-        requestData()
+        setUpData()
     }
 
-    private fun requestData() {
+    private fun setUpData() {
         if (mCvVO?.achievements != null) {
             mAchievementList = mCvVO?.achievements!!
 
@@ -171,7 +171,7 @@ class AchievementActivity : BaseActivity<ActivityAchievementBinding>(),
             }
             mAchievementList.add(achievementVO)
             mCvVO!!.achievements = mAchievementList
-            mCvModel.insertCV(mCvVO!!)
+//            mCvModel.insertCV(mCvVO!!)
             mAddDetailAdapter.setNewData(skillList = listOf(), achievementList = mAchievementList)
             Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()
         }
@@ -186,7 +186,7 @@ class AchievementActivity : BaseActivity<ActivityAchievementBinding>(),
                     iterator.remove()
                 }
             }
-            mCvModel.insertCV(mCvVO!!)
+//            mCvModel.insertCV(mCvVO!!)
             mAddDetailAdapter.setNewData(skillList = listOf(), achievementList = mAchievementList)
             Toast.makeText(applicationContext, "Deleted", Toast.LENGTH_SHORT).show()
         }

@@ -54,11 +54,11 @@ class WorkExperienceActivity : BaseActivity<ActivityWorkExperienceBinding>(), Bu
         setUpViewPods()
         setUpListeners()
         setUpAdapters()
-        requestData()
+        setUpData()
 
     }
 
-    private fun requestData() {
+    private fun setUpData() {
         if (mCvVO?.workExperiences != null) {
             mWorkExperienceList = mCvVO?.workExperiences!!
 
@@ -91,7 +91,6 @@ class WorkExperienceActivity : BaseActivity<ActivityWorkExperienceBinding>(), Bu
                 y = binding.nestedScrollView.scrollY.toFloat()
             }
         })
-
     }
 
     private fun setUpAdapters() {
@@ -144,7 +143,7 @@ class WorkExperienceActivity : BaseActivity<ActivityWorkExperienceBinding>(), Bu
         }
         mWorkExperienceList.add(workExperienceVO)
         mCvVO!!.workExperiences = mWorkExperienceList
-        mCvModel.insertCV(mCvVO!!)
+//        mCvModel.insertCV(mCvVO!!)
         mWorkExperienceAdapter.setNewData(mWorkExperienceList)
         Toast.makeText(applicationContext, "saved", Toast.LENGTH_SHORT).show()
     }
@@ -157,7 +156,7 @@ class WorkExperienceActivity : BaseActivity<ActivityWorkExperienceBinding>(), Bu
                 iterator.remove()
             }
         }
-        mCvModel.insertCV(mCvVO!!)
+//        mCvModel.insertCV(mCvVO!!)
         mWorkExperienceAdapter.setNewData(mWorkExperienceList)
         Toast.makeText(applicationContext, "Deleted", Toast.LENGTH_SHORT).show()
     }

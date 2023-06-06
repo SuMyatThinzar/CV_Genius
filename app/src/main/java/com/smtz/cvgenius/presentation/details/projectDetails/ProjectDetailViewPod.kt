@@ -49,6 +49,7 @@ class ProjectDetailViewPod @JvmOverloads constructor(
     fun setUpProjectDetailViewPod(delegate: ButtonSaveProjectDelegate, changeBtnAdd: Boolean){
         if (changeBtnAdd) {
             binding.btnDelete.setImageResource(R.drawable.ic_add)
+            binding.btnDelete.isClickable = false                  // make btnDelete unclickable
         }
         setDelegate(delegate)
     }
@@ -118,6 +119,7 @@ class ProjectDetailViewPod @JvmOverloads constructor(
 
                 collapseCardView()
             }
+
             if (title.isEmpty())    binding.errorProjectTitle.visibility = View.VISIBLE
         }
 

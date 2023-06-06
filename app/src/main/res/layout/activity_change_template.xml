@@ -3,18 +3,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ChangeTemplateActivity">
+    tools:context=".presentation.ChangeTemplateActivity"
+    android:layout_centerHorizontal="true">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
+        android:layout_width="353.5dp"
+        android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/vp"
-            layout="@layout/view_pod_zresume_free_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/flFreeOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/vpFreeOne"
+                    layout="@layout/view_pod_zresume_free_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flSecondOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/vpSecondOne"
+                    layout="@layout/view_pod_zresume_second_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flSecondTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/vpSecondTwo"
+                    layout="@layout/view_pod_zresume_second_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/flSecondThree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/vpSecondThree"
+                    layout="@layout/view_pod_zresume_second_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+        </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
 

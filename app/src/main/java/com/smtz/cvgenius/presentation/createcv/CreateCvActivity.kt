@@ -4,11 +4,18 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -77,7 +84,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         var hasObservedLiveData = false               // protect from looping the insert and observing infinitely
 
         mCvModel.getCv(mCvId)?.observe(this) {
-            // observing only once
+            // to observe only once
             if (!hasObservedLiveData) {
                 hasObservedLiveData = true
 
@@ -100,9 +107,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
                     )
                     Log.d("assasdfasdf", "new null cv created")
 
-                    mCvModel.insertCV(
-                        mCvVo!!
-                    )
                 } else {                         // if the object is exist, observing returns it
                     setUpEmptyCv(it.templateId)
                     mCvId = it.cvId
@@ -110,10 +114,9 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
                     setUpData()
                     Log.d("assasdfasdf", "replace created cv")
                 }
-            } else {       // stop at once
+            }     // stop at once
 
-            }
-            // save it to singleton and access it in PersonalDetailActivity
+            // save CvVO as a singleton and access it in Details
             CvSingleton.instance.cvVO = mCvVo
         }
     }
@@ -167,7 +170,11 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             mCvModel.insertCV(mCvVo!!)
         }
         binding.btnPreviewCv.setOnClickListener {
-            startActivity(Intent(PreviewActivity.newIntent(this)))
+            if (mCvVo?.personalDetails != null) {
+                startActivity(Intent(PreviewActivity.newIntent(this)))
+            } else {
+                showDialogOnBackPressedAndPreview("preview")
+            }
         }
     }
 
@@ -188,6 +195,48 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         binding.collapsingToolbarLayout.addView(binding.btnBack)
         binding.collapsingToolbarLayout.collapsedTitleGravity = Gravity.CENTER_HORIZONTAL
 
+    }
+
+    private fun showDialogOnBackPressedAndPreview(previewOrBackPressed: String) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_layout, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .setCancelable(false)
+
+        val dialog = dialogBuilder.create()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // for rounded corner background , set background of the dialog's root view to transparent,
+
+        dialog.show()
+
+        val tvMessage = dialogView.findViewById<TextView>(R.id.dialog_message)
+        val btnCancel = dialogView.findViewById<Button>(R.id.btn_cancel)
+        val btnAbandon = dialogView.findViewById<Button>(R.id.btn_abandon)
+
+        btnCancel.setOnClickListener {
+            // Handle Cancel button click
+            dialog.dismiss()
+        }
+
+        btnAbandon.setOnClickListener {
+            // Handle Abandon button click
+            dialog.dismiss()
+
+            // start Activity A with FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_SINGLE_TOP flags skip Activity B
+            val intent = Intent(applicationContext, HomeActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            }
+            startActivity(intent)
+            // finish Activity C
+            finish()
+
+        }
+
+        if (previewOrBackPressed == "preview") {
+//            parent.removeView(btnAbandon)
+            tvMessage.text = "Please fill personal information for previewing CV"
+            btnAbandon.visibility = View.GONE
+            btnCancel.text = "OK"
+        }
     }
 
     override fun onTapButton(id: Int) {
@@ -230,24 +279,27 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 //        }
 //    }
 
-    override fun onBackPressed() {
-        // start Activity A with FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_SINGLE_TOP flags skip Activity B
-        val intent = Intent(applicationContext, HomeActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        }
-        startActivity(intent)
-
-        // finish Activity C
-        finish()
+    override fun onResume() {
+        mCvVo = CvSingleton.instance.cvVO
+        super.onResume()
     }
 
-    override fun onDestroy() {
+    override fun onBackPressed() {
 
-        if (mCvVo == nullCv) {
-            Log.d("assasdfasdf", "null cv Deleted")
-            mCvModel.deleteCv(mCvId)
+        if (mCvVo!!.personalDetails != null) {
+            mCvModel.insertCV(
+                mCvVo!!
+            )
+            // start Activity A with FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_SINGLE_TOP flags skip Activity B
+            val intent = Intent(applicationContext, HomeActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            }
+            startActivity(intent)
+            // finish Activity C
+            finish()
+        } else {
+            showDialogOnBackPressedAndPreview("")
         }
-        super.onDestroy()
     }
 }
 

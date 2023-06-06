@@ -1,9 +1,7 @@
 package com.smtz.cvgenius.presentation.preview.templateViewPods
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.Rect
-import android.graphics.Typeface
+import android.graphics.*
 import android.os.Handler
 import android.util.AttributeSet
 import android.util.Log
@@ -14,50 +12,43 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
-import com.smtz.cvgenius.databinding.ViewPodZresumeSecondOneBinding
+import com.smtz.cvgenius.databinding.ViewPodZresumeSecondThreeBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
 import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
+import kotlin.math.ceil
 
-class ResumeSecondOneViewPod(context: Context, attrs: AttributeSet? = null) :
-    BaseViewPod(context, attrs) {
+class ResumeSecondThreeViewPod @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null
+) : BaseViewPod(context, attrs) {
 
-    private lateinit var binding: ViewPodZresumeSecondOneBinding
+    private lateinit var binding: ViewPodZresumeSecondThreeBinding
 
     private var mWorkExperienceList: List<WorkExperienceVO> = listOf()
 
-    private lateinit var containerWorkExp : LinearLayout
-    private lateinit var containerFirstPageRightSide: LinearLayout
-    private lateinit var containerFirstPageLeftSide: LinearLayout
-    private lateinit var  containerSecondPageRightSide: LinearLayout
-    private lateinit var  containerSecondPageLeftSide: LinearLayout
-
     private var mCvVO: CvVO? = null
-    private var isInitialSetupDone = false
-    private var isSentToSecondPage = false
+    private lateinit var containerWorkExp: LinearLayout
 
-    private val contentList = mutableListOf<View>()
+    private var pageIndex: Int = 0
+    private var pageHeight = 1374.0
+    private var parentFullHeight = 0
 
     override fun onFinishInflate() {
-        binding = ViewPodZresumeSecondOneBinding.bind(this)
+        binding = ViewPodZresumeSecondThreeBinding.bind(this)
         mCvVO = CvSingleton.instance.cvVO!!
-        containerWorkExp = binding.containerExperience
-        containerFirstPageRightSide = binding.containerFirstPageRightSide
-        containerFirstPageLeftSide = binding.containerFirstPageLeftSide
-        containerSecondPageRightSide = binding.containerSecondPageRightSide
-        containerSecondPageLeftSide = binding.containerSecondPageLeftSide
 
-//        setUpData()
+        containerWorkExp = binding.containerExperience
+        setUpData()
         super.onFinishInflate()
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus && !isInitialSetupDone) {
-            setUpData()
-            isInitialSetupDone = true
-        }
-    }
+//    override fun onWindowFocusChanged(hasFocus: Boolean) {
+//        super.onWindowFocusChanged(hasFocus)
+//        if (hasFocus && !isInitialSetupDone) {
+//            separatePages()
+//            isInitialSetupDone = true
+//        }
+//    }
 
     private fun setUpData() {
         mCvVO?.profileImage?.let {
@@ -111,75 +102,95 @@ class ResumeSecondOneViewPod(context: Context, attrs: AttributeSet? = null) :
                 childLayout.addView(workDescriptionTextView)
             }
 
-            contentList.add(childLayout)
-        }
-        addContentToPages()
-    }
-
-    private fun addContentToPages() {
-        val currentPageLayout = binding.firstRootView
-        val density = resources.displayMetrics.density
-        val paddingInPx = (20 * density).toInt()
-
-        val absoluteHeight = currentPageLayout.height - paddingInPx - paddingInPx
-
-        var currentPageHeight = getCurrentPageHeight()
-
-        var temp = 0
-
-        for (content in contentList) {
-
-            binding.containerExperience.addView(content)
-            val handler = Handler()
-            handler.post {
-
-                val height = content.measuredHeight
-
-                if (currentPageHeight + height <= absoluteHeight) {
-                    // Content fits on the current page
-                    Log.d("asfddfsasdf", "page1 $temp $currentPageHeight + $height = ${currentPageHeight+height} <= ${absoluteHeight}")
-                    temp ++
-                    currentPageHeight += height
-                } else {
-                    // Add content to the new page
-                    Log.d("asfddfsasdf", "page2 $temp $currentPageHeight + $height = ${currentPageHeight+height} <= ${absoluteHeight}")
-                    temp ++
-                    setUpTheChildViews(2, content as LinearLayout)
-                }
-            }
-        }
-    }
-
-    private fun getCurrentPageHeight(): Float {
-        var height = 0f
-
-        for (i in 0 until binding.containerFirstPageRightSide.childCount -2) {
-            val view = binding.containerFirstPageRightSide.getChildAt(i)
-            height += view.height.toFloat()
+//            contentList.add(childLayout)
+            containerWorkExp.addView(childLayout)
         }
 
-        return height
     }
 
-    private fun setUpTheChildViews(pageNumber: Int, childLayout: LinearLayout) {
+    private fun separatePages() {
+        val rootLayout = binding.root
 
-        if (pageNumber == 2) {
-            binding.secondRootView.visibility = View.VISIBLE
+        // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
+        val widthMeasureSpec = MeasureSpec.makeMeasureSpec(rootLayout.width, MeasureSpec.EXACTLY)
+        val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+        rootLayout.measure(widthMeasureSpec, heightMeasureSpec)
+        rootLayout.layout(0, 0, rootLayout.measuredWidth, rootLayout.measuredHeight)
 
-            val oldParent = childLayout.parent as? ViewGroup
-            oldParent?.removeView(childLayout) // Remove the childLayout from the current parent
+        parentFullHeight = rootLayout.measuredHeight
 
-            containerSecondPageRightSide.addView(childLayout)
+        Log.d("afasdf", "$parentFullHeight")
 
-            // move Project to second page
-            if (!isSentToSecondPage) {
-                val oldParentProjectDetail = binding.containerProject.parent as? ViewGroup
-                oldParentProjectDetail?.removeView(binding.containerProject)
-                containerSecondPageRightSide.addView(binding.containerProject)
-                isSentToSecondPage = true
-            }
+        if (parentFullHeight >= pageHeight) {
+            Log.d("afasdf", "true $parentFullHeight >= $pageHeight")
+            pageIndex = (parentFullHeight / pageHeight).toInt()
+
+            val pageHeight = 1364
+            val blankSpaceHeight = 10
+
+            val generatedBitmaps = generatePageBitmaps(context, binding.root, pageHeight, blankSpaceHeight)
+        } else {
+            Log.d("afasdf", "false ${rootLayout.height} >= $pageHeight")
         }
+
     }
+
+    private fun generatePageBitmaps(context: Context, viewPodLayout: ViewGroup, pageHeight: Int, blankSpaceHeight: Int): List<Bitmap> {
+        val density = context.resources.displayMetrics.density
+        val totalHeight = viewPodLayout.height
+
+        val numPages = ceil(totalHeight.toDouble() / pageHeight).toInt()
+
+        val bitmaps = mutableListOf<Bitmap>()
+
+        for (pageNo in 0 until numPages) {
+            val startY = pageNo * pageHeight.toFloat()
+            val endY = (startY + pageHeight).toInt().coerceAtMost(totalHeight)
+
+            val bitmap = Bitmap.createBitmap(
+                (viewPodLayout.width * density).toInt(),
+                1364 + blankSpaceHeight,
+                Bitmap.Config.ARGB_8888
+            )
+
+            val canvas = Canvas(bitmap)
+            canvas.scale(density, density)
+
+            canvas.translate(0f, -startY)
+            canvas.clipRect(0, startY.toInt(), viewPodLayout.width, endY)
+
+            viewPodLayout.draw(canvas)
+
+            // Add blank space below each page
+            val blankSpaceBitmap = Bitmap.createBitmap(
+                (viewPodLayout.width * density).toInt(),
+                (20 * density).toInt(),
+                Bitmap.Config.ARGB_8888
+            )
+
+            val blankSpaceCanvas = Canvas(blankSpaceBitmap)
+            blankSpaceCanvas.scale(density, density)
+
+            val blankSpaceStartY = endY.toFloat()
+            blankSpaceCanvas.translate(0f, -blankSpaceStartY)
+            blankSpaceCanvas.drawColor(Color.WHITE)
+
+            val combinedBitmap = Bitmap.createBitmap(
+                bitmap.width,
+                bitmap.height + blankSpaceBitmap.height,
+                bitmap.config
+            )
+
+            val combinedCanvas = Canvas(combinedBitmap)
+            combinedCanvas.drawBitmap(bitmap, 0f, 0f, null)
+            combinedCanvas.drawBitmap(blankSpaceBitmap, 0f, bitmap.height.toFloat(), null)
+
+            bitmaps.add(combinedBitmap)
+        }
+
+        return bitmaps
+    }
+
 
     private fun setLayouts(text: String, textSize: Float, fontFamily: Int, margin: String, textColor: Int, bold: String?): TextView {
         val textView = TextView(context)

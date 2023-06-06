@@ -134,7 +134,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewSecond"
+        android:id="@+id/cardViewSecondOne"
         android:layout_width="353.5dp"
         android:layout_height="499.79dp"
         android:elevation="@dimen/margin_card_medium_2"
@@ -164,6 +164,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             layout="@layout/view_pod_zresume_second_two"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSecondThree"
+        android:layout_width="353.5dp"
+        android:layout_height="499.79dp"
+        android:elevation="@dimen/margin_card_medium_2"
+        app:cardCornerRadius="@dimen/margin_card_medium"
+        android:layout_margin="@dimen/margin_medium_2"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/vpResumeSecondThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/view_pod_zresume_second_three"/>
 
     </androidx.cardview.widget.CardView>
 
