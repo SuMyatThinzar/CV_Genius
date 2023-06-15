@@ -66,9 +66,11 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
     }
 
     private fun setUpData() {
-        mCvVO?.profileImage?.let {
-            val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+        if (mCvVO?.profileImage != null) {
+            val bitmap = BitmapFactory.decodeByteArray(mCvVO?.profileImage, 0, mCvVO?.profileImage!!.size)
             binding.ivProfileImage.setImageBitmap(bitmap)
+        } else {
+            binding.ivProfileImage.visibility = View.GONE
         }
 
         val name = "${mCvVO?.personalDetails?.firstName} ${mCvVO?.personalDetails?.lastName}"

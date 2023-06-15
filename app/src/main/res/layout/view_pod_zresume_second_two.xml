@@ -484,7 +484,8 @@
         android:layout_width="353.5dp"
         android:layout_height="499.79dp"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="5"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/containerSecondPageLeftSide"

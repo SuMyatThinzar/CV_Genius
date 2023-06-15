@@ -1,42 +1,48 @@
 package com.smtz.cvgenius.presentation.preview
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.graphics.pdf.PdfDocument
-import android.os.Bundle
-import android.os.CancellationSignal
-import android.os.Environment
-import android.os.ParcelFileDescriptor
+import android.os.*
 import android.print.*
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.itextpdf.text.PageSize
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import com.google.android.material.snackbar.Snackbar
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
-import com.smtz.cvgenius.core.BaseActivity
+import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivityPreviewBinding
 import com.smtz.cvgenius.domain.model.CvVO
+import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.ChangeTemplateActivity
 import com.smtz.cvgenius.presentation.preview.templateViewPods.BaseViewPod
-import com.smtz.cvgenius.presentation.preview.templateViewPods.ResumeFreeOneViewPod
+import com.smtz.cvgenius.presentation.preview.utils.convertToPdfDocument
+import com.smtz.cvgenius.presentation.preview.utils.createTemporaryPdfFile
+import com.smtz.cvgenius.presentation.preview.utils.shareDocument
+import kotlinx.coroutines.*
 import java.io.*
-import kotlin.math.ceil
 
-class PreviewActivity : BaseActivity<ActivityPreviewBinding>() {
+class PreviewActivity : AppCompatActivity() {
 
-    val storageDirectory = Environment.getExternalStorageDirectory().path
+    private val REQUEST_CODE_PERMISSION_STORAGE = 100
+    private lateinit var binding: ActivityPreviewBinding
 
+    var cacheFile: File? = null
+
+    private var mCvModel: CvModel = CvModelImpl
+    private var mCvId: Long = 0L
     private var mCvVO: CvVO? = null
     private lateinit var mTemplateViewPod: BaseViewPod
     private var mViewPodId: Int = 1111
-
-    override val binding: ActivityPreviewBinding by lazy {
-        ActivityPreviewBinding.inflate(layoutInflater)
-    }
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -47,84 +53,265 @@ class PreviewActivity : BaseActivity<ActivityPreviewBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityPreviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+//        val documentsDirectory = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)  /storage/emulated/0/Android/data/com.smtz.cvgenius/files/Documents
+        val documentsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) //storage/emulated/0/Documents
+//        val documentsDirectory2 = Environment.getExternalStorageDirectory().path  /storage/emulated/0
 
         ActivityCompat.requestPermissions(
-            this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE),
-            PackageManager.PERMISSION_GRANTED
+            this,
+            arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE),
+            REQUEST_CODE_PERMISSION_STORAGE
         )
 
-        mCvVO = CvSingleton.instance.cvVO
+        mCvVO = CvSingleton.instance.cvVO     // get from singleton
         setUpTemplate()
-
-//        mTemplateViewPod = binding.root.findViewById(R.id.vpResumeFreeOne)
         setUpListeners()
 
     }
 
     private fun setUpTemplate() {
 
-//        if (mCvVO?.templateId in 2..6) {
-//            setUpViewPod(R.id.vpResumeSecondTwo)
-//            binding.cardViewFirst.visibility = View.GONE
-//            binding.cardViewSecond.visibility = View.VISIBLE
-//        }
-//        if (mCvVO?.templateId == 0) {
-//            setUpViewPod(R.id.vpResumeFreeOne)
-//            binding.cardViewFirst.visibility = View.VISIBLE
-//        }
-        when (mCvVO?.templateId) {
-            0 -> {
-                setUpViewPod(R.id.vpResumeFreeOne)
-                binding.cardViewFirst.visibility = View.VISIBLE
-            }
-            2 -> {
-                setUpViewPod(R.id.vpResumeSecondTwo)
-                binding.cardViewSecondTwo.visibility = View.VISIBLE
-            }
-            3 -> {
-                setUpViewPod(R.id.vpResumeSecondTwo)
-                binding.cardViewSecondTwo.visibility = View.VISIBLE
-            }
-            4 -> {
-                setUpViewPod(R.id.vpResumeSecondTwo)
-                binding.cardViewSecondTwo.visibility = View.VISIBLE
-            }
-            5 -> {
-                setUpViewPod(R.id.vpResumeSecondTwo)
-                binding.cardViewSecondTwo.visibility = View.VISIBLE
-            }
-            6 -> {
-                setUpViewPod(R.id.vpResumeSecondTwo)
-                binding.cardViewSecondTwo.visibility = View.VISIBLE
-            }
+        if (mCvVO?.templateId in 2..6) {
+            setUpViewPod(R.id.vpResumeSecondTwo)
+            binding.cardViewSecondTwo.visibility = View.VISIBLE
+        }
+        if (mCvVO?.templateId == 0) {
+            setUpViewPod(R.id.vpResumeFreeOne)
+            binding.cardViewFirst.visibility = View.VISIBLE
         }
     }
 
     private fun setUpViewPod(resumeId: Int) {
         mViewPodId = resumeId
         mTemplateViewPod = binding.root.findViewById(resumeId)
+//        mTemplateViewPod = binding.root.findViewById(R.id.vpResumeFreeOne)
     }
 
     private fun setUpListeners() {
+        val viewPodLayout = findViewById<BaseViewPod>(mViewPodId)
+
         binding.btnChangeTemplate.setOnClickListener {
             startActivity(Intent(ChangeTemplateActivity.newIntent(this)))
         }
         binding.btnDownload.setOnClickListener {
-//            val pageInfo = PdfDocument.PageInfo.Builder(
-//                PageSize.A4.width.toInt(),
-//                PageSize.A4.height.toInt(),
-//                1
-//            ).create()
-
-            convertViewPodToPdf(this)
+            convertAndSaveViewPodAsPdf(this, viewPodLayout)
         }
 
         binding.btnPrint.setOnClickListener {
-            val pdfDocument = convertToPdf(this)
-            printPdfDocument(pdfDocument, System.currentTimeMillis().toString(), this)
+            handleCacheFile(viewPodLayout) { cache ->
+                printCacheFile(this, cache)
+            }
+        }
+
+        binding.btnShare.setOnClickListener {
+            handleCacheFile(viewPodLayout, callback = { cache ->
+                shareDocument(this, cache)
+            })
 
         }
     }
+
+    private fun handleCacheFile(viewPodLayout: View, callback: (File) -> Unit){
+        if (cacheFile == null) {
+            setViewsClickable(false)
+
+            GlobalScope.launch(Dispatchers.IO) {
+                val pdfDocument = convertToPdfDocument(this@PreviewActivity, viewPodLayout)
+                cacheFile = createTemporaryPdfFile(this@PreviewActivity)
+
+                val outputStream = FileOutputStream(cacheFile)
+                pdfDocument.writeTo(outputStream)
+                outputStream.flush()
+                outputStream.close()
+
+                withContext(Dispatchers.Main) {
+                    setViewsClickable(true)
+                    callback(cacheFile!!)
+                }
+            }
+        } else {
+            callback(cacheFile!!)
+        }
+    }
+
+    private fun printCacheFile(context: Context, cacheFile: File) {
+        val printManager = context.getSystemService(Context.PRINT_SERVICE) as PrintManager
+        val printJobName = context.getString(R.string.app_name)
+
+        printManager.let {
+            val printAttributes = PrintAttributes.Builder()
+                .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+                .setResolution(PrintAttributes.Resolution("pdf", "pdf", 600, 600))
+                .setColorMode(PrintAttributes.COLOR_MODE_COLOR)
+                .build()
+
+            val printAdapter = object : PrintDocumentAdapter() {
+                override fun onLayout(
+                    oldAttributes: PrintAttributes?,
+                    newAttributes: PrintAttributes?,
+                    cancellationSignal: CancellationSignal?,
+                    callback: LayoutResultCallback?,
+                    extras: Bundle?
+                ) {
+                    if (cancellationSignal?.isCanceled == true) {
+                        callback?.onLayoutCancelled()
+                        return
+                    }
+
+                    // Respond with the print document's layout info
+                    val layoutResult = PrintDocumentInfo.Builder(printJobName)
+                        .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                        .build()
+
+                    callback?.onLayoutFinished(layoutResult, newAttributes != oldAttributes)
+                }
+
+                override fun onWrite(
+                    pages: Array<out PageRange>?,
+                    destination: ParcelFileDescriptor?,
+                    cancellationSignal: CancellationSignal?,
+                    callback: WriteResultCallback?
+                ) {
+                    // Open the input and output streams
+                    val inputStream = FileInputStream(cacheFile)
+                    val outputStream = FileOutputStream(destination?.fileDescriptor)
+
+                    // Copy the content from input stream to output stream
+                    val buffer = ByteArray(1024)
+                    var bytesRead: Int
+                    while (inputStream.read(buffer).also { bytesRead = it } > 0) {
+                        outputStream.write(buffer, 0, bytesRead)
+                    }
+
+                    inputStream.close()
+                    outputStream.close()
+
+                    // Signal the system that the write operation is complete
+                    callback?.onWriteFinished(arrayOf(PageRange.ALL_PAGES))
+                }
+            }
+            printManager.print(printJobName, printAdapter, printAttributes)
+        }
+    }
+
+    private fun convertAndSaveViewPodAsPdf(context: Context, viewPodLayout: View) {
+//      val pageInfo = PdfDocument.PageInfo.Builder(PageSize.A4.width.toInt(), PageSize.A4.height.toInt(), 1).create()
+
+        setViewsClickable(false)
+
+        // send to background thread
+        GlobalScope.launch(Dispatchers.IO) {
+            val document = convertToPdfDocument(context, viewPodLayout)
+
+            // create private self directory
+//            val file = File(
+//                this@PreviewActivity.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
+//                "${mCvVO?.personalDetails?.firstName ?: System.currentTimeMillis()} ${mCvVO?.personalDetails?.lastName} ${System.currentTimeMillis()}.pdf"
+//            )
+
+            // create in public default directory
+            val fileName = "${mCvVO?.personalDetails?.firstName ?: System.currentTimeMillis()} ${mCvVO?.personalDetails?.lastName} ${System.currentTimeMillis()}.pdf"
+
+            // above Api 29, to save the file in the public directory, you need to use the MediaStore API to save in that directory. Unless you have to save in your specific directory with your app's package name
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                val contentValues = ContentValues().apply {
+                    put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+                    put(MediaStore.MediaColumns.MIME_TYPE, "application/pdf")
+
+                    put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS)
+                }
+
+                val resolver = context.contentResolver
+                val uri = resolver.insert(
+                    MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL),
+                    contentValues
+                )
+                uri?.let { fileUri ->
+                    resolver.openOutputStream(fileUri)?.use { outputStream ->
+                        val fileOutputStream = outputStream as FileOutputStream
+                        document.writeTo(fileOutputStream)
+                        document.close()
+
+                        withContext(Dispatchers.Main) {
+                            setViewsClickable(true)
+                            Snackbar.make(window.decorView, "saved PDF file successfully", Snackbar.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            } else {
+                val documentsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                val file = File(documentsDirectory, fileName)
+                try {
+                    val fileOutputStream = FileOutputStream(file)
+                    document.writeTo(fileOutputStream)
+                    document.close()
+                    fileOutputStream.close()
+
+                    withContext(Dispatchers.Main) {
+                        setViewsClickable(true)
+                        Snackbar.make(window.decorView, "saved PDF file successfully", Snackbar.LENGTH_SHORT).show()
+                    }
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main) {
+                        setViewsClickable(true)
+                        Snackbar.make(window.decorView, "failed to save PDF file $e", Snackbar.LENGTH_SHORT).show()
+                        Log.d("adfafd", "$e")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setViewsClickable(clickable: Boolean) {
+        binding.btnDownload.isClickable = clickable
+        binding.btnSend.isClickable = clickable
+        binding.btnPrint.isClickable = clickable
+        binding.btnShare.isClickable = clickable
+        binding.btnChangeTemplate.isClickable = clickable
+
+        if (!clickable) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.darkenBackground.visibility = View.VISIBLE
+            binding.tvPleaseWait.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.darkenBackground.visibility = View.GONE
+            binding.tvPleaseWait.visibility = View.GONE
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cacheFile?.let {
+            if (it.exists()) {
+                it.delete()
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_CODE_PERMISSION_STORAGE -> {
+                // Check if all permissions were granted
+                val allPermissionsGranted = grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+                if (allPermissionsGranted) {
+                    // All permissions were granted
+
+                } else {
+                    // At least one permission was denied, handle accordingly
+                    println("Storage permission denied")
+                }
+            }
+        }
+    }
+
 
     private fun printPdfDocument(pdfDocument: PdfDocument, printJobName: String, context: Context) {
         val printManager = context.getSystemService(Context.PRINT_SERVICE) as? PrintManager
@@ -166,151 +353,5 @@ class PreviewActivity : BaseActivity<ActivityPreviewBinding>() {
             printManager.print(printJobName, printAdapter, printAttributes)
         }
     }
-
-    private fun convertViewPodToPdf(context: Context) {
-        val document = convertToPdf(context)
-
-        // create private self directory
-        val file = File(
-            this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
-            "${mCvVO?.personalDetails?.firstName ?: System.currentTimeMillis()} ${mCvVO?.personalDetails?.lastName} ${System.currentTimeMillis()}.pdf"
-        )
-
-        // create in public default directory
-//        val file = File(
-//            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-//            "${mCvVO?.personalDetails?.firstName ?: System.currentTimeMillis()} ${mCvVO?.personalDetails?.lastName} ${System.currentTimeMillis()}.pdf"
-//        )
-
-        try {
-            val fileOutputStream = FileOutputStream(file)
-            document.writeTo(fileOutputStream)
-            document.close()
-            fileOutputStream.close()
-
-            Toast.makeText(context, "PDF saved successfully", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun convertToPdf(context: Context): PdfDocument {
-        val document = PdfDocument()
-
-        // 1374 the actual fix height of 1 page for this activity
-//        val viewPodLayout = findViewById<ResumeFreeOneViewPod>(R.id.vpResumeFreeOne)
-
-        val viewPodLayout = findViewById<BaseViewPod>(mViewPodId)
-
-        // Manually measure and layout the viewPodLayout (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
-        val widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(viewPodLayout.width, View.MeasureSpec.EXACTLY)
-        val heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-        viewPodLayout.measure(widthMeasureSpec, heightMeasureSpec)
-        viewPodLayout.layout(0, 0, viewPodLayout.measuredWidth, viewPodLayout.measuredHeight)
-
-        val totalHeight = viewPodLayout.measuredHeight
-
-        Log.d("adsfasfasdf","${totalHeight} ${PageSize.A4.height*4.5}")
-
-        // Calculate the number of pages required
-        val numPages = ceil((totalHeight / 1374.0)).toInt()  // instead of PageSize.A4.height*4.5 = 3789, used fixed size 1374
-
-        for (pageNo in 0 until numPages) {
-            val pageInfo = PdfDocument.PageInfo.Builder(
-                (PageSize.A4.width * 4.5).toInt(),
-                (PageSize.A4.height * 4.5).toInt(),
-                pageNo + 1
-            ).create()
-            val page = document.startPage(pageInfo)
-
-            val density = context.resources.displayMetrics.density
-            val bitmap = Bitmap.createBitmap(
-                (pageInfo.pageWidth * density).toInt(),
-                (pageInfo.pageHeight * density).toInt(),
-                Bitmap.Config.ARGB_8888
-            )
-            val canvas = Canvas(bitmap)
-            canvas.scale(density, density)
-
-            val startY = pageNo * 1374.toFloat()                       // use the actual 1 page height
-            val endY = (startY + 1374).toInt().coerceAtMost(totalHeight)   // content
-
-            // Adjust the viewport on the canvas to render the section of content
-            canvas.translate(0f, -startY)
-            canvas.clipRect(0, startY.toInt(), viewPodLayout.width, endY)
-
-            viewPodLayout.draw(canvas)
-
-            val pdfCanvas = page.canvas
-            pdfCanvas.drawBitmap(bitmap, 0f, 0f, null)
-
-            document.finishPage(page)
-        }
-
-        return document
-    }
-
-
-//    private fun convertViewPodToPdf(context: Context) {
-//
-//        val document = convertToPdf(context)
-//
-//        // Save the PDF to a file
-//        val file = File(this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "${mCvVO?.personalDetails?.firstName?:System.currentTimeMillis()} ${mCvVO?.personalDetails?.lastName}.pdf")
-//
-//        try {
-//            val fileOutputStream = FileOutputStream(file)
-//            document.writeTo(fileOutputStream)
-//            document.close()
-//            fileOutputStream.close()
-//
-//            // Show a toast or perform other actions to indicate successful conversion
-//            Toast.makeText(context, "PDF saved successfully", Toast.LENGTH_SHORT).show()
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//    }
-//
-//    private fun convertToPdf(context: Context): PdfDocument {
-//        val document = PdfDocument()
-//
-//        val displayMetrics = resources.displayMetrics
-//        val width: Float = displayMetrics.widthPixels.toFloat()
-//        val height: Float = displayMetrics.heightPixels.toFloat()
-//        val convertWidth = width.toInt()
-//        val convertHeight = height.toInt()
-//
-//        // Create a blank page
-//        val pageInfo = PdfDocument.PageInfo.Builder((PageSize.A4.width*4.5).toInt(), (PageSize.A4.height*4.5).toInt(), 1).create()
-//        val page = document.startPage(pageInfo)
-//
-//        // Create a bitmap with a higher density for better resolution
-//        val density = context.resources.displayMetrics.density
-//        val bitmap = Bitmap.createBitmap((pageInfo.pageWidth * density).toInt(), (pageInfo.pageHeight * density).toInt(), Bitmap.Config.ARGB_8888)
-//        val canvas = Canvas(bitmap)
-//        canvas.scale(density, density)
-//
-//        // Inflate the custom view pod layout
-//        val viewPodLayout = findViewById<ResumeFreeOneViewPod>(R.id.vpResumeFreeOne)
-//
-//        // Measure and layout the view
-//        val widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(viewPodLayout.width, View.MeasureSpec.EXACTLY)
-//        val heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(viewPodLayout.height, View.MeasureSpec.EXACTLY)
-//        viewPodLayout.measure(widthMeasureSpec, heightMeasureSpec)
-//        viewPodLayout.layout(0, 0, viewPodLayout.measuredWidth, viewPodLayout.measuredHeight)
-//
-//        // Draw the view onto the canvas
-//        viewPodLayout.draw(canvas)
-//
-//        // Draw the bitmap onto the PDF page
-//        val pdfCanvas = page.canvas
-//        pdfCanvas.drawBitmap(bitmap, 0f, 0f, null)
-//
-//        // Finish the page
-//        document.finishPage(page)
-//
-//        return document
-//
-//    }
 
 }

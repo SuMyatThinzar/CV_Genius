@@ -9,11 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.snackbar.Snackbar
+import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivityHomeBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
+import com.smtz.cvgenius.presentation.preview.PreviewActivity
 import com.smtz.cvgenius.presentation.template.SampleTemplateActivity
 
 class HomeActivity : AppCompatActivity(), CvDelegate {
@@ -133,5 +136,28 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
     override fun onTapCv(cvId: Long) {
         startActivity(CreateCvActivity.newIntent(this, cvId, templateId = null))
     }
+
+    override fun onTapViewCv(cvVO: CvVO) {
+        CvSingleton.instance.cvVO = cvVO
+        startActivity(PreviewActivity.newIntent(this))
+    }
+
+    override fun onTapDeleteCv(cvId: Long) {
+        mCvModel.deleteCv(cvId)
+        Snackbar.make(window.decorView, "Successfully deleted", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onTapDuplicate(cvVO: CvVO) {
+        val copiedCv = cvVO.copy(cvId = System.currentTimeMillis())
+        mCvModel.insertCV(copiedCv)
+        Snackbar.make(window.decorView, "Resume Duplicated ", Snackbar.LENGTH_SHORT).show()
+    }
+
+//    override fun onTapShare(viewPodId: Int) {
+//        val viewPodLayout = findViewById<BaseViewPod>(mViewPodId)
+//        val pdfDocu = convertToPdf(this,)
+//        shareDocument(this, )
+//        Snackbar.make(window.decorView, "Successfully Shared", Snackbar.LENGTH_SHORT).show()
+//    }
 
 }

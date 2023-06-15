@@ -17,6 +17,8 @@
     <color name="colorProfileText">#9F987F</color>
     <color name="colorToolbar">#37311B</color>
     <color name="colorCardView">#FFF5D0</color>
+    <color name="colorPrimaryVariantTransparent">#80FFF5D0</color>
+    <color name="colorCardViewTransparent">#80CAC5AF</color>
 
     <color name="colorResumeSecondOne">#323b4c</color>
     <color name="colorResumeSecondTwo">#3f3d86</color>

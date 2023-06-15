@@ -22,7 +22,7 @@ import com.smtz.cvgenius.data.typeConverters.*
 data class CvVO (
 
     @ColumnInfo(name = "templateId")
-    var templateId: Int?,
+    var templateId: Int,
 
     @ColumnInfo(name = "profileImage")
     var profileImage: ByteArray?,

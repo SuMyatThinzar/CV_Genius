@@ -71,31 +71,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_card_medium"
                 android:text="@string/lbl_select_your_profile_photo"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/text_regular_2x" />
 
             <FrameLayout
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="@dimen/margin_medium_3"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="@dimen/margin_medium_2"
                 android:layout_gravity="center_horizontal">
 
                 <com.smtz.cvgenius.common.delegates.RoundedCornerImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/background_select_photo"
-                    app:cornerRadius="40dp"/>
+                    app:cornerRadius="50dp"/>
 
                 <com.smtz.cvgenius.common.delegates.RoundedCornerImageView
                     android:id="@+id/ivSelectedImage"
-                    android:layout_width="74dp"
-                    android:layout_height="74dp"
+                    android:layout_width="87dp"
+                    android:layout_height="87dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_select_photo"
                     android:scaleType="centerCrop"
-                    app:cornerRadius="40dp"/>
+                    app:cornerRadius="50dp"/>
 
             </FrameLayout>
 
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_medium_3">
+                android:layout_marginTop="@dimen/margin_medium_2">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnUploadPhoto"

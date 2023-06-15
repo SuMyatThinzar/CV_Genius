@@ -93,9 +93,11 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
     }
 
     private fun setUpData() {
-        mCvVO?.profileImage?.let {
-            val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+        if (mCvVO?.profileImage != null) {
+            val bitmap = BitmapFactory.decodeByteArray(mCvVO?.profileImage, 0, mCvVO?.profileImage!!.size)
             binding.ivSelectedImage.setImageBitmap(bitmap)
+        } else {
+            binding.ivSelectedImage.visibility = View.GONE
         }
 
         val name = "${mCvVO?.personalDetails?.firstName} ${mCvVO?.personalDetails?.lastName}"

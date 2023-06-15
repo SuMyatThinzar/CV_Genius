@@ -49,4 +49,7 @@
     <string name="lbl_clear">Clear</string>
     <string name="lbl_change_template">Change Template</string>
     <string name="lbl_education">Education</string>
+    <string name="lbl_delete">Delete</string>
+    <string name="lbl_duplicate">Duplicate</string>
+    <string name="lbl_share">Share</string>
 </resources>

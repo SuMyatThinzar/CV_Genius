@@ -94,7 +94,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
                     mCvVo = CvVO(
                         cvId = mCvId,
-                        templateId = mTemplateId,
+                        templateId = mTemplateId!!,
                         profileImage = null,
                         personalDetails = null,
                         educationDetails = mutableListOf(),
@@ -121,23 +121,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
     }
 
-    private fun setUpEmptyCv(templateId: Int?) {
-
-            nullCv = CvVO(
-                cvId = mCvId,
-                templateId = templateId,
-                profileImage = null,
-                personalDetails = null,
-                educationDetails = mutableListOf(),
-                workExperiences = mutableListOf(),
-                skills = mutableListOf(),
-                achievements = mutableListOf(),
-                objective = null,
-                signature = null,
-                projectDetails = mutableListOf()
-            )
-    }
-
     private fun setUpAdapter() {
         binding.rvDetailButton.apply {
             adapter = mAddDetailButtonAdapter
@@ -161,6 +144,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         binding.btnUploadPhoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png")) // Add more supported image formats if needed
             startActivityForResult(intent, IMAGE_REQUEST_CODE)
         }
         binding.btnRemovePhoto.setOnClickListener {
@@ -237,6 +221,22 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             btnAbandon.visibility = View.GONE
             btnCancel.text = "OK"
         }
+    }
+
+    private fun setUpEmptyCv(templateId: Int?) {
+        nullCv = CvVO(
+            cvId = mCvId,
+            templateId = templateId!!,
+            profileImage = null,
+            personalDetails = null,
+            educationDetails = mutableListOf(),
+            workExperiences = mutableListOf(),
+            skills = mutableListOf(),
+            achievements = mutableListOf(),
+            objective = null,
+            signature = null,
+            projectDetails = mutableListOf()
+        )
     }
 
     override fun onTapButton(id: Int) {

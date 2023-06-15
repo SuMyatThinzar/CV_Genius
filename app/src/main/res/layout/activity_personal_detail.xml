@@ -87,6 +87,7 @@
                         android:textColor="@color/colorSecondaryText"
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
+                        android:nextFocusDown="@id/etLastName"
                         android:textSize="@dimen/text_small" />
 
                     <TextView
@@ -127,7 +128,8 @@
                         android:textColor="@color/colorSecondaryText"
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
-                        android:textSize="@dimen/text_small" />
+                        android:textSize="@dimen/text_small"
+                        android:nextFocusDown="@id/etContact" />
 
                 </LinearLayout>
 
@@ -172,7 +174,8 @@
                         android:textColor="@color/colorSecondaryText"
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
-                        android:textSize="@dimen/text_small" />
+                        android:textSize="@dimen/text_small"
+                        android:nextFocusDown="@id/etNationality" />
 
                     <TextView
                         android:id="@+id/errorContact"
