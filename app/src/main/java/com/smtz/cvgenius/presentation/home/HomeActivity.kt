@@ -39,6 +39,8 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 
     private val mCvListAdapter = CvListAdapter(delegate = this)
 
+    // Declare a loading flag
+    var isInterstitialAdLoading = false
     private var isInternetAvailable = false
     private val mCvModel: CvModel = CvModelImpl
     private var mCvVoList: List<CvVO> = listOf()
@@ -61,7 +63,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 
         // load interstitial ad.
         isInternetAvailable = checkInternetConnection(applicationContext)
-        if (isInternetAvailable && mInterstitialAd == null ) {
+        if (isInternetAvailable && mInterstitialAd == null && !isInterstitialAdLoading) {
             loadInterstitialAd()
         }
 
@@ -78,14 +80,14 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 
         // Check internet connectivity and AdLoaded or not
         isInternetAvailable = checkInternetConnection(applicationContext)
-        if (isInternetAvailable && mInterstitialAd == null) {
+        if (isInternetAvailable && mInterstitialAd == null && !isInterstitialAdLoading) {
             loadInterstitialAd()
         }
-        Toast.makeText(applicationContext, "isInternetAvailable $isInternetAvailable", Toast.LENGTH_SHORT).show()
     }
 
     // 1. load ad when activity starts and show on button click.
     private fun loadInterstitialAd() {
+        isInterstitialAdLoading = true
         val adRequest = AdRequest.Builder().build()
 
         InterstitialAd.load(
@@ -96,11 +98,13 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d(INTERSTITIAL_TAG, "AdFailedToLoad: ${adError.message}")
                     mInterstitialAd = null
+                    isInterstitialAdLoading = false
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     Log.d(INTERSTITIAL_TAG, "AdLoaded: ")
                     mInterstitialAd = interstitialAd
+                    isInterstitialAdLoading = false
                 }
             })
     }
