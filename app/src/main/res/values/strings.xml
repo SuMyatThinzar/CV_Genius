@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CV Genius</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-4196466051386479~2501989655</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-4196466051386479/6761617101</string>
     <string name="lbl_get_started">Get Started</string>
     <string name="lbl_create_your_cv_more_professional">Create Your CV \n More Professional</string>
 

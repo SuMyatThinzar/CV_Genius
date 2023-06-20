@@ -55,6 +55,9 @@ fun setUpTitleAndButton(expand: Boolean, tvTitle: TextView, btnBack: ImageView, 
         tvTitle.textSize = 20F
     }
 }
-
+const val INTERSTITIAL_TAG = "INTERSTITIAL_AD_TAG"
 const val skill = "SKILL"
 const val achievement = "ACHIEVEMENT"
+
+const val PREVIEW_ACTIVITY = "PreviewActivity"
+const val CREATE_CV_ACTIVITY = "CreateCVActivity"

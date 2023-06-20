@@ -86,6 +86,6 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
     }
 
     override fun onTapSampleTemplate(templateId: Int) {
-        startActivity(CreateCvActivity.newIntent(this, cvId = 0, templateId = templateId))
+        startActivity(CreateCvActivity.newIntent(this, templateId = templateId))
     }
 }

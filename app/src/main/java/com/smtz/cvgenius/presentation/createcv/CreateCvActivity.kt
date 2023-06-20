@@ -54,9 +54,9 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         private const val EXTRA_ID = "EXTRA ID"
         private const val EXTRA_TEMPLATE_ID = "EXTRA TEMPLATE ID"
 
-        fun newIntent(context: Context, cvId: Long, templateId: Int?): Intent {
+        fun newIntent(context: Context, templateId: Int?): Intent {
             val intent = Intent(context, CreateCvActivity::class.java)
-            intent.putExtra(EXTRA_ID, cvId)
+//            intent.putExtra(EXTRA_ID, cvId)
             intent.putExtra(EXTRA_TEMPLATE_ID, templateId)
             return intent
         }
@@ -68,10 +68,10 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         setContentView(binding.root)
 
         mTemplateId = intent.getIntExtra(EXTRA_TEMPLATE_ID, 10000)
-        val temp = intent.getLongExtra(EXTRA_ID, 0L)
-        if (temp != 0L) {
-            mCvId = temp
-        }
+//        val temp = intent.getLongExtra(EXTRA_ID, 0L)
+//        if (temp != 0L) {
+//            mCvId = temp
+//        }
 
         setUpToolBar()
         setUpAdapter()
@@ -81,45 +81,79 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
     private fun requestData() {
 
-        var hasObservedLiveData = false               // protect from looping the insert and observing infinitely
+        setUpEmptyCv(mTemplateId)
 
-        mCvModel.getCv(mCvId)?.observe(this) {
-            // to observe only once
-            if (!hasObservedLiveData) {
-                hasObservedLiveData = true
+        mCvVo = CvSingleton.instance.cvVO
 
-                if (it == null) {                  // if the object is new, observing returns null
+        if (mCvVo == null) {
+            mCvVo = CvVO(
+                cvId = mCvId,
+                templateId = mTemplateId!!,
+                profileImage = null,
+                personalDetails = null,
+                educationDetails = mutableListOf(),
+                workExperiences = mutableListOf(),
+                skills = mutableListOf(),
+                achievements = mutableListOf(),
+                objective = null,
+                signature = null,
+                projectDetails = mutableListOf()
+            )
+            Log.d("assasdfasdf", "new null cv created")
 
-                    setUpEmptyCv(mTemplateId)
-
-                    mCvVo = CvVO(
-                        cvId = mCvId,
-                        templateId = mTemplateId!!,
-                        profileImage = null,
-                        personalDetails = null,
-                        educationDetails = mutableListOf(),
-                        workExperiences = mutableListOf(),
-                        skills = mutableListOf(),
-                        achievements = mutableListOf(),
-                        objective = null,
-                        signature = null,
-                        projectDetails = mutableListOf()
-                    )
-                    Log.d("assasdfasdf", "new null cv created")
-
-                } else {                         // if the object is exist, observing returns it
-                    setUpEmptyCv(it.templateId)
-                    mCvId = it.cvId
-                    mCvVo = it
-                    setUpData()
-                    Log.d("assasdfasdf", "replace created cv")
-                }
-            }     // stop at once
-
-            // save CvVO as a singleton and access it in Details
-            CvSingleton.instance.cvVO = mCvVo
         }
+        mCvVo?.let{                         // if the object is exist, observing returns it
+            setUpEmptyCv(it.templateId)
+            mCvId = it.cvId
+            setUpData()
+            Log.d("assasdfasdf", "replace created cv")
+        }
+
+        // save CvVO as a singleton and access it in Details
+        CvSingleton.instance.cvVO = mCvVo
     }
+
+//    private fun requestData() {
+//
+//        var hasObservedLiveData = false               // protect from looping the insert and observing infinitely
+//
+//        mCvModel.getCv(mCvId)?.observe(this) {
+//            // to observe only once
+//            if (!hasObservedLiveData) {
+//                hasObservedLiveData = true
+//
+//                if (it == null) {                  // if the object is new, observing returns null
+//
+//                    setUpEmptyCv(mTemplateId)
+//
+//                    mCvVo = CvVO(
+//                        cvId = mCvId,
+//                        templateId = mTemplateId!!,
+//                        profileImage = null,
+//                        personalDetails = null,
+//                        educationDetails = mutableListOf(),
+//                        workExperiences = mutableListOf(),
+//                        skills = mutableListOf(),
+//                        achievements = mutableListOf(),
+//                        objective = null,
+//                        signature = null,
+//                        projectDetails = mutableListOf()
+//                    )
+//                    Log.d("assasdfasdf", "new null cv created")
+//
+//                } else {                         // if the object is exist, observing returns it
+//                    setUpEmptyCv(it.templateId)
+//                    mCvId = it.cvId
+//                    mCvVo = it
+//                    setUpData()
+//                    Log.d("assasdfasdf", "replace created cv")
+//                }
+//            }     // stop at once
+//
+//            // save CvVO as a singleton and access it in Details
+//            CvSingleton.instance.cvVO = mCvVo
+//        }
+//    }
 
     private fun setUpAdapter() {
         binding.rvDetailButton.apply {
@@ -155,6 +189,9 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
         binding.btnPreviewCv.setOnClickListener {
             if (mCvVo?.personalDetails != null) {
+
+                // save again for new changes
+                mCvModel.insertCV(mCvVo!!)
                 startActivity(Intent(PreviewActivity.newIntent(this)))
             } else {
                 showDialogOnBackPressedAndPreview("preview")
@@ -215,6 +252,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
         }
 
+        // change text and buttons for Dialog box
         if (previewOrBackPressed == "preview") {
 //            parent.removeView(btnAbandon)
             tvMessage.text = "Please fill personal information for previewing CV"
@@ -287,9 +325,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
     override fun onBackPressed() {
 
         if (mCvVo!!.personalDetails != null) {
-            mCvModel.insertCV(
-                mCvVo!!
-            )
+            mCvModel.insertCV(mCvVo!!)  // save new changes
             // start Activity A with FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_SINGLE_TOP flags skip Activity B
             val intent = Intent(applicationContext, HomeActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP

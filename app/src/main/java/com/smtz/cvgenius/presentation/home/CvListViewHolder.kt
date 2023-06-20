@@ -24,7 +24,7 @@ class CvListViewHolder(private var binding: ViewHolderCvListBinding, private val
 //        }
         binding.btnEditCv.setOnClickListener {
             mDataVO?.let {
-                delegate.onTapCv(it.cvId)
+                delegate.onTapCv(it)
             }
         }
         binding.btnViewCv.setOnClickListener {
