@@ -63,6 +63,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 
         // load interstitial ad.
         isInternetAvailable = checkInternetConnection(applicationContext)
+        Log.d(INTERSTITIAL_TAG, "internet connection $isInternetAvailable")
         if (isInternetAvailable && mInterstitialAd == null && !isInterstitialAdLoading) {
             loadInterstitialAd()
         }
@@ -80,6 +81,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 
         // Check internet connectivity and AdLoaded or not
         isInternetAvailable = checkInternetConnection(applicationContext)
+        Log.d(INTERSTITIAL_TAG, "internet connection $isInternetAvailable")
         if (isInternetAvailable && mInterstitialAd == null && !isInterstitialAdLoading) {
             loadInterstitialAd()
         }
