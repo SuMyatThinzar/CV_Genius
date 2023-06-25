@@ -18,9 +18,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.smtz.cvgenius.BuildConfig
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.checkInternetConnection
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivityCreateCvBinding
 import com.smtz.cvgenius.domain.model.CvVO
@@ -36,12 +41,19 @@ import com.smtz.cvgenius.presentation.details.skills.SkillActivity
 import com.smtz.cvgenius.presentation.details.workExperiences.WorkExperienceActivity
 import com.smtz.cvgenius.presentation.home.HomeActivity
 import com.smtz.cvgenius.presentation.preview.PreviewActivity
+import com.smtz.cvgenius.utils.BACK_PRESSED
+import com.smtz.cvgenius.utils.CREATE_CV_ACTIVITY
+import com.smtz.cvgenius.utils.INTERSTITIAL_TAG
+import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
 
 class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
     private lateinit var binding: ActivityCreateCvBinding
     private var mAddDetailButtonAdapter: AddDetailButtonAdapter = AddDetailButtonAdapter(this)
 
+    // Declare a loading flag
+    var isInterstitialAdLoading = false
+    private var isInternetAvailable = false
     private var mCvId = System.currentTimeMillis()
     private var mCvModel: CvModel = CvModelImpl
     private var mCvVo: CvVO? = null
@@ -49,9 +61,11 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
     private var selectedImage: ByteArray? = null
     private var mTemplateId: Int? = null
 
+    // interstitial ad
+    private var mInterstitialAd: InterstitialAd? = null
+
     companion object {
 
-        private const val EXTRA_ID = "EXTRA ID"
         private const val EXTRA_TEMPLATE_ID = "EXTRA TEMPLATE ID"
 
         fun newIntent(context: Context, templateId: Int?): Intent {
@@ -67,16 +81,33 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         binding = ActivityCreateCvBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mTemplateId = intent.getIntExtra(EXTRA_TEMPLATE_ID, 10000)
-//        val temp = intent.getLongExtra(EXTRA_ID, 0L)
-//        if (temp != 0L) {
-//            mCvId = temp
-//        }
+        // initializing AdMob
+        MobileAds.initialize(this) {}
 
+        // load interstitial ad.
+        isInternetAvailable = checkInternetConnection(applicationContext)
+        Log.d(INTERSTITIAL_TAG, "internet connection $isInternetAvailable")
+        if (isInternetAvailable && mInterstitialAd == null && !isInterstitialAdLoading) {
+            loadInterstitialAd()
+        }
+
+        mTemplateId = intent.getIntExtra(EXTRA_TEMPLATE_ID, 10000)
         setUpToolBar()
         setUpAdapter()
         setUpListener()
         requestData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mCvVo = CvSingleton.instance.cvVO
+
+        // Check internet connectivity and AdLoaded or not
+        isInternetAvailable = checkInternetConnection(applicationContext)
+        Log.d(INTERSTITIAL_TAG, "internet connection $isInternetAvailable")
+        if (isInternetAvailable && mInterstitialAd == null && !isInterstitialAdLoading) {
+            loadInterstitialAd()
+        }
     }
 
     private fun requestData() {
@@ -113,48 +144,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         CvSingleton.instance.cvVO = mCvVo
     }
 
-//    private fun requestData() {
-//
-//        var hasObservedLiveData = false               // protect from looping the insert and observing infinitely
-//
-//        mCvModel.getCv(mCvId)?.observe(this) {
-//            // to observe only once
-//            if (!hasObservedLiveData) {
-//                hasObservedLiveData = true
-//
-//                if (it == null) {                  // if the object is new, observing returns null
-//
-//                    setUpEmptyCv(mTemplateId)
-//
-//                    mCvVo = CvVO(
-//                        cvId = mCvId,
-//                        templateId = mTemplateId!!,
-//                        profileImage = null,
-//                        personalDetails = null,
-//                        educationDetails = mutableListOf(),
-//                        workExperiences = mutableListOf(),
-//                        skills = mutableListOf(),
-//                        achievements = mutableListOf(),
-//                        objective = null,
-//                        signature = null,
-//                        projectDetails = mutableListOf()
-//                    )
-//                    Log.d("assasdfasdf", "new null cv created")
-//
-//                } else {                         // if the object is exist, observing returns it
-//                    setUpEmptyCv(it.templateId)
-//                    mCvId = it.cvId
-//                    mCvVo = it
-//                    setUpData()
-//                    Log.d("assasdfasdf", "replace created cv")
-//                }
-//            }     // stop at once
-//
-//            // save CvVO as a singleton and access it in Details
-//            CvSingleton.instance.cvVO = mCvVo
-//        }
-//    }
-
     private fun setUpAdapter() {
         binding.rvDetailButton.apply {
             adapter = mAddDetailButtonAdapter
@@ -189,10 +178,9 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
         binding.btnPreviewCv.setOnClickListener {
             if (mCvVo?.personalDetails != null) {
-
                 // save again for new changes
                 mCvModel.insertCV(mCvVo!!)
-                startActivity(Intent(PreviewActivity.newIntent(this)))
+                showInterstitialAd(PREVIEW_ACTIVITY)
             } else {
                 showDialogOnBackPressedAndPreview("preview")
             }
@@ -241,15 +229,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         btnAbandon.setOnClickListener {
             // Handle Abandon button click
             dialog.dismiss()
-
-            // start Activity A with FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_SINGLE_TOP flags skip Activity B
-            val intent = Intent(applicationContext, HomeActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            }
-            startActivity(intent)
-            // finish Activity C
-            finish()
-
+            showInterstitialAd(BACK_PRESSED)
         }
 
         // change text and buttons for Dialog box
@@ -275,6 +255,98 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             signature = null,
             projectDetails = mutableListOf()
         )
+    }
+
+    // 1. load ad when activity starts and show on button click.
+    private fun loadInterstitialAd() {
+        isInterstitialAdLoading = true
+        Log.d("adsdfsdfsd", "ad is loading $isInterstitialAdLoading")
+
+        val adRequest = AdRequest.Builder().build()
+
+        InterstitialAd.load(
+            applicationContext,
+            BuildConfig.INTERSTITIAL_AD_ID,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d("adsdfsdfsd", "AdFailedToLoad: ${adError.message}")
+                    mInterstitialAd = null
+                    isInterstitialAdLoading = false
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d("adsdfsdfsd", "AdLoaded: ")
+                    mInterstitialAd = interstitialAd
+                    isInterstitialAdLoading = false
+                }
+            })
+    }
+
+    private fun showInterstitialAd(NEXT_ACTIVITY: String) {
+        // check if ad is loaded or not loaded.
+        if (mInterstitialAd != null) {
+            //ad is loaded.
+            mInterstitialAd!!.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdClicked() {
+                    super.onAdClicked()
+                    // called when ad is clicked.
+                    Log.d("adsdfsdfsd", "AdClicked: ")
+                }
+
+                override fun onAdDismissedFullScreenContent() {
+                    super.onAdDismissedFullScreenContent()
+                    // called when ad is dismissed/closed.
+                    Log.d("adsdfsdfsd", "AdDismissedFullScreenContent: ")
+                    mInterstitialAd = null
+                    showNextActivity(NEXT_ACTIVITY)    // *****
+                    if (NEXT_ACTIVITY != BACK_PRESSED) loadInterstitialAd()
+                }
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                    super.onAdFailedToShowFullScreenContent(adError)
+                    // called when ad is failed to show.
+                    Log.d("adsdfsdfsd", "AdFailedToShowFullScreenContent: ${adError.message}")
+                    mInterstitialAd = null
+                    showNextActivity(NEXT_ACTIVITY)     // *****
+                    if (NEXT_ACTIVITY != BACK_PRESSED)  loadInterstitialAd()
+                }
+
+                override fun onAdImpression() {
+                    super.onAdImpression()
+                    // called when ad impression is recorded.
+                    Log.d("adsdfsdfsd", "onAdImpression: ")
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    super.onAdShowedFullScreenContent()
+                    // called when ad is shown.
+                    Log.d("adsdfsdfsd", "onAdShowedFullScreenContent: ")
+                }
+            }
+
+            //show ad.
+            mInterstitialAd!!.show(this as Activity)
+        } else {
+            showNextActivity(NEXT_ACTIVITY)     // *****
+            Log.d("adsdfsdfsd", "Ad wasn't ready.")
+        }
+    }
+
+    private fun showNextActivity(activityToStart: String) {
+
+        when (activityToStart) {
+            PREVIEW_ACTIVITY -> startActivity(PreviewActivity.newIntent(this))
+            BACK_PRESSED -> {
+                // start Activity A with FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_SINGLE_TOP flags skip Activity B
+                val intent = Intent(applicationContext, HomeActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                startActivity(intent)
+                // finish Activity C
+                finish()
+            }
+        }
     }
 
     override fun onTapButton(id: Int) {
@@ -317,25 +389,21 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 //        }
 //    }
 
-    override fun onResume() {
-        mCvVo = CvSingleton.instance.cvVO
-        super.onResume()
-    }
-
     override fun onBackPressed() {
 
         if (mCvVo!!.personalDetails != null) {
             mCvModel.insertCV(mCvVo!!)  // save new changes
-            // start Activity A with FLAG_ACTIVITY_CLEAR_TOP and FLAG_ACTIVITY_SINGLE_TOP flags skip Activity B
-            val intent = Intent(applicationContext, HomeActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-            }
-            startActivity(intent)
-            // finish Activity C
-            finish()
+            showInterstitialAd(BACK_PRESSED)
+
         } else {
             showDialogOnBackPressedAndPreview("")
         }
+    }
+
+    override fun onDestroy() {
+
+        CvSingleton.instance.cvVO = null
+        super.onDestroy()
     }
 }
 

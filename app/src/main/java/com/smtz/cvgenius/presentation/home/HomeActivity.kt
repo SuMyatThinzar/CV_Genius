@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -27,7 +28,9 @@ import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
 import com.smtz.cvgenius.presentation.preview.PreviewActivity
+import com.smtz.cvgenius.presentation.profile.ProfileActivity
 import com.smtz.cvgenius.presentation.template.SampleTemplateActivity
+import com.smtz.cvgenius.utils.BACK_PRESSED
 import com.smtz.cvgenius.utils.CREATE_CV_ACTIVITY
 import com.smtz.cvgenius.utils.INTERSTITIAL_TAG
 import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
@@ -90,6 +93,8 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
     // 1. load ad when activity starts and show on button click.
     private fun loadInterstitialAd() {
         isInterstitialAdLoading = true
+        Log.d(INTERSTITIAL_TAG, "ad is loading $isInterstitialAdLoading")
+
         val adRequest = AdRequest.Builder().build()
 
         InterstitialAd.load(
@@ -111,7 +116,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
             })
     }
 
-    private fun showInterstitialAd(PREVIEW_ACTIVITY: String) {
+    private fun showInterstitialAd(NEXT_ACTIVITY: String) {
         // check if ad is loaded or not loaded.
         if (mInterstitialAd != null) {
             //ad is loaded.
@@ -127,8 +132,8 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
                     // called when ad is dismissed/closed.
                     Log.d(INTERSTITIAL_TAG, "AdDismissedFullScreenContent: ")
                     mInterstitialAd = null
-                    showNextActivity(PREVIEW_ACTIVITY)    // *****
-                    loadInterstitialAd()
+                    showNextActivity(NEXT_ACTIVITY)    // *****
+                    if (NEXT_ACTIVITY != BACK_PRESSED)  loadInterstitialAd()
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError) {
@@ -136,7 +141,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
                     // called when ad is failed to show.
                     Log.d(INTERSTITIAL_TAG, "AdFailedToShowFullScreenContent: ${adError.message}")
                     mInterstitialAd = null
-                    showNextActivity(PREVIEW_ACTIVITY)     // *****
+                    showNextActivity(NEXT_ACTIVITY)     // *****
                 }
 
                 override fun onAdImpression() {
@@ -155,7 +160,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
             //show ad.
             mInterstitialAd!!.show(this as Activity)
         } else {
-            showNextActivity(PREVIEW_ACTIVITY)     // *****
+            showNextActivity(NEXT_ACTIVITY)     // *****
             Log.d(INTERSTITIAL_TAG, "Ad wasn't ready.")
         }
     }
@@ -220,12 +225,14 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
     }
 
     private fun hideEmptyView() {
-        if (mCvVoList.isNotEmpty()) {
-            binding.llEmptyView.visibility = View.INVISIBLE
-        }
+//        if (mCvVoList.isNotEmpty()) {
+            binding.hideEmptyView.visibility = View.VISIBLE
+            binding.llEmptyView.visibility = View.GONE
+//        }
     }
 
     private fun showEmptyView() {
+        binding.hideEmptyView.visibility = View.GONE
         binding.llEmptyView.visibility = View.VISIBLE
     }
 
@@ -236,31 +243,12 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
         binding.fabCreateNewCV.setOnClickListener {
             startActivity(Intent(this, SampleTemplateActivity::class.java))
         }
+        binding.btnProfile.setOnClickListener {
+            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
     }
-
-//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId){
-//            R.id.nav_camera -> {
-//                Toast.makeText(this, "Camera", Toast.LENGTH_SHORT).show()
-//                //Logic
-//                drawerLayout.closeDrawer(GravityCompat.START)
-//            }
-//            R.id.nav_album -> {
-//                Toast.makeText(this, "Album", Toast.LENGTH_SHORT).show()
-//            }
-//            R.id.nav_slideshow -> {
-//                Toast.makeText(this, "Slideshow", Toast.LENGTH_SHORT).show()
-//            }
-//            R.id.nav_tool -> {
-//                Toast.makeText(this, "Tools", Toast.LENGTH_SHORT).show()
-//            }
-//            R.id.nav_constraint -> {
-//                val intent = Intent(this, ConstraintActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }
-//        return true
-//    }
 
     private fun setUpToolBar() {
         setSupportActionBar(binding.toolBar)
@@ -286,7 +274,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
         when (activityToStart) {
             PREVIEW_ACTIVITY -> startActivity(PreviewActivity.newIntent(this))
             CREATE_CV_ACTIVITY -> startActivity(CreateCvActivity.newIntent(this, templateId = null)) // will be replaced in requestData()
-            // Handle other activities as needed
+            BACK_PRESSED -> super.onBackPressed()
         }
     }
 
@@ -295,8 +283,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
             binding.drawerLayout.isDrawerOpen(GravityCompat.START) ->
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
             else -> {
-                showInterstitialAd("BACK_PRESSED")
-                super.onBackPressed()
+                showInterstitialAd(BACK_PRESSED)
             }
         }
     }

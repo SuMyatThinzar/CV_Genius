@@ -61,3 +61,4 @@ const val achievement = "ACHIEVEMENT"
 
 const val PREVIEW_ACTIVITY = "PreviewActivity"
 const val CREATE_CV_ACTIVITY = "CreateCVActivity"
+const val BACK_PRESSED = "BACK_PRESSED"

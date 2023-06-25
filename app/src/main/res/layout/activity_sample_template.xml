@@ -31,6 +31,7 @@
                 android:layout_height="@dimen/height_back_btn"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/margin_medium_3"
+                android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/background_back"
                 android:padding="@dimen/margin_card_medium"
                 android:src="@drawable/ic_back" />
@@ -39,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_card_medium"
                 android:text="@string/lbl_choose_templates"
                 android:textColor="@color/colorToolbar"
                 android:textSize="@dimen/text_heading_1x"
@@ -52,21 +54,37 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        <soup.neumorphism.NeumorphCardView
+            style="@style/Widget.Neumorph.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_half_card"
-            android:paddingBottom="1dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:tabGravity="fill"
-            app:tabIndicator="@drawable/background_tab_indicator"
-            app:tabIndicatorColor="@color/black"
-            app:tabIndicatorFullWidth="false"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorSecondaryText"
-            app:tabTextAppearance="@style/CustomTabTextAppearance"
-            app:tabTextColor="@color/colorToolbar" />
+            android:layout_marginStart="-10.5dp"
+            android:layout_marginEnd="-10.5dp"
+            android:layout_marginBottom="@dimen/margin_medium_3_n"
+            android:padding="@dimen/margin_medium_2"
+            app:neumorph_backgroundColor="@color/colorPrimary"
+            app:neumorph_insetBottom="0dp"
+            app:neumorph_insetTop="2dp"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+            app:neumorph_shapeType="pressed">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="@dimen/margin_medium_n"
+                android:paddingBottom="1dp"
+                app:tabGravity="fill"
+                app:tabIndicator="@drawable/background_tab_indicator"
+                app:tabIndicatorColor="@color/black"
+                app:tabIndicatorFullWidth="false"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorSecondaryText"
+                app:tabTextAppearance="@style/CustomTabTextAppearance"
+                app:tabTextColor="@color/colorToolbar" />
+
+        </soup.neumorphism.NeumorphCardView>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -74,11 +92,20 @@
         android:id="@+id/rvCreatedCV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingStart="@dimen/margin_medium"
-        android:paddingBottom="@dimen/margin_xxlarge"
-        android:overScrollMode="never"
+        android:background="@color/colorPrimary"
         android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingStart="@dimen/margin_medium"
+        android:paddingBottom="@dimen/margin_xxxlarge"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bannerAdView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:elevation="1dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_banner_id" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

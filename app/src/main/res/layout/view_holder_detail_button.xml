@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<soup.neumorphism.NeumorphCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Neumorph.CardView"
+    app:neumorph_shapeType="flat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/margin_medium_2"
-    android:layout_marginBottom="@dimen/margin_medium_3"
-    android:padding="@dimen/margin_card_medium"
-    app:cardCornerRadius="@dimen/margin_small"
-    app:cardElevation="@dimen/margin_medium">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorPrimaryLight"/>
+    android:layout_marginTop="@dimen/margin_small"
+    app:neumorph_inset="8.6dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_2_n"
+        android:layout_marginEnd="@dimen/margin_medium_2_n"
+        android:layout_marginTop="@dimen/margin_medium_2_n"
         android:orientation="vertical">
 
         <ImageView
@@ -32,12 +29,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingEnd="@dimen/margin_medium"
             android:layout_marginTop="@dimen/margin_card_medium_2"
             android:layout_marginBottom="@dimen/margin_detail_button"
             android:text="Personal Details"
-            android:textColor="@color/colorProfileText"
+            android:textColor="@color/colorSecondaryText"
             android:textSize="@dimen/text_small" />
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</soup.neumorphism.NeumorphCardView>

@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#FFFFFFFF</color>
+    <color name="colorPrimary">#F4F4F4</color>
     <color name="colorPrimaryDark">#161c24</color>
     <color name="colorPrimaryLight">#eeeeee</color>
     <color name="colorAccent">#FFDE67</color>
@@ -17,4 +17,7 @@
     <color name="colorProfileText">#9F987F</color>
     <color name="colorToolbar">#37311B</color>
     <color name="colorCardView">#FFF5D0</color>
+    <color name="colorPrimaryVariantTransparent">#80FFF5D0</color>
+    <color name="colorCardViewTransparent">#80CAC5AF</color>
+
 </resources>

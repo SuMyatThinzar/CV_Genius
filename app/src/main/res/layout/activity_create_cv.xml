@@ -54,12 +54,23 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <soup.neumorphism.NeumorphCardView
+        style="@style/Widget.Neumorph.CardView"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+        app:neumorph_backgroundColor="@color/colorPrimary"
+        app:neumorph_shapeType="pressed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_xxlarge_n"
+        android:layout_marginStart="-10.5dp"
+        android:layout_marginEnd="-10.5dp"
+        android:padding="@dimen/margin_large"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_medium_3_n"
-        android:background="@drawable/background_half_card"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_marginTop="@dimen/margin_medium_3_n">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_card_medium"
+                android:layout_marginTop="@dimen/margin_medium_2"
                 android:text="@string/lbl_select_your_profile_photo"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="@dimen/text_regular_2x" />
@@ -103,28 +114,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_medium_2">
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <soup.neumorphism.NeumorphButton
+                    style="@style/Widget.Neumorph.Button"
+                    app:neumorph_shapeType="flat"
+                    app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+                    app:neumorph_backgroundColor="@color/colorAccent"
+                    app:neumorph_shadowColorLight="#FEFAEB"
                     android:id="@+id/btnUploadPhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/height_button"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:background="@drawable/background_upload_photo"
-                    android:paddingStart="@dimen/margin_medium_3"
-                    android:paddingEnd="@dimen/margin_medium_3"
                     android:text="@string/lbl_upload_photo"
                     android:textAllCaps="false"
                     android:textColor="@color/colorSecondaryText"/>
 
-                <androidx.appcompat.widget.AppCompatButton
+                <soup.neumorphism.NeumorphButton
+                    style="@style/Widget.Neumorph.Button"
+                    app:neumorph_shapeType="flat"
+                    app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+                    app:neumorph_backgroundColor="@color/colorAccent"
+                    app:neumorph_shadowColorLight="#FEFAEB"
                     android:id="@+id/btnRemovePhoto"
+                    android:layout_marginStart="@dimen/margin_medium_n"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/height_button"
-                    android:background="@drawable/background_remove"
                     android:text="@string/lbl_remove"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorSecondaryText" />
+                    android:textColor="@color/colorSecondaryText"/>
 
             </LinearLayout>
 
@@ -132,9 +150,8 @@
                 android:id="@+id/rvDetailButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_xlarge"
-                android:layout_marginBottom="@dimen/margin_medium_2"
-                android:paddingStart="@dimen/margin_medium_2"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_medium"
                 android:overScrollMode="never"
                 android:clipToPadding="false"/>
 
@@ -219,6 +236,8 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    </soup.neumorphism.NeumorphCardView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/btnPreviewCv"

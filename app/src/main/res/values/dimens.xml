@@ -8,9 +8,11 @@
     <dimen name ="margin_medium_2">16dp</dimen>
     <dimen name ="margin_card_medium_2">12dp</dimen>
     <dimen name = "margin_medium_3">20dp</dimen>
+    <dimen name = "margin_medium_4">28dp</dimen>
     <dimen name = "margin_large" >24dp</dimen>
     <dimen name = "margin_xlarge">32dp</dimen>
     <dimen name = "margin_xxlarge">48dp</dimen>
+    <dimen name = "margin_xxxlarge">76dp</dimen>
 
     <dimen name = "margin_small_n">-4dp</dimen>
     <dimen name = "margin_card_medium_n">-6dp</dimen>
@@ -18,8 +20,11 @@
     <dimen name = "margin_card_medium_2_n">-12dp</dimen>
     <dimen name = "margin_medium_2_n">-16dp</dimen>
     <dimen name = "margin_medium_3_n">-18dp</dimen>
+    <dimen name = "margin_medium_4_n">-22dp</dimen>
     <dimen name = "margin_large_n">-24dp</dimen>
     <dimen name = "margin_xlarge_n">-32dp</dimen>
+    <dimen name = "margin_xxlarge_n">-38dp</dimen>
+    <dimen name = "margin_xxxlarge_n">-48dp</dimen>
 
     <dimen name = "text_smaller">8sp</dimen>
     <dimen name = "text_small">12sp</dimen>
@@ -40,8 +45,8 @@
     <dimen name="width_back_btn">24dp</dimen>
     <dimen name="height_back_btn">26dp</dimen>
     <dimen name="margin_bottom_get_started">130dp</dimen>
-    <dimen name="height_button">38dp</dimen>
-    <dimen name="margin_detail_button">28dp</dimen>
+    <dimen name="height_button">66dp</dimen>
+    <dimen name="margin_detail_button">32dp</dimen>
 
     <dimen name="text_name_resume_free_one">22.87sp</dimen>
     <dimen name="text_heading_resume_free_one">9.92sp</dimen>

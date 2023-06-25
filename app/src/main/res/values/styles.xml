@@ -34,4 +34,52 @@
         <item name="android:textColorSecondary">@color/colorSecondaryText</item>
     </style>
 
+    <!--  Neumorphism Card View under toolbar  -->
+    <style name="CustomShapeAppearance">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        <!-- Or if wants different radius depending on the corner. -->
+        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_medium_4</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/margin_medium_4</item>
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_medium_2</item>
+        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_medium_2</item>
+    </style>
+
+    <!--  Neumorphism Image Button corner  -->
+    <style name="CustomShapeAppearanceImageButton">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        <!-- Or if wants different radius depending on the corner. -->
+        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_small</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/margin_small</item>
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_small</item>
+        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_small</item>
+    </style>
+
+    <!--  Neumorphism Text Button corner  -->
+    <style name="CustomShapeAppearanceTextButton">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        <!-- Or if wants different radius depending on the corner. -->
+        <item name="neumorph_cornerSizeTopLeft">7dp</item>
+        <item name="neumorph_cornerSizeTopRight">7dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">7dp</item>
+        <item name="neumorph_cornerSizeBottomRight">7dp</item>
+    </style>
+
+    <!--  Neumorphism Sample Template background below TabBar  -->
+    <style name="CustomShapeAppearanceTabBarBottom">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        <!-- Or if wants different radius depending on the corner. -->
+        <item name="neumorph_cornerSizeTopLeft">0dp</item>
+        <item name="neumorph_cornerSizeTopRight">0dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">12dp</item>
+        <item name="neumorph_cornerSizeBottomRight">12dp</item>
+    </style>
+
 </resources>

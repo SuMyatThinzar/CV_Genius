@@ -5,6 +5,9 @@ import android.view.Gravity
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.smtz.cvgenius.common.delegates.SampleTemplateDelegate
 import com.smtz.cvgenius.databinding.ActivitySampleTemplateBinding
@@ -16,11 +19,20 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
 
     private lateinit var binding : ActivitySampleTemplateBinding
     private val mSampleTemplateAdapter = SampleTemplateAdapter(this)
+    private lateinit var mBannerAdView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySampleTemplateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // initializing AdMob
+        MobileAds.initialize(this) {}
+
+        // banner Ad
+        mBannerAdView = binding.bannerAdView
+        val adRequest = AdRequest.Builder().build()
+        mBannerAdView.loadAd(adRequest)
 
         setUpToolBar()
         setUpTabLayout()
@@ -36,7 +48,7 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
         parentView.removeView(binding.btnBack)
 
         val layoutParamsExpanded = binding.btnBack.layoutParams as CollapsingToolbarLayout.LayoutParams
-        layoutParamsExpanded.topMargin = 32
+        layoutParamsExpanded.topMargin = 46
         layoutParamsExpanded.bottomMargin = 32
         layoutParamsExpanded.collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
         layoutParamsExpanded.gravity = Gravity.CENTER_VERTICAL

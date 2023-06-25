@@ -15,27 +15,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium_2"
-        android:layout_marginEnd="@dimen/margin_medium_2"
-        android:layout_marginTop="@dimen/margin_xlarge"
-        android:layout_marginBottom="@dimen/margin_large"
         android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_medium_2"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/btnDownload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:orientation="vertical"
-            android:layout_marginEnd="@dimen/margin_large"
             android:gravity="center_horizontal">
 
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/btnDownload"
+                style="@style/Widget.Neumorph.ImageButton"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearanceImageButton"
+                app:neumorph_backgroundColor="@color/colorAccent"
+                app:neumorph_shadowColorLight="#FFFCF1"
+                android:layout_width="80dp"
+                android:layout_height="80dp">
+
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/background_upload_photo"
-                android:padding="@dimen/margin_card_medium_2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
                 android:src="@drawable/ic_download" />
+
+            </soup.neumorphism.NeumorphCardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,19 +53,28 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btnSend"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:gravity="center_horizontal">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/background_upload_photo"
-                android:padding="@dimen/margin_medium_2"
-                android:src="@drawable/ic_send" />
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/btnSend"
+                style="@style/Widget.Neumorph.ImageButton"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearanceImageButton"
+                app:neumorph_backgroundColor="@color/colorAccent"
+                app:neumorph_shadowColorLight="#FFFCF1"
+                android:layout_width="80dp"
+                android:layout_height="80dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_send" />
+
+            </soup.neumorphism.NeumorphCardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,19 +86,28 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btnPrint"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium"
             android:orientation="vertical"
-            android:layout_marginEnd="@dimen/margin_large"
             android:gravity="center_horizontal">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/background_upload_photo"
-                android:padding="@dimen/margin_medium_2"
-                android:src="@drawable/ic_print" />
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/btnPrint"
+                style="@style/Widget.Neumorph.ImageButton"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearanceImageButton"
+                app:neumorph_backgroundColor="@color/colorAccent"
+                app:neumorph_shadowColorLight="#FFFCF1"
+                android:layout_width="80dp"
+                android:layout_height="80dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_print" />
+
+            </soup.neumorphism.NeumorphCardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,18 +119,27 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/btnShare"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/background_upload_photo"
-                android:padding="@dimen/margin_medium_2"
-                android:src="@drawable/baseline_share_24dp" />
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/btnShare"
+                style="@style/Widget.Neumorph.ImageButton"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearanceImageButton"
+                app:neumorph_backgroundColor="@color/colorAccent"
+                app:neumorph_shadowColorLight="#FFFCF1"
+                android:layout_width="80dp"
+                android:layout_height="80dp">
+
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_share" />
+
+            </soup.neumorphism.NeumorphCardView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -188,17 +221,18 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <soup.neumorphism.NeumorphButton
+        style="@style/Widget.Neumorph.Button"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+        app:neumorph_shadowColorLight="#FFFBEB"
+        app:neumorph_backgroundColor="@color/colorAccent"
+        app:neumorph_shadowElevation="3dp"
         android:id="@+id/btnChangeTemplate"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/height_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/margin_medium_2"
-        android:layout_marginEnd="@dimen/margin_medium"
-        android:layout_marginBottom="@dimen/margin_xxlarge"
+        android:gravity="center"
         android:background="@drawable/background_upload_photo"
-        android:paddingStart="@dimen/margin_medium_3"
-        android:paddingEnd="@dimen/margin_medium_3"
         android:text="@string/lbl_change_template"
         android:textAllCaps="false"
         android:textColor="@color/colorSecondaryText" />

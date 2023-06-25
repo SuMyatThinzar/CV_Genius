@@ -19,6 +19,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
         super.onCreate(savedInstanceState)
 
 
+
     }
 
 }
