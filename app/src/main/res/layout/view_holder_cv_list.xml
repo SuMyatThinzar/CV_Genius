@@ -103,7 +103,7 @@
                     android:background="@color/colorSecondaryText"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="@dimen/margin_card_medium">
+                    android:padding="@dimen/margin_medium">
 
                     <ImageView
                         android:layout_width="@dimen/size_drawer_icon"
@@ -127,7 +127,7 @@
                     android:background="@color/colorAccent"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="@dimen/margin_card_medium">
+                    android:padding="@dimen/margin_medium">
 
                     <ImageView
                         android:layout_width="@dimen/size_drawer_icon"

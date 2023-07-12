@@ -40,10 +40,10 @@
         <item name="neumorph_cornerSize">32dp</item>
 
         <!-- Or if wants different radius depending on the corner. -->
-        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_medium_4</item>
-        <item name="neumorph_cornerSizeTopRight">@dimen/margin_medium_4</item>
-        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_medium_2</item>
-        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_medium_2</item>
+        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_xlarge</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/margin_xlarge</item>
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_xlarge</item>
+        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_xlarge</item>
     </style>
 
     <!--  Neumorphism Image Button corner  -->
@@ -64,10 +64,10 @@
         <item name="neumorph_cornerSize">32dp</item>
 
         <!-- Or if wants different radius depending on the corner. -->
-        <item name="neumorph_cornerSizeTopLeft">7dp</item>
-        <item name="neumorph_cornerSizeTopRight">7dp</item>
-        <item name="neumorph_cornerSizeBottomLeft">7dp</item>
-        <item name="neumorph_cornerSizeBottomRight">7dp</item>
+        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_medium</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/margin_medium</item>
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_medium</item>
+        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_medium</item>
     </style>
 
     <!--  Neumorphism Sample Template background below TabBar  -->

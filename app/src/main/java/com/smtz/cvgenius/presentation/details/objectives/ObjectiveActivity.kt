@@ -41,7 +41,7 @@ class ObjectiveActivity : BaseActivity<ActivityObjectiveBinding>() {
 
         mCvVO = CvSingleton.instance.cvVO
 
-        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
+//        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
         setUpListeners()
         requestData()
     }

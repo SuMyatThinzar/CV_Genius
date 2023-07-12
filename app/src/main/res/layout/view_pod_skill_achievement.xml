@@ -109,18 +109,21 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <soup.neumorphism.NeumorphButton
+            style="@style/Widget.Neumorph.Button"
+            app:neumorph_shapeType="flat"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+            app:neumorph_backgroundColor="@color/colorAccent"
+            app:neumorph_shadowColorLight="#FFFDF4"
+            app:neumorph_insetTop="8dp"
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/height_button"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/margin_card_medium"
-            android:background="@drawable/background_upload_photo"
-            android:paddingStart="@dimen/margin_medium_3"
-            android:paddingEnd="@dimen/margin_medium_3"
+            android:paddingBottom="@dimen/margin_medium_2"
             android:text="@string/lbl_save"
             android:textAllCaps="false"
-            android:textColor="@color/colorSecondaryText" />
+            android:textColor="@color/colorSecondaryText"/>
 
     </LinearLayout>
 

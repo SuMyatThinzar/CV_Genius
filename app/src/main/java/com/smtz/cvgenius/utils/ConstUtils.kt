@@ -25,13 +25,13 @@ import com.smtz.cvgenius.domain.model.DetailButtonLabel
 val tabList = listOf("All", "Professional", "Modern")
 
 val detailButtonList = listOf(
-    DetailButtonLabel(1, R.drawable.ic_profile_create, "Personal Details"),
-    DetailButtonLabel(2, R.drawable.ic_education, "Education Details"),
+    DetailButtonLabel(1, R.drawable.ic_profile_create, "Personal Detail"),
+    DetailButtonLabel(2, R.drawable.ic_education, "Education Detail"),
     DetailButtonLabel(3, R.drawable.ic_experience, "Work Experience"),
     DetailButtonLabel(4, R.drawable.ic_skill, "Skills"),
     DetailButtonLabel(5, R.drawable.ic_achievement, "Achievements"),
     DetailButtonLabel(6, R.drawable.ic_objective, "Objectives"),
-    DetailButtonLabel(7, R.drawable.ic_project, "Project Details"),
+    DetailButtonLabel(7, R.drawable.ic_project, "Project Detail"),
     DetailButtonLabel(8, R.drawable.ic_reference, "Reference"),
     DetailButtonLabel(9, R.drawable.ic_signature, "Signature"),
 )

@@ -11,8 +11,16 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="?attr/actionBarSize"
         android:background="@color/colorAccent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/lbl_personal_details"
+            app:titleTextColor="@color/colorToolbar"
+            app:titleCentered="true"/>
 
         <ImageView
             android:id="@+id/btnBack"
@@ -25,40 +33,44 @@
             android:padding="@dimen/margin_card_medium"
             android:src="@drawable/ic_back" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:elevation="1dp"
-            android:text="@string/lbl_personal_details"
-            android:textColor="@color/colorToolbar"
-            android:textSize="@dimen/text_heading_1x"
-            android:textStyle="bold" />
-
     </FrameLayout>
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/Widget.Neumorph.CardView"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+        app:neumorph_backgroundColor="@color/colorPrimary"
+        app:neumorph_shapeType="pressed"
+        app:neumorph_insetTop="0dp"
+        app:neumorph_insetBottom="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="-10.8dp"
+        android:layout_marginEnd="-10.3dp"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingStart="@dimen/margin_xlarge"
+        android:paddingEnd="@dimen/margin_xlarge"
+        android:paddingBottom="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_medium_n">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_medium_2_n"
-        android:background="@drawable/background_half_card"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:background="@color/colorPrimary">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
             <!-- First Name, Last Name -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium_2"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/margin_medium_3"
-                android:paddingEnd="@dimen/margin_medium_3">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -88,7 +100,7 @@
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
                         android:nextFocusDown="@id/etLastName"
-                        android:textSize="@dimen/text_small" />
+                        android:textSize="@dimen/text_regular" />
 
                     <TextView
                         android:id="@+id/errorName"
@@ -128,7 +140,7 @@
                         android:textColor="@color/colorSecondaryText"
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
-                        android:textSize="@dimen/text_small"
+                        android:textSize="@dimen/text_regular"
                         android:nextFocusDown="@id/etContact" />
 
                 </LinearLayout>
@@ -141,9 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium_n"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/margin_medium_3"
-                android:paddingEnd="@dimen/margin_medium_3">
+                android:orientation="horizontal">
 
                 <!-- Contact -->
                 <LinearLayout
@@ -174,7 +184,7 @@
                         android:textColor="@color/colorSecondaryText"
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
-                        android:textSize="@dimen/text_small"
+                        android:textSize="@dimen/text_regular"
                         android:nextFocusDown="@id/etNationality" />
 
                     <TextView
@@ -216,7 +226,7 @@
                         android:textColor="@color/colorSecondaryText"
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
-                        android:textSize="@dimen/text_small" />
+                        android:textSize="@dimen/text_regular" />
 
                 </LinearLayout>
 
@@ -228,9 +238,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium_n"
                 android:layout_marginBottom="@dimen/margin_medium"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/margin_medium_3"
-                android:paddingEnd="@dimen/margin_medium_3">
+                android:orientation="horizontal">
 
                 <!-- Gender -->
                 <LinearLayout
@@ -285,7 +293,7 @@
                         android:singleLine="true"
                         android:textColorHint="@color/colorProfileText"
                         android:textCursorDrawable="@drawable/custom_cursor"
-                        android:textSize="@dimen/text_small" />
+                        android:textSize="@dimen/text_regular" />
 
                 </LinearLayout>
 
@@ -296,9 +304,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/margin_medium_3"
-                android:paddingEnd="@dimen/margin_medium_3">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -320,7 +326,7 @@
                     android:textColor="@color/colorSecondaryText"
                     android:textColorHint="@color/colorProfileText"
                     android:textCursorDrawable="@drawable/custom_cursor"
-                    android:textSize="@dimen/text_small" />
+                    android:textSize="@dimen/text_regular" />
 
             </LinearLayout>
 
@@ -329,9 +335,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_medium"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/margin_medium_3"
-                android:paddingEnd="@dimen/margin_medium_3">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -355,7 +359,7 @@
                     android:textColor="@color/colorSecondaryText"
                     android:textColorHint="@color/colorProfileText"
                     android:textCursorDrawable="@drawable/custom_cursor"
-                    android:textSize="@dimen/text_small" />
+                    android:textSize="@dimen/text_regular" />
 
             </LinearLayout>
 
@@ -364,9 +368,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_large"
-                android:orientation="vertical"
-                android:paddingStart="@dimen/margin_medium_3"
-                android:paddingEnd="@dimen/margin_medium_3">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -388,26 +390,28 @@
                     android:textColor="@color/colorSecondaryText"
                     android:textColorHint="@color/colorProfileText"
                     android:textCursorDrawable="@drawable/custom_cursor"
-                    android:textSize="@dimen/text_small" />
+                    android:textSize="@dimen/text_regular" />
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <soup.neumorphism.NeumorphButton
+                style="@style/Widget.Neumorph.Button"
+                app:neumorph_shapeType="flat"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+                app:neumorph_backgroundColor="@color/colorAccent"
+                app:neumorph_shadowColorLight="#FFFDF4"
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/height_button"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_xxlarge"
-                android:background="@drawable/background_upload_photo"
-                android:paddingStart="@dimen/margin_medium_3"
-                android:paddingEnd="@dimen/margin_medium_3"
                 android:text="@string/lbl_save"
                 android:textAllCaps="false"
-                android:textColor="@color/colorSecondaryText" />
+                android:textColor="@color/colorSecondaryText"/>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    </soup.neumorphism.NeumorphCardView>
 
 </LinearLayout>

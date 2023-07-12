@@ -55,7 +55,7 @@ class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
 //        val jsonListString = intent.getStringExtra(EXTRA_EDUCATION_STRING)
         mCvVO = CvSingleton.instance.cvVO
 
-        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
+//        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
         setUpViewPods()
         setUpListeners()
         setUpAdapters()
@@ -81,20 +81,20 @@ class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
             super.onBackPressed()
         }
 
-        binding.nestedScrollView.viewTreeObserver.addOnScrollChangedListener(object : ViewTreeObserver.OnScrollChangedListener {
-                var y = 0f
-                override fun onScrollChanged() {
-                    if (binding.nestedScrollView.scrollY > y && mToolbarHeight == binding.frameLayout.height) {
-                        collapseToolbar()
-                        isExpanded = false
-                    }
-                    if (mToolbarHeight > binding.frameLayout.height && binding.nestedScrollView.scrollY == 0 && !isExpanded) {
-                        expandToolbar()
-                        isExpanded = true
-                    }
-                    y = binding.nestedScrollView.scrollY.toFloat()
-                }
-            })
+//        binding.nestedScrollView.viewTreeObserver.addOnScrollChangedListener(object : ViewTreeObserver.OnScrollChangedListener {
+//                var y = 0f
+//                override fun onScrollChanged() {
+//                    if (binding.nestedScrollView.scrollY > y && mToolbarHeight == binding.frameLayout.height) {
+//                        collapseToolbar()
+//                        isExpanded = false
+//                    }
+//                    if (mToolbarHeight > binding.frameLayout.height && binding.nestedScrollView.scrollY == 0 && !isExpanded) {
+//                        expandToolbar()
+//                        isExpanded = true
+//                    }
+//                    y = binding.nestedScrollView.scrollY.toFloat()
+//                }
+//            })
 
     }
 
@@ -106,38 +106,38 @@ class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
     }
 
 
-    private fun collapseToolbar() {
-        if (mToolbarHeight == binding.frameLayout.height) {
-            setUpTitleAndButton(expand = false, binding.tvTitle, binding.btnBack, binding.frameLayout)
+//    private fun collapseToolbar() {
+//        if (mToolbarHeight == binding.frameLayout.height) {
+//            setUpTitleAndButton(expand = false, binding.tvTitle, binding.btnBack, binding.frameLayout)
+//
+//            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight / 2)
+//            animator.duration = ANIMATION_DURATION
+//            animator.interpolator = AccelerateInterpolator()
+//            animator.addUpdateListener {
+//                val value = it.animatedValue as Int
+//                binding.frameLayout.layoutParams.height = value
+//                binding.frameLayout.requestLayout()
+//
+//            }
+//            animator.start()
+//        }
+//    }
 
-            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight / 2)
-            animator.duration = ANIMATION_DURATION
-            animator.interpolator = AccelerateInterpolator()
-            animator.addUpdateListener {
-                val value = it.animatedValue as Int
-                binding.frameLayout.layoutParams.height = value
-                binding.frameLayout.requestLayout()
-
-            }
-            animator.start()
-        }
-    }
-
-    private fun expandToolbar() {
-        if (mToolbarHeight > binding.frameLayout.height) {
-            setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
-
-            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight)
-            animator.duration = ANIMATION_DURATION
-            animator.interpolator = DecelerateInterpolator()
-            animator.addUpdateListener {
-                val value = it.animatedValue as Int
-                binding.frameLayout.layoutParams.height = value
-                binding.frameLayout.requestLayout()
-            }
-            animator.start()
-        }
-    }
+//    private fun expandToolbar() {
+//        if (mToolbarHeight > binding.frameLayout.height) {
+//            setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
+//
+//            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight)
+//            animator.duration = ANIMATION_DURATION
+//            animator.interpolator = DecelerateInterpolator()
+//            animator.addUpdateListener {
+//                val value = it.animatedValue as Int
+//                binding.frameLayout.layoutParams.height = value
+//                binding.frameLayout.requestLayout()
+//            }
+//            animator.start()
+//        }
+//    }
 
     override fun onTapSaveEducation(educationDetailVO: EducationDetailVO) {
         val iterator = mEducationList.iterator()
@@ -148,7 +148,7 @@ class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
             }
         }
         mEducationList.add(educationDetailVO)
-        mCvVO!!.educationDetails = mEducationList
+        mCvVO!!.educationDetails = mEducationList  //  singletons are used to provide a single shared instance throughout an application
 //        mCvModel.insertCV(mCvVO!!)
         mEducationDetailAdapter.setNewData(mEducationList)
         Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT).show()

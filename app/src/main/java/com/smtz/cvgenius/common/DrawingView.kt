@@ -3,8 +3,10 @@ package com.smtz.cvgenius.common
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Base64
 import android.view.MotionEvent
 import android.view.View
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
@@ -52,14 +54,27 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         val canvas = Canvas(bitmap)
         draw(canvas)
 
-        val imagePath = context.getExternalFilesDir(null)?.absolutePath + "/drawing.png"
-        val imageFile = File(imagePath)
-        val fileOutputStream = FileOutputStream(imageFile)
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
-        fileOutputStream.close()
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        byteArrayOutputStream.close()
 
-        return imagePath
+        return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
+
+//    fun saveDrawingAsImage(context: Context): String? {
+//        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+//        val canvas = Canvas(bitmap)
+//        draw(canvas)
+//
+//        val imagePath = context.getExternalFilesDir(null)?.absolutePath + "/drawing.png"
+//        val imageFile = File(imagePath)
+//        val fileOutputStream = FileOutputStream(imageFile)
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+//        fileOutputStream.close()
+//
+//        return imagePath
+//    }
 
     fun clearDrawing() {
         path.reset()

@@ -4,7 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Base64
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.lifecycleScope
@@ -50,7 +54,7 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding>() {
         mCvVO = CvSingleton.instance.cvVO
 
         drawingView = binding.drawingView
-        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
+//        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
         setUpListeners()
         requestData()
     }
@@ -58,10 +62,21 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding>() {
     private fun requestData() {
         mCvVO?.signature?.let {
             mSignature = it
-            val bitmap = BitmapFactory.decodeFile(it)
-            val drawable = BitmapDrawable(resources, bitmap)
-            binding.drawingView.background = drawable
+//            val bitmap = BitmapFactory.decodeFile(it)
+//            val drawable = BitmapDrawable(resources, bitmap)
+//            binding.drawingView.background = drawable
+
+            val decodedBytes = Base64.decode(it, Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+            binding.drawingView.background = BitmapDrawable(binding.drawingView.resources, bitmap)
         }
+    }
+
+    fun displayImageFromBase64(base64Image: String, view: View) {
+        val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
+        val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+        val drawable: Drawable = BitmapDrawable(view.resources, bitmap)
+        view.background = drawable
     }
 
     private fun setUpListeners() {

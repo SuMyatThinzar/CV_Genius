@@ -51,6 +51,7 @@ class EducationDetailViewPod @JvmOverloads constructor(
         if (changeBtnAdd) {
             binding.btnDelete.setImageResource(R.drawable.ic_add)
             binding.btnDelete.isClickable = false                  // make btnDelete unclickable
+            binding.containerExpanded.visibility = View.VISIBLE
         }
         setDelegate(delegate)
     }

@@ -5,10 +5,12 @@
     <dimen name ="margin_small">4dp</dimen >
     <dimen name ="margin_card_medium">6dp</dimen>
     <dimen name ="margin_medium">8dp</dimen>
-    <dimen name ="margin_medium_2">16dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
     <dimen name ="margin_card_medium_2">12dp</dimen>
+    <dimen name ="margin_medium_2">16dp</dimen>
     <dimen name = "margin_medium_3">20dp</dimen>
     <dimen name = "margin_medium_4">28dp</dimen>
+    <dimen name = "margin_medium_5">38dp</dimen>
     <dimen name = "margin_large" >24dp</dimen>
     <dimen name = "margin_xlarge">32dp</dimen>
     <dimen name = "margin_xxlarge">48dp</dimen>
@@ -46,7 +48,8 @@
     <dimen name="height_back_btn">26dp</dimen>
     <dimen name="margin_bottom_get_started">130dp</dimen>
     <dimen name="height_button">66dp</dimen>
-    <dimen name="margin_detail_button">32dp</dimen>
+    <dimen name="margin_detail_button">34dp</dimen>
+    <dimen name="margin_detail_button_bottom">28dp</dimen>
 
     <dimen name="text_name_resume_free_one">22.87sp</dimen>
     <dimen name="text_heading_resume_free_one">9.92sp</dimen>

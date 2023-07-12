@@ -11,8 +11,16 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_detail_toolbar"
+        android:layout_height="62dp"
         android:background="@color/colorAccent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/colorToolbar"
+            app:titleCentered="true"/>
 
         <ImageView
             android:id="@+id/btnBack"
@@ -25,24 +33,12 @@
             android:padding="@dimen/margin_card_medium"
             android:src="@drawable/ic_back" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:elevation="1dp"
-            android:text="@string/lbl_create_my_cv"
-            android:textColor="@color/colorToolbar"
-            android:textSize="@dimen/text_heading_1x"
-            android:textStyle="bold" />
-
     </FrameLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_medium_2_n"
         android:background="@drawable/background_half_card"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 

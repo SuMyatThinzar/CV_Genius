@@ -62,7 +62,7 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
 
         mCvVO = CvSingleton.instance.cvVO
 
-        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
+//        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
         setUpListener()
         setUpData()
     }
@@ -146,122 +146,74 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-//        binding.nestedScrollView.setOnTouchListener(object : View.OnTouchListener {
-//            var y0 = 0f
-//            var y1 = 0f
-//            override fun onTouch(view: View?, motionEvent: MotionEvent): Boolean {
-//                if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-//                    y0 = motionEvent.y
-//                    if (y1 - y0 > 0) {
+//        binding.nestedScrollView.viewTreeObserver
+//            .addOnScrollChangedListener(object : OnScrollChangedListener {
+//                var y = 0f
+//                override fun onScrollChanged() {
+//                    if (binding.nestedScrollView.scrollY > y && mToolbarHeight == binding.frameLayout.height) {
 //                        collapseToolbar()
 //                        isExpanded = false
 //                    }
-//
-//                    else if (y1 - y0 < 0 && binding.nestedScrollView.scrollY == 0) {   // binding.nestedScrollView.scrollY == 0 makes sure it's the top of nestedScrollView to expand
+//                    if (mToolbarHeight > binding.frameLayout.height && binding.nestedScrollView.scrollY == 0 && !isExpanded) {
 //                        expandToolbar()
 //                        isExpanded = true
 //                    }
-//                    y1 = motionEvent.y
-//                }
-//                return false
-//            }
-//        })
-
-        binding.nestedScrollView.viewTreeObserver
-            .addOnScrollChangedListener(object : OnScrollChangedListener {
-                var y = 0f
-                override fun onScrollChanged() {
-                    if (binding.nestedScrollView.scrollY > y && mToolbarHeight == binding.frameLayout.height) {
-                        collapseToolbar()
-                        isExpanded = false
-                    }
-                    if (mToolbarHeight > binding.frameLayout.height && binding.nestedScrollView.scrollY == 0 && !isExpanded) {
-                        expandToolbar()
-                        isExpanded = true
-                    }
-                    y = binding.nestedScrollView.scrollY.toFloat()
-                }
-            })
-
-//        binding.nestedScrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollY, oldScrollX ->
-//            if ( mToolbarHeight > binding.frameLayout.height && binding.nestedScrollView.scrollY == 0 ) {
-//                // Scroll view is at the top, expand the toolbar
-//                if (!isExpanded && !hasScrolled) {
-//                    expandToolbar()
-//                    isExpanded = true
-//                }
-//                hasScrolled = true
-//            } else if (scrollY > 0 && mToolbarHeight == binding.frameLayout.height && !hasScrolled) {
-//                // Scroll view has been scrolled, collapse the toolbar
-//                if (isExpanded) {
-//                    collapseToolbar()
-//                    isExpanded = false
-//                }
-//                hasScrolled = true
-//            }
-
-//            if (scrollY > oldScrollY && isExpanded ) {
-//                collapseToolbar()
-//                    isExpanded = false
-//            }
-//            if (scrollY < oldScrollY && !isExpanded ) {
-//                    expandToolbar()
-//                    isExpanded = true
-//            }
-//        }
-
-    }
-
-    private fun collapseToolbar() {
-
-        if (mToolbarHeight == binding.frameLayout.height) {
-
-            setUpTitleAndButton(
-                expand = false,
-                binding.tvTitle,
-                binding.btnBack,
-                binding.frameLayout
-            )
-
-            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight / 2)
-            animator.duration = ANIMATION_DURATION
-            animator.interpolator = AccelerateInterpolator()
-            animator.addUpdateListener {
-                val value = it.animatedValue as Int
-                binding.frameLayout.layoutParams.height = value
-                binding.frameLayout.requestLayout()
-            }
-            animator.start()
-        }
-    }
-
-    private fun expandToolbar() {
-
-        if (mToolbarHeight > binding.frameLayout.height) {
-
-            setUpTitleAndButton(
-                expand = true,
-                binding.tvTitle,
-                binding.btnBack,
-                binding.frameLayout
-            )
-
-            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight)
-            animator.duration = ANIMATION_DURATION
-            animator.interpolator = DecelerateInterpolator()
-            animator.addUpdateListener {
-                val value = it.animatedValue as Int
-                binding.frameLayout.layoutParams.height = value
-                binding.frameLayout.requestLayout()
-            }
-//            animator.addListener(object : AnimatorListenerAdapter() {
-//                override fun onAnimationEnd(animation: Animator) {
-//                    isAnimating = false
+//                    y = binding.nestedScrollView.scrollY.toFloat()
 //                }
 //            })
-            animator.start()
-        }
+
     }
+
+//    private fun collapseToolbar() {
+//
+//        if (mToolbarHeight == binding.frameLayout.height) {
+//
+//            setUpTitleAndButton(
+//                expand = false,
+//                binding.tvTitle,
+//                binding.btnBack,
+//                binding.frameLayout
+//            )
+//
+//            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight / 2)
+//            animator.duration = ANIMATION_DURATION
+//            animator.interpolator = AccelerateInterpolator()
+//            animator.addUpdateListener {
+//                val value = it.animatedValue as Int
+//                binding.frameLayout.layoutParams.height = value
+//                binding.frameLayout.requestLayout()
+//            }
+//            animator.start()
+//        }
+//    }
+
+//    private fun expandToolbar() {
+//
+//        if (mToolbarHeight > binding.frameLayout.height) {
+//
+//            setUpTitleAndButton(
+//                expand = true,
+//                binding.tvTitle,
+//                binding.btnBack,
+//                binding.frameLayout
+//            )
+//
+//            val animator = ValueAnimator.ofInt(binding.frameLayout.height, mToolbarHeight)
+//            animator.duration = ANIMATION_DURATION
+//            animator.interpolator = DecelerateInterpolator()
+//            animator.addUpdateListener {
+//                val value = it.animatedValue as Int
+//                binding.frameLayout.layoutParams.height = value
+//                binding.frameLayout.requestLayout()
+//            }
+////            animator.addListener(object : AnimatorListenerAdapter() {
+////                override fun onAnimationEnd(animation: Animator) {
+////                    isAnimating = false
+////                }
+////            })
+//            animator.start()
+//        }
+//    }
 
 //    private fun setUpEditorActionListener(firstEt: TextInputEditText, secondEt: TextInputEditText) {
 //        firstEt.setOnEditorActionListener { _, actionId, _ ->

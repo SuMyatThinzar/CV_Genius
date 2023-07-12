@@ -11,8 +11,16 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_detail_toolbar"
+        android:layout_height="62dp"
         android:background="@color/colorAccent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/colorToolbar"
+            app:titleCentered="true"/>
 
         <ImageView
             android:id="@+id/btnBack"
@@ -25,24 +33,12 @@
             android:padding="@dimen/margin_card_medium"
             android:src="@drawable/ic_back" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:elevation="1dp"
-            android:text="@string/lbl_create_my_cv"
-            android:textColor="@color/colorToolbar"
-            android:textSize="@dimen/text_heading_1x"
-            android:textStyle="bold" />
-
     </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/margin_medium_2_n"
             android:background="@drawable/background_half_card">
 
             <TextView
@@ -92,32 +88,41 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_medium_2"
+                        android:layout_marginBottom="@dimen/margin_medium_2"
                         android:orientation="horizontal"
                         android:gravity="center_horizontal">
 
-                        <androidx.appcompat.widget.AppCompatButton
+                        <soup.neumorphism.NeumorphButton
+                            style="@style/Widget.Neumorph.Button"
+                            app:neumorph_shapeType="flat"
+                            app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+                            app:neumorph_backgroundColor="@color/colorPrimary"
+                            app:neumorph_shadowColorLight="#FFFDF4"
+                            app:neumorph_insetTop="8dp"
                             android:id="@+id/btnClear"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/height_button"
-                            android:background="@drawable/background_remove"
-                            android:layout_marginEnd="@dimen/margin_medium_2"
+                            android:layout_gravity="center_horizontal"
+                            android:paddingBottom="@dimen/margin_medium_2"
                             android:text="@string/lbl_clear"
                             android:textAllCaps="false"
-                            android:textColor="@color/colorSecondaryText" />
+                            android:textColor="@color/colorSecondaryText"/>
 
-                        <androidx.appcompat.widget.AppCompatButton
+                        <soup.neumorphism.NeumorphButton
+                            style="@style/Widget.Neumorph.Button"
+                            app:neumorph_shapeType="flat"
+                            app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+                            app:neumorph_backgroundColor="@color/colorAccent"
+                            app:neumorph_shadowColorLight="#FFFDF4"
+                            app:neumorph_insetTop="8dp"
                             android:id="@+id/btnSave"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/height_button"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="@dimen/margin_large"
-                            android:background="@drawable/background_upload_photo"
-                            android:paddingStart="@dimen/margin_medium_3"
-                            android:paddingEnd="@dimen/margin_medium_3"
+                            android:paddingBottom="@dimen/margin_medium_2"
                             android:text="@string/lbl_save"
                             android:textAllCaps="false"
-                            android:textColor="@color/colorSecondaryText" />
+                            android:textColor="@color/colorSecondaryText"/>
 
                     </LinearLayout>
 
