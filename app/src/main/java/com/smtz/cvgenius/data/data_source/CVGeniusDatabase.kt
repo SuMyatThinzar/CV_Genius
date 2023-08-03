@@ -11,7 +11,7 @@ import com.smtz.cvgenius.domain.model.ProjectDetailVO
 
 @Database(
     entities = [CvVO::class],
-    version = 15,
+    version = 16,
     exportSchema = false
 )
 

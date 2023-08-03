@@ -128,6 +128,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
                 achievements = mutableListOf(),
                 objective = null,
                 signature = null,
+                references = null,
                 projectDetails = mutableListOf()
             )
             Log.d("assasdfasdf", "new null cv created")
@@ -253,6 +254,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             achievements = mutableListOf(),
             objective = null,
             signature = null,
+            references = null,
             projectDetails = mutableListOf()
         )
     }

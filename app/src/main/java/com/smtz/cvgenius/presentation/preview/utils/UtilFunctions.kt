@@ -30,6 +30,7 @@ fun setUpContentVisibilityResumeSecondOne(textView: TextView, content: String?, 
 fun getCurrentPageHeight(containerToCheckHeight: LinearLayout, childCountToReduce: Int): Float {
     var height = 0f
 
+    // childCountToReduce က အောက်ကဟိုဘက်ပို့ရမယ့် child တွေကိုဖယ်ဖို့
     for (i in 0 until containerToCheckHeight.childCount -childCountToReduce) {
         val view = containerToCheckHeight.getChildAt(i)
         height += view.height.toFloat()

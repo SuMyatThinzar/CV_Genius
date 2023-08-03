@@ -174,7 +174,7 @@
 
             <!--  Education  -->
             <LinearLayout
-                android:id="@+id/containerEducation"
+                android:id="@+id/containerEducationSecondTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -196,37 +196,48 @@
                     android:layout_height="1dp"
                     android:background="@drawable/line_white" />
 
-                <TextView
-                    android:id="@+id/tvEducationDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:fontFamily="@font/lato_light"
-                    android:letterSpacing="0.04"
-                    android:text="6/2016 - 8/2020"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvEducationDuration"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:fontFamily="@font/lato_light"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:text="6/2016 - 8/2020"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
 
-                <TextView
-                    android:id="@+id/tvDegreeName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:letterSpacing="0.04"
-                    android:text="Degree/Diploma Name"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvDegreeName"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:text="Degree/Diploma Name"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one"-->
+<!--                    android:textStyle="bold" />-->
 
-                <TextView
-                    android:id="@+id/tvUniversity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_regular"
-                    android:letterSpacing="0.04"
-                    android:text="Harvard University"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvUniversity"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:text="Harvard University"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCredentialURL"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:letterSpacing="0.05"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:text="https://smtz.com"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_title_resume_second_one"-->
+<!--                    android:autoLink="web" />-->
 
             </LinearLayout><!-- Education -->
 
@@ -480,7 +491,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/secondRootView"
+        android:id="@+id/secondRootViewSecondTwo"
         android:layout_width="353.5dp"
         android:layout_height="499.79dp"
         android:orientation="horizontal"

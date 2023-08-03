@@ -16,7 +16,11 @@ import androidx.core.content.res.ResourcesCompat
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.databinding.ViewPodZresumeFreeOneBinding
+import com.smtz.cvgenius.domain.model.AchievementVO
 import com.smtz.cvgenius.domain.model.CvVO
+import com.smtz.cvgenius.domain.model.EducationDetailVO
+import com.smtz.cvgenius.domain.model.ProjectDetailVO
+import com.smtz.cvgenius.domain.model.SkillsVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
 
 @RequiresApi(Build.VERSION_CODES.N)
@@ -26,9 +30,12 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
 
     private lateinit var binding: ViewPodZresumeFreeOneBinding
 
+    private var mEducationDetailList: List<EducationDetailVO> = listOf()
     private var mWorkExperienceList: List<WorkExperienceVO> = listOf()
+    private var mProjectDetailList: List<ProjectDetailVO> = listOf()
+    private var mSkillList: List<SkillsVO> = listOf()
+    private var mAchievementList: List<AchievementVO> = listOf()
 
-    private lateinit var containerWorkExp : LinearLayout
     private lateinit var containerFirstPageRightSide: LinearLayout
     private lateinit var containerFirstPageLeftSide: LinearLayout
     private lateinit var  containerSecondPageRightSide: LinearLayout
@@ -47,7 +54,6 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
         binding = ViewPodZresumeFreeOneBinding.bind(this)
         mCvVO = CvSingleton.instance.cvVO!!
 //        setUpScreenHeight()
-        containerWorkExp = binding.containerWorkExp
         containerFirstPageRightSide = binding.containerFirstPageRightSide
         containerFirstPageLeftSide = binding.containerFirstPageLeftSide
         containerSecondPageRightSide = binding.containerSecondPageRightSide
@@ -73,17 +79,15 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
             binding.ivProfileImage.visibility = View.GONE
         }
 
+        // 1.
         val name = "${mCvVO?.personalDetails?.firstName} ${mCvVO?.personalDetails?.lastName}"
         binding.tvName.text = name
-
         binding.tvPosition.text = mCvVO?.personalDetails?.professionalTitle
-
         binding.tvAddress.text = "Address: ${mCvVO?.personalDetails?.address}"
-
         binding.tvPhone.text = "Phone: ${mCvVO?.personalDetails?.contact}"
-
         binding.tvEmail.text = "Email: ${mCvVO?.personalDetails?.email}"
 
+        // 2.
         if (mCvVO?.objective == null) {
             binding.containerObjective.visibility = View.GONE
             binding.viewBelowObjective.visibility = View.GONE
@@ -91,10 +95,64 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
             binding.tvObjective.text = mCvVO?.objective
         }
 
+        // 3.
+        if (mCvVO?.educationDetails?.isNotEmpty() == true) {
+            mEducationDetailList = mCvVO?.educationDetails!!
+//            setUpWorkExp()
+        } else {
+            binding.containerEducation.visibility = View.GONE
+        }
+
+        // 4.
         if (mCvVO?.workExperiences?.isNotEmpty() == true) {
             mWorkExperienceList = mCvVO?.workExperiences!!
             setUpWorkExp()
+        } else {
+            binding.containerWorkExp.visibility = View.GONE
         }
+
+        // 5.
+        if (mCvVO?.projectDetails?.isNotEmpty() == true) {
+            mProjectDetailList = mCvVO?.projectDetails!!
+//            setUpWorkExp()
+        } else {
+            binding.containerProject.visibility = View.GONE
+        }
+
+        // 6.
+        if (mCvVO?.skills?.isNotEmpty() == true) {
+            mSkillList = mCvVO?.skills!!
+//            setUpWorkExp()
+        } else {
+            binding.containerSkill.visibility = View.GONE
+        }
+
+        // 7.
+        if (mCvVO?.achievements?.isNotEmpty() == true) {
+            mAchievementList = mCvVO?.achievements!!
+//            setUpWorkExp()
+        } else {
+            binding.containerAchievement.visibility = View.GONE
+        }
+
+        // 8.
+//        if (mCvVO?.signature == null) {
+//            mAchievementList = mCvVO?.achievements!!
+////            setUpWorkExp()
+//        } else {
+//            binding.containerAchievement.visibility = View.GONE
+//        }
+
+        if (mCvVO?.educationDetails?.isEmpty() == true &&
+            mCvVO?.workExperiences?.isEmpty() == true &&
+            mCvVO?.projectDetails?.isEmpty() == true &&
+            mCvVO?.skills?.isEmpty() == true &&
+            mCvVO?.achievements?.isEmpty() == true &&
+            mCvVO?.signature == null &&
+            mCvVO?.references == null) {
+            binding.viewSecondBottomost.visibility = View.GONE
+        }
+
     }
 
     private fun setUpWorkExp() {
@@ -129,7 +187,7 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
                 childLayout.addView(workDescriptionTextView)
             }
 
-            containerWorkExp.addView(childLayout)
+            binding.containerWorkExp.addView(childLayout)
 
             val parentView = findViewById<ViewGroup>(R.id.firstRootView)
 
@@ -138,7 +196,7 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
                 val parentRect = Rect()
                 val childRect = Rect()
 
-                containerWorkExp.getGlobalVisibleRect(parentRect)
+                binding.containerWorkExp.getGlobalVisibleRect(parentRect)
 
                 // Adjust the parent visible rect to account for padding
                 parentRect.left += parentView.paddingLeft
@@ -147,7 +205,7 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
                 parentRect.bottom -= parentView.paddingBottom
 
                 val parentLocation = IntArray(2)
-                containerWorkExp.getLocationOnScreen(parentLocation)
+                binding.containerWorkExp.getLocationOnScreen(parentLocation)
 
                 childLayout.getGlobalVisibleRect(childRect)
 
@@ -201,7 +259,7 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
     private fun setUpTheChildViews(pageNumber: Int, childLayout: LinearLayout) {
 
         if (pageNumber == 1) {
-            containerWorkExp.addView(childLayout)
+            binding.containerWorkExp.addView(childLayout)
         }
         if (pageNumber == 2) {
             binding.secondRootView.visibility = View.VISIBLE

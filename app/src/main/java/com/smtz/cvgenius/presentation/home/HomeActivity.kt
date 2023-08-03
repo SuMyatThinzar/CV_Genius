@@ -77,6 +77,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
         setUpAdapter()
         showEmptyView()
         requestData()
+
     }
 
     override fun onResume() {
