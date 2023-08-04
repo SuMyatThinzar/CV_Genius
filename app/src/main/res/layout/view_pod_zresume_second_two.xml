@@ -386,56 +386,56 @@
                     android:layout_height="1.3dp"
                     android:background="@drawable/line_colortoolbar" />
 
-                <TextView
-                    android:id="@+id/tvProjectTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:letterSpacing="0.05"
-                    android:fontFamily="@font/lato_regular"
-                    android:text="Wechat"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_title_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvProjectTitle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:letterSpacing="0.05"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:text="Wechat"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="@dimen/text_title_resume_second_one" />-->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small">
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small">-->
 
-                    <TextView
-                        android:id="@+id/tvProjectPosition"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:letterSpacing="0.05"
-                        android:layout_marginEnd="@dimen/margin_small"
-                        android:fontFamily="@font/lato_regular"
-                        android:text="Main Developer |"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/text_title_resume_second_one" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvProjectPosition"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:letterSpacing="0.05"-->
+<!--                        android:layout_marginEnd="@dimen/margin_small"-->
+<!--                        android:fontFamily="@font/lato_regular"-->
+<!--                        android:text="Main Developer |"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/text_title_resume_second_one" />-->
 
-                    <TextView
-                        android:id="@+id/tvProjectDuration"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:letterSpacing="0.05"
-                        android:layout_toEndOf="@id/tvProjectPosition"
-                        android:fontFamily="@font/lato_regular"
-                        android:text="04/2018 - 04/2022"
-                        android:textColor="@color/colorToolbar"
-                        android:textSize="@dimen/text_title_resume_second_one" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvProjectDuration"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:letterSpacing="0.05"-->
+<!--                        android:layout_toEndOf="@id/tvProjectPosition"-->
+<!--                        android:fontFamily="@font/lato_regular"-->
+<!--                        android:text="04/2018 - 04/2022"-->
+<!--                        android:textColor="@color/colorToolbar"-->
+<!--                        android:textSize="@dimen/text_title_resume_second_one" />-->
 
-                </RelativeLayout>
+<!--                </RelativeLayout>-->
 
-                <TextView
-                    android:id="@+id/tvProjectDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:letterSpacing="0.05"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:fontFamily="@font/lato_light"
-                    android:text="- lausfadsfjl ajsfhjsdfasl ifjasfdhaasfda sdfasfdasdfa sfdasdf asfdasf dasdadsfasdihsa usdfhausfadsfjsd fahldshfasji dfhlajsfhjsdfaslf"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvProjectDescription"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:letterSpacing="0.05"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:fontFamily="@font/lato_light"-->
+<!--                    android:text="- lausfadsfjl ajsfhjsdfasl ifjasfdhaasfda sdfasfdasdfa sfdasdf asfdasf dasdadsfasdihsa usdfhausfadsfjsd fahldshfasji dfhlajsfhjsdfaslf"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
 
             </LinearLayout><!--   Project   -->
 

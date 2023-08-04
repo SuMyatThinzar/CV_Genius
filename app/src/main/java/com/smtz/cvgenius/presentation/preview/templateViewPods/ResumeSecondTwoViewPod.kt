@@ -2,7 +2,6 @@ package com.smtz.cvgenius.presentation.preview.templateViewPods
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Handler
 import android.text.method.LinkMovementMethod
@@ -18,8 +17,11 @@ import androidx.core.content.res.ResourcesCompat
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.databinding.ViewPodZresumeSecondTwoBinding
+import com.smtz.cvgenius.domain.model.AchievementVO
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.EducationDetailVO
+import com.smtz.cvgenius.domain.model.ProjectDetailVO
+import com.smtz.cvgenius.domain.model.SkillsVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
 import com.smtz.cvgenius.presentation.preview.utils.getCurrentPageHeight
 import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
@@ -35,9 +37,15 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
     private var mWorkExperienceList: List<WorkExperienceVO> = listOf()
     private var mEducationList: List<EducationDetailVO> = listOf()
+    private var mProjectDetailList: List<ProjectDetailVO> = listOf()
+    private var mAchievementList: List<AchievementVO> = listOf()
+    private var mSkillList: List<SkillsVO> = listOf()
 
     private var experienceContentViewList: MutableList<View> = mutableListOf()
     private var educationContentViewList: MutableList<View> = mutableListOf()
+    private var projectContentViewList: MutableList<View> = mutableListOf()
+    private var achievementContentViewList: MutableList<View> = mutableListOf()
+    private var skillContentViewList: MutableList<View> = mutableListOf()
 
     private lateinit var containerWorkExp: LinearLayout
     private lateinit var containerFirstPageRightSide: LinearLayout
@@ -151,6 +159,13 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             binding.containerEducationSecondTwo.visibility = View.GONE
         }
 
+        if (mCvVO?.projectDetails?.isNotEmpty() == true) {
+            mProjectDetailList = mCvVO?.projectDetails!!
+            setUpProject()      // content တွေကိုအရင်ထည့်လိုက်တယ် ဆန့်ဆန့်မဆန့်ဆန့်
+        } else {
+            binding.containerProject.visibility = View.GONE
+        }
+
         checkContentsVisibility()     // content တွေကိုဆန့်မဆန့်စစ်ပြီး ဟိုဘက်ပို့တယ်
     }
 
@@ -164,17 +179,17 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             // Set a unique ID for the childLayout
             childLayout.id = View.generateViewId()
 
-            val workExperienceDuration = setLayouts("${workExperienceVO.startDate} - ${workExperienceVO.endDate}", 6.5f, R.font.lato_light, "top", R.color.black, null)
+            val workExperienceDuration = setLayouts("${workExperienceVO.startDate} - ${workExperienceVO.endDate}", 6.5f, R.font.lato_light, "top", R.dimen.margin_medium, R.color.black, null)
             childLayout.addView(workExperienceDuration)
 
-            val companyNameTextView = setLayouts(workExperienceVO.company, 6.5f, R.font.lato_regular, "", R.color.black, "bold")
+            val companyNameTextView = setLayouts(workExperienceVO.company, 6.5f, R.font.lato_regular, "", 0, R.color.black, "bold")
             childLayout.addView(companyNameTextView)
 
-            val workPositionTextView = setLayouts(workExperienceVO.position, 7.5f, R.font.lato_regular, "", R.color.black, null)
+            val workPositionTextView = setLayouts(workExperienceVO.position, 7.5f, R.font.lato_regular, "", 0, R.color.black, null)
             childLayout.addView(workPositionTextView)
 
             workExperienceVO.description?.let {
-                val workDescriptionTextView = setLayouts(it, 6.5f, R.font.lato_light, "", R.color.black, null)
+                val workDescriptionTextView = setLayouts(it, 6.5f, R.font.lato_light, "", 0, R.color.black, null)
                 childLayout.addView(workDescriptionTextView)
             }
 
@@ -192,17 +207,17 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             val childLayout = LinearLayout(context)
             childLayout.orientation = VERTICAL
 
-            val educationDate = setLayouts("${educationVO.startDate} - ${educationVO.endDate}", 6.5f, R.font.lato_light, "top", R.color.white, null)
+            val educationDate = setLayouts("${educationVO.startDate} - ${educationVO.endDate}", 6.5f, R.font.lato_light, "top", R.dimen.margin_medium, R.color.white, null)
             childLayout.addView(educationDate)
 
-            val degree = setLayouts(educationVO.diplomaName, 6.8f, R.font.lato_regular, "", R.color.white, "bold")
+            val degree = setLayouts(educationVO.diplomaName, 6.8f, R.font.lato_regular, "", 0, R.color.white, "bold")
             childLayout.addView(degree)
 
-            val university = setLayouts("${educationVO.levelOfEducation} at ${educationVO.schoolName}", 6.8f, R.font.lato_regular, "", R.color.white, null)
+            val university = setLayouts("${educationVO.levelOfEducation} at ${educationVO.schoolName}", 6.8f, R.font.lato_regular, "", 0, R.color.white, null)
             childLayout.addView(university)
 
             educationVO.credentialURL?.let {
-                val credentialURL = setLayouts(it, 7.5f, R.font.lato_regular, "", R.color.white, null)
+                val credentialURL = setLayouts(it, 7.5f, R.font.lato_regular, "", 0, R.color.white, null)
                 Linkify.addLinks(credentialURL, Patterns.WEB_URL, "http://")
                 credentialURL.autoLinkMask = Linkify.WEB_URLS
                 credentialURL.isClickable = true
@@ -216,6 +231,45 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             binding.containerEducationSecondTwo.addView(childLayout)
         }
 //        addContentToPagesEducation(contentList)
+    }
+
+    private fun setUpProject() {
+
+        mProjectDetailList.forEachIndexed { index, projectDetailVO ->
+
+            val childLayout = LinearLayout(context)
+            childLayout.orientation = VERTICAL
+
+            // Set a unique ID for the childLayout
+            childLayout.id = View.generateViewId()
+
+            val projectTitle = setLayouts(projectDetailVO.projectTitle, 7.5f, R.font.lato_regular, "top", R.dimen.margin_medium, R.color.black, null)
+            childLayout.addView(projectTitle)
+
+            val position = setLayouts("${projectDetailVO.position} | ${projectDetailVO.startDate} - ${projectDetailVO.endDate}", 7.5f, R.font.lato_regular, "topbottom", R.dimen.margin_small, R.color.black, null)
+            childLayout.addView(position)
+
+            projectDetailVO.projectDescription?.let {
+                val projectDescription = setLayouts("- $it", 6.5f, R.font.lato_light, "bottom", R.dimen.margin_small, R.color.black, null)
+                childLayout.addView(projectDescription)
+            }
+
+            projectDetailVO.credentialURL?.let {
+                val credentialURL = setLayouts(it, 7.5f, R.font.lato_regular, "", 0, R.color.white, null)
+                Linkify.addLinks(credentialURL, Patterns.WEB_URL, "http://")
+                credentialURL.autoLinkMask = Linkify.WEB_URLS
+                credentialURL.isClickable = true
+                credentialURL.setLinkTextColor(resources.getColor(R.color.colorLinkText))
+                credentialURL.movementMethod = LinkMovementMethod.getInstance()
+                childLayout.addView(credentialURL)
+            }
+
+            projectContentViewList.add(childLayout)
+
+            // အရင်ထည့်ပြီးမှစစ်တာ
+            binding.containerProject.addView(childLayout)
+        }
+//        addContentToPagesWorkExp(contentList)
     }
 
     // reusable func left and right side
@@ -262,7 +316,7 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             }
 
             else {  // content ကမဆန့်ဘူး change all Layouts here
-                if (currentPageLeft == 1) {  // page က 1 ဖြစ်ရင်
+                if (currentPageLeft == 1) {  //  //ပထမဆုံးအကြိမ် first page မှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
                     currentPageLeft = 2
                     currentPageLayoutLeft = containerSecondPageLeftSide  // 1
                     rootViewAbsoluteHeightLeft = currentPageLayoutLeft.height - paddingInPx - paddingInPx  // 2
@@ -289,22 +343,22 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             if (currentPageHeightRight + contentHeight <= rootViewAbsoluteHeightRight) {
 
                 if (currentPageRight == 1) {    // Content fits on the current page
-                    Log.d("asfddfsasdf", "page1 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+                    Log.d("asfdf", "page1 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
                     temp++
                     currentPageHeightRight += contentHeight
                     setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
                 }
                 if (currentPageRight == 2){     // Add content to the new page
-                    Log.d("asfddfsasdf", "page2 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+                    Log.d("asfdf", "page2 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
                     temp++
                     setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
                 }
             }
 
             else {  // change all Layouts here
-                temp++
 
-                if (currentPageRight == 1) {
+                if (currentPageRight == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
+                    Log.d("asfdf", "page2 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
 
                     currentPageRight = 2
                     currentPageLayoutRight = binding.secondRootViewSecondTwo  // 1
@@ -312,16 +366,58 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
                     currentPageHeightRight = getCurrentPageHeight(containerToCheckHeight = containerSecondPageRightSide, 2)  // 3
 
                 }
+                temp++
                 setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
-                Log.d("asfddfsasdf", "page2 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
-
             }
         }
         sendOtherLayoutsToAnotherPage(type = workExperience)
 
+        // Project
+        projectContentViewList.forEachIndexed { index, content ->
+
+            // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
+            val widthMeasureSpec = MeasureSpec.makeMeasureSpec(content.width, MeasureSpec.EXACTLY)
+            val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+            content.measure(widthMeasureSpec, heightMeasureSpec)
+            content.layout(0, 0, content.measuredWidth, content.measuredHeight)
+
+            val contentHeight = content.measuredHeight
+            val contentFixedInFirstPage = currentPageHeightRight + contentHeight <= rootViewAbsoluteHeightRight
+
+            if (contentFixedInFirstPage) {
+
+                if (currentPageRight == 1) {    // Content fits on the current page
+                    Log.d("asfddfsaasdfasdfsdf", "page1 $index $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+                    currentPageHeightRight += contentHeight
+                    setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
+                }
+                if (currentPageRight == 2){     // Add content to the new page
+                    Log.d("asfddfsaasdfasdfsdf", "page2 $index $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+                    setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
+                }
+
+            }
+            else {  // change all Layouts here
+                if (currentPageRight == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
+
+                    currentPageRight = 2
+                    currentPageLayoutRight = binding.secondRootViewSecondTwo  // 1
+                    rootViewAbsoluteHeightRight = currentPageLayoutRight.height - paddingInPx - paddingInPx  // 2
+                    currentPageHeightRight = getCurrentPageHeight(containerToCheckHeight = containerSecondPageRightSide, 2)  // 3
+
+                    if (index == 0) {
+                        sendOtherLayoutsToAnotherPage(type = workExperience)
+                    }
+                }
+                setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
+                Log.d("asfddfsaasdfasdfsdf", "page2 $index $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+
+            }
+        }
+        sendOtherLayoutsToAnotherPage(type = projectDetail)
     }
 
-    // reusable func add and remove views for pages
+    // reusable func asynchronouslyCheckContent ကနေတစ်ခေါက်ပြီးတစ်ခေါက် ခေါ်ပြီး pages တွေထဲကို add and remove
     private fun setUpTheChildViews(childLayout: LinearLayout, type: String, leftOrRight: String) {
 
         if (leftOrRight == "right") {
@@ -330,14 +426,23 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
                 oldParent?.removeView(childLayout) // Remove the childLayout from the current parent
 
                 if (type == workExperience) containerWorkExp.addView(childLayout)
+                if (type == projectDetail) binding.containerProject.addView(childLayout)
             }
+
             if (currentPageRight == 2) {
                 binding.secondRootViewSecondTwo.visibility = View.VISIBLE
 
                 val oldParent = childLayout.parent as? ViewGroup
                 oldParent?.removeView(childLayout) // Remove the childLayout from the current parent
 
-                containerSecondPageRightSide.addView(childLayout)
+                if (type == workExperience) { containerSecondPageRightSide.addView(childLayout) }  // isSentToSecondPageRight ကအောက်ကကောင်တွေအတွက်ပဲလိုတယ်
+
+                if (isSentToSecondPageRight) {
+                    if (type == projectDetail) { binding.containerProject.addView(childLayout) }
+
+                } else {
+                    if (type == projectDetail) { containerSecondPageRightSide.addView(childLayout) }
+                }
             }
         }
 
@@ -359,7 +464,7 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
         }
     }
 
-    // reusable func send other views to page 2
+    // reusable func if currentPage == 2, page 2 ကို below layouts တွေပို့တဲ့ func
     private fun sendOtherLayoutsToAnotherPage(type: String) {
         when (type) {
             workExperience -> {
@@ -410,7 +515,8 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
         text: String,
         textSize: Float,
         fontFamily: Int,
-        margin: String,
+        marginType: String,
+        marginSize: Int,
         textColor: Int,
         bold: String?
     ): TextView {
@@ -419,8 +525,9 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
         textView.textSize = textSize   // textSize
         textView.setTextColor(resources.getColorStateList(textColor))   // textColor
-        textView.letterSpacing = 0.05f  // letterSpacing
-        val marginTopBottom = resources.getDimensionPixelSize(R.dimen.margin_medium)
+        textView.letterSpacing = 0.06f  // letterSpacing
+        var marginTopBottom = 0
+        if ( marginSize != 0) marginTopBottom = resources.getDimensionPixelSize(marginSize)
 
         // fontFamily
         val typeface = ResourcesCompat.getFont(context, fontFamily)
@@ -434,7 +541,7 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             LayoutParams.WRAP_CONTENT,
             LayoutParams.WRAP_CONTENT
         )
-        when (margin) {
+        when (marginType) {
             "top" -> layoutParams.setMargins(0, marginTopBottom, 0, 0)
             "bottom" -> layoutParams.setMargins(0, 0, 0, marginTopBottom)
             "topbottom" -> layoutParams.setMargins(0, marginTopBottom, 0, marginTopBottom)
