@@ -61,6 +61,8 @@ const val achievement = "ACHIEVEMENT"
 const val workExperience = "WORK EXPERIENCE"
 const val projectDetail = "PROJECT DETAIL"
 const val education = "EDUCATION DETAIL"
+const val signature = "SIGNATURE"
+const val reference = "REFERENCE"
 
 const val PREVIEW_ACTIVITY = "PreviewActivity"
 const val CREATE_CV_ACTIVITY = "CreateCVActivity"
