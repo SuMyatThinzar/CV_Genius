@@ -174,7 +174,7 @@
 
             <!--  Education  -->
             <LinearLayout
-                android:id="@+id/containerEducationSecondTwo"
+                android:id="@+id/containerEducation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -263,28 +263,29 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@drawable/line_white" />
+                    android:background="@drawable/line_white"
+                    android:layout_marginBottom="@dimen/margin_small"/>
 
-                <TextView
-                    android:id="@+id/tvAchievement"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:letterSpacing="0.05"
-                    android:fontFamily="@font/lato_light"
-                    android:text="Asdfasdfasd"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvAchievement"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:letterSpacing="0.05"-->
+<!--                    android:fontFamily="@font/lato_light"-->
+<!--                    android:text="Asdfasdfasd"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:letterSpacing="0.05"
-                    android:fontFamily="@font/lato_light"
-                    android:text="dfssffsdfasfaasfd"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:letterSpacing="0.05"-->
+<!--                    android:fontFamily="@font/lato_light"-->
+<!--                    android:text="dfssffsdfasfaasfd"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
 
             </LinearLayout>
 
@@ -305,7 +306,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_card_medium"
+                android:layout_marginTop="@dimen/margin_small"
                 android:fontFamily="@font/lato_regular"
                 android:text="Mariana Anderson"
                 android:textColor="@color/black"
@@ -317,7 +318,6 @@
                 android:id="@+id/tvPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_small"
                 android:fontFamily="@font/lato_regular"
                 android:text="Android Developer"
                 android:textColor="@color/black"
@@ -329,12 +329,13 @@
                 android:id="@+id/tvObjective"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_card_medium"
                 android:fontFamily="@font/lato_light"
-                android:text="lausfad sfjlajsfhjsdfasl ifjasfdhaasfdasdfasfdasdfasfdasdfasfdasfdasdadsfasdihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslifjasfdhaihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslifjasfdhaihsausdfhausfhlajsfhjsdfaslifjasfdhaihsausdfhausf"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_content_resume_second_one"
-                android:letterSpacing="0.05"/>
+                android:letterSpacing="0.05"
+                android:visibility="gone"/>
 
             <!--  Experience  -->
             <LinearLayout
@@ -461,28 +462,29 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1.3dp"
-                    android:background="@drawable/line_colortoolbar" />
+                    android:background="@drawable/line_colortoolbar"
+                    android:layout_marginBottom="@dimen/margin_small"/>
 
-                <TextView
-                    android:id="@+id/containerSingleSkill"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:letterSpacing="0.05"
-                    android:fontFamily="@font/lato_light"
-                    android:text="&#9679;  Basic computer"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:id="@+id/containerSingleSkill"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:letterSpacing="0.05"-->
+<!--                    android:fontFamily="@font/lato_light"-->
+<!--                    android:text="&#9679;  Basic computer"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:letterSpacing="0.05"
-                    android:fontFamily="@font/lato_light"
-                    android:text="&#9679;  Organization skill"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:letterSpacing="0.05"-->
+<!--                    android:fontFamily="@font/lato_light"-->
+<!--                    android:text="&#9679;  Organization skill"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
 
             </LinearLayout><!--   Skill   -->
 

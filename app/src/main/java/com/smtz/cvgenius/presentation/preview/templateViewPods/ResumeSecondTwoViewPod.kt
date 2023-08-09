@@ -25,8 +25,10 @@ import com.smtz.cvgenius.domain.model.SkillsVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
 import com.smtz.cvgenius.presentation.preview.utils.getCurrentPageHeight
 import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
+import com.smtz.cvgenius.utils.achievement
 import com.smtz.cvgenius.utils.education
 import com.smtz.cvgenius.utils.projectDetail
+import com.smtz.cvgenius.utils.skill
 import com.smtz.cvgenius.utils.workExperience
 
 class ResumeSecondTwoViewPod @JvmOverloads constructor(
@@ -68,11 +70,16 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
     // 2 right
     private var rootViewAbsoluteHeightRight = 0
-    private var currentPageHeightRight = 0F
-
     // 2 left
     private var rootViewAbsoluteHeightLeft = 0
-    private var currentPageHeightLeft = 0F
+
+    private var pageHeightRight = 0F       // 4ခု
+    private var pageRight3to2 = 0F    // Obj -> Skill Proj Exp
+    private var pageRight2to1 = 0F    // Exp -> Skill Proj
+    private var pageRight1to0 = 0F    // Pro -> Skill
+
+    private var pageHeightLeft = 0F        // 2ခု
+    private var pageLeft1to0 = 0F     // Edu -> Achi
 
     override fun onFinishInflate() {
         binding = ViewPodZresumeSecondTwoBinding.bind(this)
@@ -154,19 +161,33 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
         if (mCvVO?.educationDetails?.isNotEmpty() == true) {
             mEducationList = mCvVO?.educationDetails!!
-            setUpEducation()      // content တွေကိုအရင်ထည့်လိုက်တယ် ဆန့်ဆန့်မဆန့်ဆန့်
+            setUpEducation()
         } else {
-            binding.containerEducationSecondTwo.visibility = View.GONE
+            binding.containerEducation.visibility = View.GONE
         }
 
         if (mCvVO?.projectDetails?.isNotEmpty() == true) {
             mProjectDetailList = mCvVO?.projectDetails!!
-            setUpProject()      // content တွေကိုအရင်ထည့်လိုက်တယ် ဆန့်ဆန့်မဆန့်ဆန့်
+            setUpProject()
         } else {
             binding.containerProject.visibility = View.GONE
         }
 
-        checkContentsVisibility()     // content တွေကိုဆန့်မဆန့်စစ်ပြီး ဟိုဘက်ပို့တယ်
+        if (mCvVO?.skills?.isNotEmpty() == true) {
+            mSkillList = mCvVO?.skills!!
+            setUpSkill()
+        } else {
+            binding.containerSkill.visibility = View.GONE
+        }
+
+        if (mCvVO?.achievements?.isNotEmpty() == true) {
+            mAchievementList = mCvVO?.achievements!!
+            setUpAchievement()
+        } else {
+            binding.containerAchievement.visibility = View.GONE
+        }
+
+        checkContentsVisibility()     // content တွေကိုဆန့်မဆန့်စစ်ပြီး next page ပို့တယ်
     }
 
     private fun setUpWorkExp() {
@@ -228,7 +249,7 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
             educationContentViewList.add(childLayout)
 
-            binding.containerEducationSecondTwo.addView(childLayout)
+            binding.containerEducation.addView(childLayout)
         }
 //        addContentToPagesEducation(contentList)
     }
@@ -272,18 +293,51 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 //        addContentToPagesWorkExp(contentList)
     }
 
+    private fun setUpSkill() {
+
+        mSkillList.forEachIndexed { index, skillsVO ->
+
+            val childLayout = LinearLayout(context)
+
+            val skillName = setLayouts("● ${skillsVO.skill}", 7.5f, R.font.lato_regular, "top", R.dimen.margin_small, R.color.black, null)
+            childLayout.addView(skillName)
+
+            skillContentViewList.add(childLayout)
+
+            // အရင်ထည့်ပြီးမှစစ်တာ
+            binding.containerSkill.addView(childLayout)
+        }
+    }
+
+    private fun setUpAchievement() {
+
+        mAchievementList.forEachIndexed { index, achievementVO ->
+
+            val childLayout = LinearLayout(context)
+
+            val achievementName = setLayouts("● ${achievementVO.achievement}", 7.5f, R.font.lato_regular, "top", R.dimen.margin_small, R.color.white, null)
+            childLayout.addView(achievementName)
+
+            achievementContentViewList.add(childLayout)
+
+            // အရင်ထည့်ပြီးမှစစ်တာ
+            binding.containerAchievement.addView(childLayout)
+        }
+    }
+
     // reusable func left and right side
     private fun checkContentsVisibility() {
 
-        // 2 right
         rootViewAbsoluteHeightRight = currentPageLayoutRight.height - paddingInPx - paddingInPx
-        currentPageHeightRight = getCurrentPageHeight(containerToCheckHeight = containerFirstPageRightSide, 2)
-
-        // 2 left
         rootViewAbsoluteHeightLeft = currentPageLayoutLeft.height - paddingInPx - paddingInPx
-        currentPageHeightLeft = getCurrentPageHeight(containerToCheckHeight = containerFirstPageLeftSide, 1)
 
-        Log.d("asdfasdfgfsdfghfgujr56", "$currentPageHeightRight $currentPageHeightLeft")
+        pageHeightRight = getCurrentPageHeight(containerToCheckHeight = containerFirstPageRightSide, 3) // need to reduce Project and Skill below Exp
+        pageRight3to2 = getCurrentPageHeight(containerFirstPageRightSide, 2) - getCurrentPageHeight(containerFirstPageRightSide, 3)  //reduce 2 က reduce 3 ထက် height ပိုများတယ်
+        pageRight2to1 = getCurrentPageHeight(containerFirstPageRightSide, 1) - getCurrentPageHeight(containerFirstPageRightSide, 2)
+        pageRight1to0 = getCurrentPageHeight(containerFirstPageRightSide, 0) - getCurrentPageHeight(containerFirstPageRightSide, 1)
+
+        pageHeightLeft = getCurrentPageHeight(containerToCheckHeight = containerFirstPageLeftSide, 1) // need to reduce Project and Skill below Exp
+        pageLeft1to0 = getCurrentPageHeight(containerFirstPageLeftSide, 0) - getCurrentPageHeight(containerFirstPageLeftSide, 1)
 
         val handler = Handler()
         handler.post {
@@ -293,8 +347,26 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
     // reusable func check visibility for all
     private fun asynchronouslyCheckContent() {
-        // Education
-        for (content in educationContentViewList) {
+        // Objective  (Right)
+        mCvVO?.objective?.let {
+            val objective : View = binding.tvObjective
+            val widthMeasure = MeasureSpec.makeMeasureSpec(objective.width, MeasureSpec.EXACTLY)
+            val heightMeasure = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+            objective.measure(widthMeasure, heightMeasure)
+            objective.layout(0, 0, objective.measuredWidth, objective.measuredHeight)
+            val objectiveHeight = objective.measuredHeight
+
+            Log.d("adf4ff", "obj $pageHeightRight + $objectiveHeight = ${pageHeightRight + objectiveHeight}")
+
+            pageHeightRight += objectiveHeight
+            Log.d("a3rwe", "pageHeightRight= $pageHeightRight after obj")
+        }
+
+
+        // Work Experience (Right)
+        Log.d("adf4ff", "added different 3-2 $pageHeightRight + $pageRight3to2 = ${pageHeightRight+pageRight3to2}")
+        pageHeightRight += pageRight3to2 + (8 * density).toInt()
+        for (content in experienceContentViewList) {
 
             // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
             val widthMeasureSpec = MeasureSpec.makeMeasureSpec(content.width, MeasureSpec.EXACTLY)
@@ -304,10 +376,140 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
             val contentHeight = content.measuredHeight
 
-            if (currentPageHeightLeft + contentHeight <= rootViewAbsoluteHeightLeft) { // content ကဆန့်တယ်ဆိုရင်
+            if (pageHeightRight + contentHeight <= rootViewAbsoluteHeightRight) {
+
+                if (currentPageRight == 1) {    // Content fits on the current page
+                    Log.d("adf4ff", "Exp $pageHeightRight + $contentHeight = ${pageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+
+                    pageHeightRight += contentHeight
+                    Log.d("a3rwe", "pageHeightRight= $pageHeightRight exp")
+                    setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
+                }
+                if (currentPageRight == 2){     // Add content to the new page
+                    setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
+                }
+            }
+
+            else {  // change all Layouts here
+                if (currentPageRight == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
+
+                    currentPageRight = 2
+                    currentPageLayoutRight = binding.secondRootViewSecondTwo  // 1
+                    rootViewAbsoluteHeightRight = currentPageLayoutRight.height - paddingInPx - paddingInPx  // 2
+                }
+                setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
+            }
+        }
+        sendOtherLayoutsToAnotherPage(type = workExperience)
+
+
+        // Project (Right)
+        Log.d("adf4ff", "added different 2-1 $pageHeightRight + $pageRight2to1 = ${pageHeightRight+pageRight2to1}")
+        pageHeightRight += pageRight2to1 + (8 * density).toInt()
+        projectContentViewList.forEachIndexed { index, content ->
+
+            // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
+            val widthMeasureSpec = MeasureSpec.makeMeasureSpec(content.width, MeasureSpec.EXACTLY)
+            val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+            content.measure(widthMeasureSpec, heightMeasureSpec)
+            content.layout(0, 0, content.measuredWidth, content.measuredHeight)
+
+            val contentHeight = content.measuredHeight
+            val contentFitsInFirstPage = pageHeightRight + contentHeight <= rootViewAbsoluteHeightRight
+
+            if (contentFitsInFirstPage) {
+
+                if (currentPageRight == 1) {    // Content fits on the current page
+                    Log.d("adf4ff", "Pro $index $pageHeightRight + $contentHeight = ${pageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+                    pageHeightRight += contentHeight
+
+                    Log.d("a3rwe", "pageHeightRight= $pageHeightRight proj")
+                    setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
+                }
+                if (currentPageRight == 2){     // Add content to the new page
+                    setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
+                }
+
+            }
+            else {  // change all Layouts here
+                if (currentPageRight == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
+
+                    currentPageRight = 2
+                    currentPageLayoutRight = binding.secondRootViewSecondTwo  // 1
+                    rootViewAbsoluteHeightRight = currentPageLayoutRight.height - paddingInPx - paddingInPx  // 2
+
+                    if (index == 0) {  // ပထမဆုံးတစ်ခုမှာတင် မဆန့်ရင် header ကိုပါ nextpage ပို့ဖို့ဆိုရင် workExperience နဲ့ဆို project ရော skill ပါအကုန်ပို့ပြီးသားဖြစ်သွားရော
+                        sendOtherLayoutsToAnotherPage(type = workExperience)
+                    }
+                }
+                setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
+            }
+        }
+        sendOtherLayoutsToAnotherPage(type = projectDetail)
+
+
+        // skill (Right)
+        Log.d("adf4ff", "added different 1-0 $pageHeightRight + $pageRight1to0 = ${pageHeightRight+pageRight1to0}")
+        pageHeightRight += pageRight1to0 + (8 * density).toInt()
+        skillContentViewList.forEachIndexed { index, content ->
+
+            // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
+            val widthMeasureSpec = MeasureSpec.makeMeasureSpec(content.width, MeasureSpec.EXACTLY)
+            val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+            content.measure(widthMeasureSpec, heightMeasureSpec)
+            content.layout(0, 0, content.measuredWidth, content.measuredHeight)
+
+            val contentHeight = content.measuredHeight
+            val contentFitsInFirstPage = pageHeightRight + contentHeight <= rootViewAbsoluteHeightRight
+
+            if (contentFitsInFirstPage) {
+
+                if (currentPageRight == 1) {    // Content fits on the current page
+                    Log.d("adf4ff", "Ski $index $pageHeightRight + $contentHeight = ${pageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
+                    pageHeightRight += contentHeight
+
+                    Log.d("a3rwe", "pageHeightRight= $pageHeightRight skill")
+                    setUpTheChildViews(content as LinearLayout, type = skill, leftOrRight = "right")
+                }
+                if (currentPageRight == 2){     // Add content to the new page
+                    setUpTheChildViews(content as LinearLayout, type = skill, leftOrRight = "right")
+                }
+
+            }
+            else {  // change all Layouts here
+                if (currentPageRight == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
+
+                    currentPageRight = 2
+                    currentPageLayoutRight = binding.secondRootViewSecondTwo  // 1
+                    rootViewAbsoluteHeightRight = currentPageLayoutRight.height - paddingInPx - paddingInPx  // 2
+
+                    if (index == 0) {
+                        sendOtherLayoutsToAnotherPage(type = projectDetail)
+                    }
+                }
+                setUpTheChildViews(content as LinearLayout, type = skill, leftOrRight = "right")
+            }
+        }
+        sendOtherLayoutsToAnotherPage(type = skill)
+
+
+        // Education
+        educationContentViewList.forEachIndexed { index, content ->
+
+            // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
+            val widthMeasureSpec = MeasureSpec.makeMeasureSpec(content.width, MeasureSpec.EXACTLY)
+            val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+            content.measure(widthMeasureSpec, heightMeasureSpec)
+            content.layout(0, 0, content.measuredWidth, content.measuredHeight)
+
+            val contentHeight = content.measuredHeight
+            val contentFitsInFirstPage = pageHeightLeft + contentHeight <= rootViewAbsoluteHeightLeft
+
+            if (contentFitsInFirstPage) { // content ကဆန့်တယ်ဆိုရင်
 
                 if (currentPageLeft == 1) {    // Content fits on the current page
-                    currentPageHeightLeft += contentHeight
+                    Log.d("a3dsrwe", "Edu $index $pageHeightLeft + $contentHeight = ${pageHeightLeft + contentHeight} <= $rootViewAbsoluteHeightLeft")
+                    pageHeightLeft += contentHeight
                     setUpTheChildViews(content as LinearLayout, type = education, leftOrRight = "left")
                 }
                 if (currentPageLeft == 2){     // Add content to the new page
@@ -320,7 +522,8 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
                     currentPageLeft = 2
                     currentPageLayoutLeft = containerSecondPageLeftSide  // 1
                     rootViewAbsoluteHeightLeft = currentPageLayoutLeft.height - paddingInPx - paddingInPx  // 2
-                    currentPageHeightLeft = getCurrentPageHeight(containerToCheckHeight = containerSecondPageLeftSide, 2)  // 3
+//                    currentPageHeightLeft = getCurrentPageHeight(containerToCheckHeight = containerSecondPageLeftSide, 2)  // 3
+
                 }
                 // page က already 2 ဖြစ်ရင်
                 setUpTheChildViews(content as LinearLayout, type = education, leftOrRight = "left")
@@ -328,9 +531,11 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
         }
         sendOtherLayoutsToAnotherPage(type = education)
 
-        // Work Experience
-        var temp = 0
-        for (content in experienceContentViewList) {
+
+        // Achievement
+        Log.d("a3dsrwe", "added different 1-0 $pageHeightLeft + $pageLeft1to0 = ${pageHeightLeft+pageLeft1to0}")
+        pageHeightLeft += pageLeft1to0 + (8 * density).toInt()
+        achievementContentViewList.forEachIndexed { index, content ->
 
             // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
             val widthMeasureSpec = MeasureSpec.makeMeasureSpec(content.width, MeasureSpec.EXACTLY)
@@ -339,96 +544,54 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
             content.layout(0, 0, content.measuredWidth, content.measuredHeight)
 
             val contentHeight = content.measuredHeight
+            val contentFitsInFirstPage = pageHeightLeft + contentHeight <= rootViewAbsoluteHeightLeft
 
-            if (currentPageHeightRight + contentHeight <= rootViewAbsoluteHeightRight) {
+            if (contentFitsInFirstPage) {
 
-                if (currentPageRight == 1) {    // Content fits on the current page
-                    Log.d("asfdf", "page1 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
-                    temp++
-                    currentPageHeightRight += contentHeight
-                    setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
+                if (currentPageLeft == 1) {    // Content fits on the current page
+                    Log.d("a3dsrwe", "Skil $index $pageHeightLeft + $contentHeight = ${pageHeightLeft + contentHeight} <= $rootViewAbsoluteHeightLeft")
+                    pageHeightLeft += contentHeight
+                    setUpTheChildViews(content as LinearLayout, type = achievement, leftOrRight = "left")
                 }
-                if (currentPageRight == 2){     // Add content to the new page
-                    Log.d("asfdf", "page2 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
-                    temp++
-                    setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
-                }
-            }
-
-            else {  // change all Layouts here
-
-                if (currentPageRight == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
-                    Log.d("asfdf", "page2 $temp $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
-
-                    currentPageRight = 2
-                    currentPageLayoutRight = binding.secondRootViewSecondTwo  // 1
-                    rootViewAbsoluteHeightRight = currentPageLayoutRight.height - paddingInPx - paddingInPx  // 2
-                    currentPageHeightRight = getCurrentPageHeight(containerToCheckHeight = containerSecondPageRightSide, 2)  // 3
-
-                }
-                temp++
-                setUpTheChildViews(content as LinearLayout, type = workExperience, leftOrRight = "right")
-            }
-        }
-        sendOtherLayoutsToAnotherPage(type = workExperience)
-
-        // Project
-        projectContentViewList.forEachIndexed { index, content ->
-
-            // Manually measure and layout the (not need if the layout height is displayed fully) can setUp as val totalHeight = viewPodLayout.height
-            val widthMeasureSpec = MeasureSpec.makeMeasureSpec(content.width, MeasureSpec.EXACTLY)
-            val heightMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
-            content.measure(widthMeasureSpec, heightMeasureSpec)
-            content.layout(0, 0, content.measuredWidth, content.measuredHeight)
-
-            val contentHeight = content.measuredHeight
-            val contentFixedInFirstPage = currentPageHeightRight + contentHeight <= rootViewAbsoluteHeightRight
-
-            if (contentFixedInFirstPage) {
-
-                if (currentPageRight == 1) {    // Content fits on the current page
-                    Log.d("asfddfsaasdfasdfsdf", "page1 $index $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
-                    currentPageHeightRight += contentHeight
-                    setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
-                }
-                if (currentPageRight == 2){     // Add content to the new page
-                    Log.d("asfddfsaasdfasdfsdf", "page2 $index $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
-                    setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
+                if (currentPageLeft == 2){     // Add content to the new page
+                    setUpTheChildViews(content as LinearLayout, type = achievement, leftOrRight = "left")
                 }
 
             }
             else {  // change all Layouts here
-                if (currentPageRight == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
+                if (currentPageLeft == 1) { //ပထမဆုံးအကြိမ် first pageမှာမဆန့်တာဆိုရင် currentPage, RootView, pageNum အကုန်အရင်ပြောင်း
 
-                    currentPageRight = 2
-                    currentPageLayoutRight = binding.secondRootViewSecondTwo  // 1
-                    rootViewAbsoluteHeightRight = currentPageLayoutRight.height - paddingInPx - paddingInPx  // 2
-                    currentPageHeightRight = getCurrentPageHeight(containerToCheckHeight = containerSecondPageRightSide, 2)  // 3
+                    currentPageLeft = 2
+                    currentPageLayoutLeft = binding.secondRootViewSecondTwo  // 1
+                    rootViewAbsoluteHeightLeft = currentPageLayoutLeft.height - paddingInPx - paddingInPx  // 2
 
                     if (index == 0) {
-                        sendOtherLayoutsToAnotherPage(type = workExperience)
+                        sendOtherLayoutsToAnotherPage(type = achievement)
                     }
                 }
-                setUpTheChildViews(content as LinearLayout, type = projectDetail, leftOrRight = "right")
-                Log.d("asfddfsaasdfasdfsdf", "page2 $index $currentPageHeightRight + $contentHeight = ${currentPageHeightRight + contentHeight} <= $rootViewAbsoluteHeightRight")
-
+                setUpTheChildViews(content as LinearLayout, type = achievement, leftOrRight = "left")
             }
         }
-        sendOtherLayoutsToAnotherPage(type = projectDetail)
+        sendOtherLayoutsToAnotherPage(type = achievement)
+
     }
 
     // reusable func asynchronouslyCheckContent ကနေတစ်ခေါက်ပြီးတစ်ခေါက် ခေါ်ပြီး pages တွေထဲကို add and remove
     private fun setUpTheChildViews(childLayout: LinearLayout, type: String, leftOrRight: String) {
 
+        // Right
         if (leftOrRight == "right") {
+            // Right 1
             if (currentPageRight == 1) {
                 val oldParent = childLayout.parent as? ViewGroup
                 oldParent?.removeView(childLayout) // Remove the childLayout from the current parent
 
                 if (type == workExperience) containerWorkExp.addView(childLayout)
                 if (type == projectDetail) binding.containerProject.addView(childLayout)
+                if (type == skill) binding.containerSkill.addView(childLayout)
             }
 
+            // Right 2
             if (currentPageRight == 2) {
                 binding.secondRootViewSecondTwo.visibility = View.VISIBLE
 
@@ -437,22 +600,28 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
                 if (type == workExperience) { containerSecondPageRightSide.addView(childLayout) }  // isSentToSecondPageRight ကအောက်ကကောင်တွေအတွက်ပဲလိုတယ်
 
-                if (isSentToSecondPageRight) {
+                if (isSentToSecondPageRight) {  // workExp မှာထဲက မဆန့်လို့ nextpage ပို့ပြီးသားဆိုရင် container ထဲ တန်းထည့်လိုက်ရုံပဲ
                     if (type == projectDetail) { binding.containerProject.addView(childLayout) }
+                    if (type == skill) binding.containerSkill.addView(childLayout)
 
-                } else {
+                } else {  // အခုမှပို့ရမှာဆိုရင် root ထဲတန်းထည့်လိုက်ရုံပဲ / first element ဆိုရင် header ကိုပါ ပို့ဖို့အတွက်က checkContent ထဲမှာစစ်ပြီးသား
                     if (type == projectDetail) { containerSecondPageRightSide.addView(childLayout) }
+                    if (type == skill) { containerSecondPageRightSide.addView(childLayout) }
                 }
             }
         }
 
+        // Left
         if (leftOrRight == "left") {
+            // Left 1
             if (currentPageLeft == 1) {
                 val oldParent = childLayout.parent as? ViewGroup
                 oldParent?.removeView(childLayout) // Remove the childLayout from the current parent
 
-                if (type == education) binding.containerEducationSecondTwo.addView(childLayout)
+                if (type == education) binding.containerEducation.addView(childLayout)
+                if (type == achievement) binding.containerAchievement.addView(childLayout)
             }
+            // Left 2
             if (currentPageLeft == 2) {
                 binding.secondRootViewSecondTwo.visibility = View.VISIBLE
 
