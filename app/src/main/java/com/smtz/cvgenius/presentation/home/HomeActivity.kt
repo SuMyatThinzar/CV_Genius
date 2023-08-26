@@ -89,6 +89,10 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
         if (isInternetAvailable && mInterstitialAd == null && !isInterstitialAdLoading) {
             loadInterstitialAd()
         }
+
+        CvSingleton.instance.cvVO?.let {
+            CvSingleton.instance.cleanup()
+        }
     }
 
     // 1. load ad when activity starts and show on button click.
@@ -242,7 +246,8 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
         binding.fabCreateNewCV.setOnClickListener {
-            startActivity(Intent(this, SampleTemplateActivity::class.java))
+//            startActivity(Intent(this, SampleTemplateActivity::class.java))
+            startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
         }
         binding.btnProfile.setOnClickListener {
             Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
@@ -257,8 +262,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
         val parentView = binding.btnMenu.parent as ViewGroup
         parentView.removeView(binding.btnMenu)
 
-        val layoutParamsExpanded =
-            binding.btnMenu.layoutParams as CollapsingToolbarLayout.LayoutParams
+        val layoutParamsExpanded = binding.btnMenu.layoutParams as CollapsingToolbarLayout.LayoutParams
         layoutParamsExpanded.topMargin = 46
         layoutParamsExpanded.bottomMargin = 32
         layoutParamsExpanded.collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN

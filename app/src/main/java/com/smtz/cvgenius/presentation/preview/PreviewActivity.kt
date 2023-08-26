@@ -28,6 +28,7 @@ import com.smtz.cvgenius.presentation.preview.templateViewPods.BaseViewPod
 import com.smtz.cvgenius.presentation.preview.utils.convertToPdfDocument
 import com.smtz.cvgenius.presentation.preview.utils.createTemporaryPdfFile
 import com.smtz.cvgenius.presentation.preview.utils.shareDocument
+import com.smtz.cvgenius.presentation.template.SampleTemplateActivity
 import kotlinx.coroutines.*
 import java.io.*
 
@@ -61,11 +62,7 @@ class PreviewActivity : AppCompatActivity() {
         val documentsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) //storage/emulated/0/Documents
 //        val documentsDirectory2 = Environment.getExternalStorageDirectory().path  /storage/emulated/0
 
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE),
-            REQUEST_CODE_PERMISSION_STORAGE
-        )
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION_STORAGE)
 
         mCvVO = CvSingleton.instance.cvVO     // get from singleton
         setUpTemplate()
@@ -94,7 +91,7 @@ class PreviewActivity : AppCompatActivity() {
     private fun setUpListeners() {
         val viewPodLayout = findViewById<BaseViewPod>(mViewPodId)
 
-        binding.btnChangeTemplate.setOnClickListener {
+        binding.flPreview.setOnClickListener {
             startActivity(Intent(ChangeTemplateActivity.newIntent(this)))
         }
         binding.btnDownload.setOnClickListener {
@@ -111,7 +108,10 @@ class PreviewActivity : AppCompatActivity() {
             handleCacheFile(viewPodLayout, callback = { cache ->
                 shareDocument(this, cache)
             })
+        }
 
+        binding.btnChangeTemplate.setOnClickListener {
+            startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CHANGE_ID))
         }
     }
 

@@ -154,7 +154,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorAccent"
-        android:maxWidth="300dp">
+        android:maxWidth="250dp">
 
         <LinearLayout
             android:layout_width="match_parent"

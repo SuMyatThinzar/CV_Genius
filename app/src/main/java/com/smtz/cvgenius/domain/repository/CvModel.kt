@@ -7,6 +7,8 @@ interface CvModel {
 
     fun insertCV(cvVO: CvVO)
 
+//    fun updateCv(cvVO: CvVO)
+
     fun getCv(cvId: Long): LiveData<CvVO?>?
 
     fun getAllCv(): LiveData<List<CvVO>>?

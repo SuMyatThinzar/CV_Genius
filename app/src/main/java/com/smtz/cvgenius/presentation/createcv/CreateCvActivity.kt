@@ -175,7 +175,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             binding.ivSelectedImage.setImageResource(R.drawable.ic_select_photo)
             selectedImage = null
             mCvVo!!.profileImage = null
-            mCvModel.insertCV(mCvVo!!)
         }
         binding.btnPreviewCv.setOnClickListener {
             if (mCvVo?.personalDetails != null) {
@@ -360,8 +359,8 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             5 -> startActivity(AchievementActivity.newIntent(this))
             6 -> startActivity(ObjectiveActivity.newIntent(this))
             7 -> startActivity(ProjectDetailActivity.newIntent(this))
-            8 -> Toast.makeText(applicationContext, id.toString(), Toast.LENGTH_SHORT).show()
-            9 -> startActivity(SignatureActivity.newIntent(this))
+            8 -> startActivity(SignatureActivity.newIntent(this))
+            9 -> Toast.makeText(applicationContext, id.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -378,7 +377,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
             mCvVo!!.profileImage = byteArray
             selectedImage = byteArray
-            mCvModel.insertCV(mCvVo!!)
         }
     }
 
@@ -402,11 +400,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
     }
 
-    override fun onDestroy() {
-
-        CvSingleton.instance.cvVO = null
-        super.onDestroy()
-    }
 }
 
 private const val IMAGE_REQUEST_CODE = 100

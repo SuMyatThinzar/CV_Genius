@@ -32,8 +32,8 @@ val detailButtonList = listOf(
     DetailButtonLabel(5, R.drawable.ic_achievement, "Achievements"),
     DetailButtonLabel(6, R.drawable.ic_objective, "Objectives"),
     DetailButtonLabel(7, R.drawable.ic_project, "Project Detail"),
-    DetailButtonLabel(8, R.drawable.ic_reference, "Reference"),
-    DetailButtonLabel(9, R.drawable.ic_signature, "Signature"),
+    DetailButtonLabel(8, R.drawable.ic_signature, "Signature"),
+    DetailButtonLabel(9, R.drawable.ic_information, "Reference"),
 )
 
 fun setUpTitleAndButton(expand: Boolean, tvTitle: TextView, btnBack: ImageView, frameLayout: FrameLayout) {
