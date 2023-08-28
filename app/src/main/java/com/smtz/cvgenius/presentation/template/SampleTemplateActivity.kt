@@ -15,16 +15,18 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayout
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.common.delegates.SampleTemplateDelegate
+import com.smtz.cvgenius.common.dummy.templateList
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivitySampleTemplateBinding
+import com.smtz.cvgenius.domain.model.TemplateVO
 import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
 import com.smtz.cvgenius.presentation.preview.PreviewActivity
 import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
 import com.smtz.cvgenius.utils.tabList
-
 
 class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
 
@@ -33,6 +35,10 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
     private val mSampleTemplateAdapter = SampleTemplateAdapter(this)
     private lateinit var mBannerAdView: AdView
     private var cvModel: CvModel = CvModelImpl
+
+    private var freeTemplateList: MutableList<TemplateVO> = mutableListOf()
+    private var secondTemplateList: MutableList<TemplateVO> = mutableListOf()
+    private var thirdTemplateList: MutableList<TemplateVO> = mutableListOf()
 
     companion object {
 
@@ -63,6 +69,7 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
         mBannerAdView.loadAd(adRequest)
 
         setUpToolBar()
+        setUpTemplates()
         setUpTabLayout()
         setUpListeners()
         setUpAdapters()
@@ -101,27 +108,42 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
             adapter = mSampleTemplateAdapter
             layoutManager = GridLayoutManager(applicationContext, 2)
         }
+        mSampleTemplateAdapter.setTemplates(templateList)
     }
 
     private fun setUpListeners() {
-//        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-//            override fun onTabSelected(tab: TabLayout.Tab?) {
-//                tabList.getOrNull(tab?.position ?: 0)?.let {
-//                    getMoviesByGenres(it)
-//                }
-////                Snackbar.make(window.decorView,tab?.text?:"", Snackbar.LENGTH_SHORT).show()
-//            }
-//
-//            override fun onTabUnselected(tab: TabLayout.Tab?) {
-//            }
-//
-//            override fun onTabReselected(tab: TabLayout.Tab?) {
-//            }
-//        })
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {   // tab?.position = 0|1|2|3  tab?.text
+                tabList.getOrNull(tab?.position ?: 0)?.let {
+                    when (tab?.position) {
+                        0 -> mSampleTemplateAdapter.setTemplates(templateList)
+                        1 -> mSampleTemplateAdapter.setTemplates(freeTemplateList)
+                        2 -> mSampleTemplateAdapter.setTemplates(secondTemplateList)
+                        3 -> mSampleTemplateAdapter.setTemplates(thirdTemplateList)
+                        else -> mSampleTemplateAdapter.setTemplates(templateList)
+                    }
+//                    Snackbar.make(window.decorView, "${ tab?.text ?: "" } ${tab?.position}", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
 
 
         binding.btnBack.setOnClickListener{
             onBackPressed()
+        }
+    }
+
+    private fun setUpTemplates() {
+        templateList.forEachIndexed { index, template ->
+            if (index <=1 ) freeTemplateList.add(template)
+            if (index in 2..6) secondTemplateList.add(template)
+            if (index > 6) thirdTemplateList.add(template)
         }
     }
 

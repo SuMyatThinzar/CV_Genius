@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimary"
     tools:context=".presentation.template.SampleTemplateActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -58,8 +58,8 @@
             style="@style/Widget.Neumorph.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="-10.5dp"
-            android:layout_marginEnd="-10.5dp"
+            android:layout_marginStart="-11dp"
+            android:layout_marginEnd="-11.2dp"
             android:layout_marginBottom="@dimen/margin_medium_3_n"
             android:padding="@dimen/margin_medium_2"
             app:neumorph_backgroundColor="@color/colorPrimary"

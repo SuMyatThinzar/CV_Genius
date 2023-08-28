@@ -13,6 +13,8 @@ import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.smtz.cvgenius.R
+import com.smtz.cvgenius.common.defaultPrefs
+import com.smtz.cvgenius.common.get
 import com.smtz.cvgenius.databinding.ActivitySplashBinding
 import com.smtz.cvgenius.presentation.home.HomeActivity
 
@@ -31,6 +33,20 @@ class SplashActivity : AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             statusBarColor = Color.TRANSPARENT
         }
+
+        binding.btnGetStarted.visibility = View.INVISIBLE
+
+        Handler().postDelayed({
+            val preference = defaultPrefs(applicationContext)
+            val user = preference.get("new_user", "")
+
+            if (user.isNotEmpty()) {
+                startActivity(Intent(applicationContext, HomeActivity::class.java))
+                finish() // remove from activity stack
+            } else
+                binding.btnGetStarted.visibility = View.VISIBLE
+
+        }, 1500L)
 
         backgroundColorAnimation()                   // Background colors change Animation
         crossFadeTextChangeAnimation()               // Texts fade in/out Animation

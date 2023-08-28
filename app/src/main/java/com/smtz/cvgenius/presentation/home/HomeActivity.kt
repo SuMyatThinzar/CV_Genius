@@ -249,11 +249,27 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 //            startActivity(Intent(this, SampleTemplateActivity::class.java))
             startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
         }
-        binding.btnProfile.setOnClickListener {
-            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-            startActivity(Intent(this, ProfileActivity::class.java))
+//        binding.btnProfile.setOnClickListener {
+//            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+//            binding.drawerLayout.closeDrawer(GravityCompat.START)
+//            startActivity(Intent(this, ProfileActivity::class.java))
+//        }
+        binding.btnShare.setOnClickListener {
+            shareApp()
         }
+    }
+
+    private fun shareApp() {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this app!")
+        shareIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            "Hey! I found this amazing app that can create professional Resume easily. Download it on Google Play: [App Store Link]."
+        )
+
+        val chooser = Intent.createChooser(shareIntent, "Share app via ...")
+        startActivity(chooser)
     }
 
     private fun setUpToolBar() {
@@ -322,5 +338,4 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 //        shareDocument(this, )
 //        Snackbar.make(window.decorView, "Successfully Shared", Snackbar.LENGTH_SHORT).show()
 //    }
-
 }

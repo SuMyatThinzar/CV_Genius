@@ -150,11 +150,11 @@
     <!-- Navigation drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorAccent"
-        android:maxWidth="250dp">
+        android:maxWidth="320dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -173,33 +173,33 @@
                 android:textSize="@dimen/text_drawer_heading"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/btnProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium_2">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/btnProfile"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="@dimen/margin_medium_2">-->
 
-                <ImageView
-                    android:layout_width="@dimen/size_drawer_icon"
-                    android:layout_height="@dimen/size_drawer_icon"
-                    android:src="@drawable/ic_profile" />
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/size_drawer_icon"-->
+<!--                    android:layout_height="@dimen/size_drawer_icon"-->
+<!--                    android:src="@drawable/ic_profile" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_medium_2"
-                    android:text="@string/lbl_my_profile"
-                    android:textColor="@color/colorToolbar"
-                    android:textSize="@dimen/text_regular" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="@dimen/margin_medium_2"-->
+<!--                    android:text="@string/lbl_my_profile"-->
+<!--                    android:textColor="@color/colorToolbar"-->
+<!--                    android:textSize="@dimen/text_regular" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="@dimen/margin_medium_2"
-                android:background="@drawable/line" />
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="2dp"-->
+<!--                android:layout_marginBottom="@dimen/margin_medium_2"-->
+<!--                android:background="@drawable/line" />-->
 
             <LinearLayout
                 android:id="@+id/btnTemplates"
@@ -210,7 +210,7 @@
                 <ImageView
                     android:layout_width="@dimen/size_drawer_icon"
                     android:layout_height="@dimen/size_drawer_icon"
-                    android:src="@drawable/ic_more" />
+                    android:src="@drawable/ic_template" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -229,33 +229,61 @@
                 android:layout_marginBottom="@dimen/margin_medium_2"
                 android:background="@drawable/line" />
 
-            <LinearLayout
-                android:id="@+id/btnFeedback"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium_2">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/btnFeedback"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="@dimen/margin_medium_2">-->
 
-                <ImageView
-                    android:layout_width="@dimen/size_drawer_icon"
-                    android:layout_height="@dimen/size_drawer_icon"
-                    android:src="@drawable/ic_feedback" />
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/size_drawer_icon"-->
+<!--                    android:layout_height="@dimen/size_drawer_icon"-->
+<!--                    android:src="@drawable/ic_feedback" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_medium_2"
-                    android:text="@string/lbl_feedback"
-                    android:textColor="@color/colorToolbar"
-                    android:textSize="@dimen/text_regular" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="@dimen/margin_medium_2"-->
+<!--                    android:text="@string/lbl_feedback"-->
+<!--                    android:textColor="@color/colorToolbar"-->
+<!--                    android:textSize="@dimen/text_regular" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="@dimen/margin_medium_2"
-                android:background="@drawable/line" />
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="2dp"-->
+<!--                android:layout_marginBottom="@dimen/margin_medium_2"-->
+<!--                android:background="@drawable/line" />-->
+
+                        <LinearLayout
+                            android:id="@+id/btnPrivacyPolicy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/margin_medium_2">
+
+                            <ImageView
+                                android:layout_width="@dimen/size_drawer_icon"
+                                android:layout_height="@dimen/size_drawer_icon"
+                                android:src="@drawable/ic_privacy_policy" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/margin_medium_2"
+                                android:text="@string/lbl_privacy_policy"
+                                android:textColor="@color/colorToolbar"
+                                android:textSize="@dimen/text_regular" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_marginBottom="@dimen/margin_medium_2"
+                            android:background="@drawable/line" />
 
             <LinearLayout
                 android:id="@+id/btnRate"
@@ -313,33 +341,33 @@
                 android:layout_marginBottom="@dimen/margin_medium_2"
                 android:background="@drawable/line" />
 
-            <LinearLayout
-                android:id="@+id/btnLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_medium_2">
+<!--            <LinearLayout-->
+<!--                android:id="@+id/btnLogout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="@dimen/margin_medium_2">-->
 
-                <ImageView
-                    android:layout_width="@dimen/size_drawer_icon"
-                    android:layout_height="@dimen/size_drawer_icon"
-                    android:src="@drawable/ic_logout" />
+<!--                <ImageView-->
+<!--                    android:layout_width="@dimen/size_drawer_icon"-->
+<!--                    android:layout_height="@dimen/size_drawer_icon"-->
+<!--                    android:src="@drawable/ic_logout" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_medium_2"
-                    android:text="@string/lbl_logout"
-                    android:textColor="@color/colorToolbar"
-                    android:textSize="@dimen/text_regular" />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:layout_marginStart="@dimen/margin_medium_2"-->
+<!--                    android:text="@string/lbl_logout"-->
+<!--                    android:textColor="@color/colorToolbar"-->
+<!--                    android:textSize="@dimen/text_regular" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginBottom="@dimen/margin_large"
-                android:background="@drawable/line" />
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="2dp"-->
+<!--                android:layout_marginBottom="@dimen/margin_large"-->
+<!--                android:background="@drawable/line" />-->
 
         </LinearLayout>
 

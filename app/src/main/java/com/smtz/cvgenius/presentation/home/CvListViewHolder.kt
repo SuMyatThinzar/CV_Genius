@@ -17,11 +17,11 @@ class CvListViewHolder(private var binding: ViewHolderCvListBinding, private val
     private var mDataVO : CvVO ? = null
 
     init {
-//        itemView.setOnClickListener {
-//            mDataVO?.let {
-//                delegate.onTapCv(it.cvId)
-//            }
-//        }
+        itemView.setOnClickListener {
+            mDataVO?.let {
+                delegate.onTapCv(it)
+            }
+        }
         binding.btnEditCv.setOnClickListener {
             mDataVO?.let {
                 delegate.onTapCv(it)
@@ -87,7 +87,8 @@ class CvListViewHolder(private var binding: ViewHolderCvListBinding, private val
 
         val name = "${data.personalDetails?.firstName} ${data.personalDetails?.lastName}"
         binding.tvUserName.text = name
-        binding.tvEmail.text = data.personalDetails?.email
+        if (data.personalDetails?.email != "") binding.tvEmail.text = data.personalDetails?.email
+        else binding.tvEmail.text = data.personalDetails?.contact
 
         if (data.profileImage != null){
             val bitmap = BitmapFactory.decodeByteArray(data.profileImage, 0, data.profileImage!!.size)

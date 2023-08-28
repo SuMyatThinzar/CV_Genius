@@ -22,7 +22,7 @@ import com.smtz.cvgenius.domain.model.DetailButtonLabel
 //    10 to R.drawable.resume_third_five,
 //)
 
-val tabList = listOf("All", "Professional", "Modern")
+val tabList = listOf("All", "Simple", "Classic", "Modern")
 
 val detailButtonList = listOf(
     DetailButtonLabel(1, R.drawable.ic_profile_create, "Personal Detail"),
