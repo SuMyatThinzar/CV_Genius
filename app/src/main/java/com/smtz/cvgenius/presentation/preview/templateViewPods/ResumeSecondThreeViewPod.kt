@@ -2,7 +2,6 @@ package com.smtz.cvgenius.presentation.preview.templateViewPods
 
 import android.content.Context
 import android.graphics.*
-import android.os.Handler
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -18,6 +17,7 @@ import com.smtz.cvgenius.domain.model.WorkExperienceVO
 import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
 import kotlin.math.ceil
 
+// not used
 class ResumeSecondThreeViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : BaseViewPod(context, attrs) {

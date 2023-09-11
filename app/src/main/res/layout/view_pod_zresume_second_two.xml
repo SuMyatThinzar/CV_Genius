@@ -14,6 +14,7 @@
         android:orientation="horizontal"
         android:weightSum="5">
 
+        <!-- 5 childs - 1 fixed -->
         <LinearLayout
             android:id="@+id/containerFirstPageLeftSide"
             android:layout_width="0dp"
@@ -25,6 +26,7 @@
             android:paddingTop="@dimen/margin_medium_3"
             android:paddingBottom="22dp">
 
+            <!--  Profile image    1. fixed  -->
             <com.smtz.cvgenius.common.delegates.RoundedCornerImageView
                 android:id="@+id/ivSelectedImage"
                 android:layout_width="86dp"
@@ -35,6 +37,7 @@
                 android:scaleType="centerCrop"
                 app:cornerRadius="40dp" />
 
+            <!--  Contact         2. dynamic  -->
             <LinearLayout
                 android:id="@+id/containerContact"
                 android:layout_width="121dp"
@@ -48,7 +51,7 @@
                     android:layout_marginBottom="@dimen/margin_small"
                     android:fontFamily="@font/lato_regular"
                     android:letterSpacing="0.04"
-                    android:text="Contact"
+                    android:text="@string/lbl_contact"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_heading_resume_second_one"
                     android:textStyle="bold" />
@@ -58,125 +61,165 @@
                     android:layout_height="1dp"
                     android:background="@drawable/line_white" />
 
-                <TextView
-                    android:id="@+id/tvLabelPhone"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/containerPhone"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:fontFamily="@font/lato_regular"
-                    android:letterSpacing="0.04"
-                    android:text="Phone"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_title_resume_second_one"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvPhone"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tvLabelPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:fontFamily="@font/lato_regular"
+                        android:letterSpacing="0.04"
+                        android:text="Phone"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_title_resume_second_one"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_light"
+                        android:letterSpacing="0.04"
+                        android:singleLine="true"
+                        android:text="+95912345678"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_content_resume_second_one"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/containerEmail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_light"
-                    android:letterSpacing="0.04"
-                    android:singleLine="true"
-                    android:text="+95912345678"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvLabelEmail"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tvLabelEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:fontFamily="@font/lato_regular"
+                        android:letterSpacing="0.04"
+                        android:text="Email"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_title_resume_second_one"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_light"
+                        android:letterSpacing="0.04"
+                        android:singleLine="true"
+                        android:text="abcd@gmail.com"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_content_resume_second_one" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/containerAddress"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:fontFamily="@font/lato_regular"
-                    android:letterSpacing="0.04"
-                    android:text="Email"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_title_resume_second_one"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tvLabelAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:fontFamily="@font/lato_regular"
+                        android:letterSpacing="0.04"
+                        android:text="Address"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_title_resume_second_one"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_light"
+                        android:letterSpacing="0.03"
+                        android:singleLine="true"
+                        android:text="123 Anywhere St. Any City"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_content_resume_second_one" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/containerDoB"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_light"
-                    android:letterSpacing="0.04"
-                    android:singleLine="true"
-                    android:text="abcd@gmail.com"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvLabelAddress"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tvLabelDoB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:fontFamily="@font/lato_regular"
+                        android:letterSpacing="0.04"
+                        android:text="Date of Birth"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_title_resume_second_one"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvDateOfBirth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_light"
+                        android:letterSpacing="0.04"
+                        android:singleLine="true"
+                        android:text="01/11/2000"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_content_resume_second_one" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/containerNationality"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:fontFamily="@font/lato_regular"
-                    android:letterSpacing="0.04"
-                    android:text="Address"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_title_resume_second_one"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_light"
-                    android:letterSpacing="0.03"
-                    android:singleLine="true"
-                    android:text="123 Anywhere St. Any City"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+                    <TextView
+                        android:id="@+id/tvLabelNationality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:fontFamily="@font/lato_regular"
+                        android:letterSpacing="0.04"
+                        android:text="Nationality"
+                        android:textColor="@color/white"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_title_resume_second_one"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvLabelDoB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:fontFamily="@font/lato_regular"
-                    android:letterSpacing="0.04"
-                    android:text="Date of Birth"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_title_resume_second_one"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvNationality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_light"
+                        android:letterSpacing="0.04"
+                        android:text="Korean"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_content_resume_second_one" />
 
-                <TextView
-                    android:id="@+id/tvDateOfBirth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_light"
-                    android:letterSpacing="0.04"
-                    android:singleLine="true"
-                    android:text="01/11/2000"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvLabelNationality"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_small"
-                    android:fontFamily="@font/lato_regular"
-                    android:letterSpacing="0.04"
-                    android:text="Nationality"
-                    android:textColor="@color/white"
-                    android:singleLine="true"
-                    android:textSize="@dimen/text_title_resume_second_one"
-                    android:textStyle="bold" />
+            </LinearLayout><!--  Contact  -->
 
-                <TextView
-                    android:id="@+id/tvNationality"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_light"
-                    android:letterSpacing="0.04"
-                    android:text="Korean"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/text_content_resume_second_one" />
-
-            </LinearLayout>
-
-            <!--  Education  -->
+            <!--  Education        3. dynamic  -->
             <LinearLayout
                 android:id="@+id/containerEducation"
                 android:layout_width="match_parent"
@@ -190,7 +233,7 @@
                     android:layout_marginBottom="@dimen/margin_small"
                     android:fontFamily="@font/lato_regular"
                     android:letterSpacing="0.04"
-                    android:text="Education"
+                    android:text="@string/lbl_education"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_heading_resume_second_one"
                     android:textStyle="bold" />
@@ -245,7 +288,7 @@
 
             </LinearLayout><!-- Education -->
 
-            <!--   Achievements   -->
+            <!--   Achievements    4. dynamic   -->
             <LinearLayout
                 android:id="@+id/containerAchievement"
                 android:layout_width="match_parent"
@@ -259,7 +302,7 @@
                     android:layout_marginBottom="@dimen/margin_small"
                     android:fontFamily="@font/lato_regular"
                     android:letterSpacing="0.04"
-                    android:text="Achievements"
+                    android:text="@string/lbl_achievements"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_heading_resume_second_one"
                     android:textStyle="bold" />
@@ -291,10 +334,85 @@
 <!--                    android:textColor="@color/white"-->
 <!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
 
-            </LinearLayout>
+            </LinearLayout><!-- Achievements -->
+
+            <!--   Reference      5. dynamic   -->
+            <LinearLayout
+                android:id="@+id/containerReference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:fontFamily="@font/lato_regular"
+                    android:letterSpacing="0.04"
+                    android:text="@string/lbl_references"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_heading_resume_second_one"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/line_white"
+                    android:layout_marginBottom="@dimen/margin_small"/>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvReferenceName"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:text="Professor Su"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:text="Position  &#9679;  Company Name"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_small"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:text="Tel: 98383490"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:text="Mail: abcd@gmail.com"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/lato_regular"-->
+<!--                    android:letterSpacing="0.04"-->
+<!--                    android:text="abcdefghijklmnopqrstuvwxyz"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/text_content_resume_second_one" />-->
+
+            </LinearLayout><!-- Reference -->
 
         </LinearLayout><!-- First Left -->
 
+        <!-- 7 childs - 2 fixed -->
         <LinearLayout
             android:id="@+id/containerFirstPageRightSide"
             android:layout_width="0dp"
@@ -306,6 +424,7 @@
             android:paddingEnd="@dimen/margin_medium_3"
             android:paddingBottom="@dimen/margin_medium_3">
 
+            <!--  Name          1. fixed  -->
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
@@ -319,6 +438,7 @@
                 android:singleLine="true"
                 android:letterSpacing="0.02" />
 
+            <!--  Position       2. fixed  -->
             <TextView
                 android:id="@+id/tvPosition"
                 android:layout_width="wrap_content"
@@ -330,7 +450,7 @@
                 android:textSize="@dimen/text_heading_resume_second_one"
                 android:letterSpacing="0.04" />
 
-            <!--   Objective   -->
+            <!--   Objective     3. dynamic  -->
             <TextView
                 android:id="@+id/tvObjective"
                 android:layout_width="wrap_content"
@@ -343,7 +463,7 @@
                 android:letterSpacing="0.05"
                 android:visibility="gone"/>
 
-            <!--  Experience  -->
+            <!--  Experience     4. dynamic  -->
             <LinearLayout
                 android:id="@+id/containerExperience"
                 android:layout_width="match_parent"
@@ -369,7 +489,7 @@
 
             </LinearLayout><!-- Experience -->
 
-            <!--   Project   -->
+            <!--   Project       5. dynamic  -->
             <LinearLayout
                 android:id="@+id/containerProject"
                 android:layout_width="match_parent"
@@ -446,7 +566,7 @@
 
             </LinearLayout><!--   Project   -->
 
-            <!--   Skills   -->
+            <!--   Skills        6. dynamic  -->
             <LinearLayout
                 android:id="@+id/containerSkill"
                 android:layout_width="match_parent"
@@ -494,7 +614,7 @@
 
             </LinearLayout><!--   Skill   -->
 
-            <!--  Signature  -->
+            <!--  Signature      7. fixed -->
             <ImageView
                 android:id="@+id/ivSignature"
                 android:layout_width="wrap_content"

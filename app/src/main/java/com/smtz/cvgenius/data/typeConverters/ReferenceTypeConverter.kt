@@ -8,12 +8,12 @@ import com.smtz.cvgenius.domain.model.ReferenceVO
 
 class ReferenceTypeConverter {
     @TypeConverter
-    fun toString(referenceVO : ReferenceVO?) : String{
-        return Gson().toJson(referenceVO)
+    fun toString(references : List<ReferenceVO>?) : String{
+        return Gson().toJson(references)
     }
     @TypeConverter
-    fun toReferenceVO(referencesJsonString: String) : ReferenceVO? {
-        val referenceVOType = object : TypeToken<ReferenceVO?>() {}.type
+    fun toReferenceVO(referencesJsonString: String) : List<ReferenceVO>? {
+        val referenceVOType = object : TypeToken<List<ReferenceVO>?>() {}.type
         return Gson().fromJson(referencesJsonString, referenceVOType)
     }
 }

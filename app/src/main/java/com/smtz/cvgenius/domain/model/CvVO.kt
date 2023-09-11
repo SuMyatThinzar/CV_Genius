@@ -49,7 +49,7 @@ data class CvVO (
     var projectDetails: MutableList<ProjectDetailVO>,
 
     @ColumnInfo(name = "references")
-    var references: ReferenceVO?,
+    var references: MutableList<ReferenceVO>,
 
     @ColumnInfo(name = "signature")
     var signature: String?,

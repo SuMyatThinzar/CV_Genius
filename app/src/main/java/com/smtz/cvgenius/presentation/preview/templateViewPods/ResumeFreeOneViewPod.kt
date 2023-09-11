@@ -3,6 +3,7 @@ package com.smtz.cvgenius.presentation.preview.templateViewPods
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Rect
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Handler
 import android.util.AttributeSet
@@ -22,6 +23,7 @@ import com.smtz.cvgenius.domain.model.EducationDetailVO
 import com.smtz.cvgenius.domain.model.ProjectDetailVO
 import com.smtz.cvgenius.domain.model.SkillsVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
+import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
 
 @RequiresApi(Build.VERSION_CODES.N)
 class ResumeFreeOneViewPod @JvmOverloads constructor(
@@ -44,11 +46,6 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
     private var mCvVO: CvVO? = null
     private var isInitialSetupDone = false
     private var isSentToSecondPage = false
-
-//    init {
-//        displayMetrics = context.resources.displayMetrics
-//        screenWidth = displayMetrics.heightPixels
-//    }
 
     override fun onFinishInflate() {
         binding = ViewPodZresumeFreeOneBinding.bind(this)
@@ -83,16 +80,24 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
         val name = "${mCvVO?.personalDetails?.firstName} ${mCvVO?.personalDetails?.lastName}"
         binding.tvName.text = name
         binding.tvPosition.text = mCvVO?.personalDetails?.professionalTitle
-        binding.tvAddress.text = "Address: ${mCvVO?.personalDetails?.address}"
-        binding.tvPhone.text = "Phone: ${mCvVO?.personalDetails?.contact}"
-        binding.tvEmail.text = "Email: ${mCvVO?.personalDetails?.email}"
 
-        // 2.
-        if (mCvVO?.objective == null) {
-            binding.containerObjective.visibility = View.GONE
-            binding.viewBelowObjective.visibility = View.GONE
-        } else {
-            binding.tvObjective.text = mCvVO?.objective
+        binding.apply {
+            if (mCvVO?.personalDetails?.address?.isNotEmpty() == true) setUpContentVisibilityResumeSecondOne(tvAddress, "Address: ${mCvVO?.personalDetails?.address}", null)  else tvAddress.visibility = View.GONE
+//            if (mCvVO?.personalDetails?.contact?.isNotEmpty() == true) setUpContentVisibilityResumeSecondOne(tvPhone, "Phone: ${mCvVO?.personalDetails?.contact}",  null)  else tvPhone.visibility = View.GONE
+//            if (mCvVO?.personalDetails?.email?.isNotEmpty() == true) setUpContentVisibilityResumeSecondOne(tvEmail, "Email: ${mCvVO?.personalDetails?.email}",  null)  else tvEmail.visibility = View.GONE
+//            if (mCvVO?.personalDetails?.dateOfBirth?.isNotEmpty() == true) setUpContentVisibilityResumeSecondOne(tvDateOfBirth, "Date of Birth: ${mCvVO?.personalDetails?.dateOfBirth}",  null)  else tvDateOfBirth.visibility = View.GONE
+//            if (mCvVO?.personalDetails?.nationality?.isNotEmpty() == true) setUpContentVisibilityResumeSecondOne(tvNationality, "Nationality: ${mCvVO?.personalDetails?.nationality}",  null)  else tvNationality.visibility = View.GONE
+//            if (mCvVO?.personalDetails?.gender?.isNotEmpty() == true) setUpContentVisibilityResumeSecondOne(tvWebsite, "Website: ${mCvVO?.personalDetails?.gender}",  null)  else tvWebsite.visibility = View.GONE
+//
+            setUpPersonalDetails()
+
+            // 2.
+            if (mCvVO?.objective?.isNotEmpty() == true) {
+                setUpContentVisibilityResumeSecondOne(tvObjective, mCvVO?.objective, containerObjective)
+            } else {
+                containerObjective.visibility = View.GONE
+                viewBelowObjective.visibility = View.GONE   // invisible underline
+            }
         }
 
         // 3.
@@ -153,6 +158,36 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
             binding.viewSecondBottomost.visibility = View.GONE
         }
 
+    }
+
+    private fun setUpPersonalDetails() {
+
+        binding.apply {
+            if (mCvVO?.personalDetails?.contact?.isNotEmpty() == true) {
+                val phone = setLayouts("Phone: ${mCvVO?.personalDetails?.contact}   ", 7.13F, R.font.nunito_medium, "", 0, R.color.black, null )
+                gridLayoutPersonalDetail.addView(phone)
+            }
+
+            if (mCvVO?.personalDetails?.email?.isNotEmpty() == true) {
+                val email = setLayouts("Email: ${mCvVO?.personalDetails?.email}   ", 7.13F, R.font.nunito_medium, "", 0, R.color.black, null )
+                gridLayoutPersonalDetail.addView(email)
+            }
+
+            if (mCvVO?.personalDetails?.dateOfBirth?.isNotEmpty() == true) {
+                val dateOfBirth = setLayouts("DateOfBirth: ${mCvVO?.personalDetails?.dateOfBirth}   ", 7.13F, R.font.nunito_medium, "", 0, R.color.black, null )
+                gridLayoutPersonalDetail.addView(dateOfBirth)
+            }
+
+            if (mCvVO?.personalDetails?.nationality?.isNotEmpty() == true) {
+                val nationality = setLayouts("Nationality: ${mCvVO?.personalDetails?.nationality}   ", 7.13F, R.font.nunito_medium, "", 0, R.color.black, null )
+                gridLayoutPersonalDetail.addView(nationality)
+            }
+
+            if (mCvVO?.personalDetails?.gender?.isNotEmpty() == true) {
+                val website = setLayouts("Website: ${mCvVO?.personalDetails?.gender}   ", 7.13F, R.font.nunito_medium, "", 0, R.color.black, null )
+                gridLayoutPersonalDetail.addView(website)
+            }
+        }
     }
 
     private fun setUpWorkExp() {
@@ -321,5 +356,50 @@ class ResumeFreeOneViewPod @JvmOverloads constructor(
 //        layoutParams.height = desiredHeight
 //        binding.root.layoutParams = layoutParams
 //    }
+
+    // reusable func
+    private fun setLayouts(
+        text: String,
+        textSize: Float,
+        fontFamily: Int,
+        marginType: String,
+        marginSize: Int,
+        textColor: Int,
+        bold: String?
+    ): TextView {
+
+        val textView = TextView(context)
+        textView.text = text
+
+        textView.textSize = textSize   // textSize
+        textView.setTextColor(resources.getColorStateList(textColor))   // textColor
+        textView.letterSpacing = 0.06f  // letterSpacing
+        var marginTopBottom = 0
+        if ( marginSize != 0) marginTopBottom = resources.getDimensionPixelSize(marginSize)
+
+        // fontFamily
+        val typeface = ResourcesCompat.getFont(context, fontFamily)
+
+        // fontStyle
+        if (bold != null) {
+            val textStyle = Typeface.BOLD
+            textView.setTypeface(typeface, textStyle)
+        } else textView.typeface = typeface
+
+        val layoutParams = LayoutParams(
+            LayoutParams.WRAP_CONTENT,
+            LayoutParams.WRAP_CONTENT
+        )
+        when (marginType) {
+            "top" -> layoutParams.setMargins(0, marginTopBottom, 0, 0)
+            "bottom" -> layoutParams.setMargins(0, 0, 0, marginTopBottom)
+            "topbottom" -> layoutParams.setMargins(0, marginTopBottom, 0, marginTopBottom)
+            "end" -> layoutParams.setMargins(0, 0, marginTopBottom, 0)
+        }
+
+        textView.layoutParams = layoutParams
+
+        return textView
+    }
 
 }

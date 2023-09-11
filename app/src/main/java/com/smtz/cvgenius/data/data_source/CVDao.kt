@@ -22,5 +22,4 @@ interface CVDao {
     @Query("DELETE FROM Cv WHERE cvId = :cvId")
     fun deleteCV(cvId: Long)
 
-
 }

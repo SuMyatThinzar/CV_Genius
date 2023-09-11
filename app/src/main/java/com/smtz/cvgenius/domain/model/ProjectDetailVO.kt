@@ -30,5 +30,4 @@ data class ProjectDetailVO (
     @ColumnInfo(name = "id")
     val id: Long,
 
-    var isExpanded: Boolean = false,
         )

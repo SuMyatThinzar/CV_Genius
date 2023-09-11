@@ -2,7 +2,6 @@ package com.smtz.cvgenius.presentation.preview.templateViewPods
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.graphics.Rect
 import android.graphics.Typeface
 import android.os.Handler
 import android.util.AttributeSet
@@ -19,6 +18,7 @@ import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
 import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
 
+// not used
 class ResumeSecondOneViewPod(context: Context, attrs: AttributeSet? = null) :
     BaseViewPod(context, attrs) {
 

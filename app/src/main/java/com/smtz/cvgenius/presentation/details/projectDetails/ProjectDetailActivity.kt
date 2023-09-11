@@ -29,8 +29,6 @@ class ProjectDetailActivity : BaseActivity<ActivityProjectDetailBinding>(),
     private var mAddDetailAdapter = AddProjectDetailsAdapter(this)
     private lateinit var mProjectDetailViewPod: ProjectDetailViewPod
 
-    private var mCvModel: CvModel = CvModelImpl
-
     private var mCvVO: CvVO? = null
     private var mProjectDetailList: MutableList<ProjectDetailVO> = mutableListOf()
 
@@ -72,6 +70,14 @@ class ProjectDetailActivity : BaseActivity<ActivityProjectDetailBinding>(),
         mProjectDetailViewPod.setUpProjectDetailViewPod(delegate = this, changeBtnAdd = true)
     }
 
+    private fun setUpAdapters() {
+        binding.rvProjectDetails.apply {
+            adapter = mAddDetailAdapter
+            layoutManager =
+                LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
     private fun setUpListeners() {
 
         binding.btnBack.setOnClickListener {
@@ -94,14 +100,6 @@ class ProjectDetailActivity : BaseActivity<ActivityProjectDetailBinding>(),
 //            }
 //        })
 
-    }
-
-    private fun setUpAdapters() {
-        binding.rvProjectDetails.apply {
-            adapter = mAddDetailAdapter
-            layoutManager =
-                LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-        }
     }
 
 

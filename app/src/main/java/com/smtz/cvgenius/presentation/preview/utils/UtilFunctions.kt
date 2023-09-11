@@ -15,8 +15,8 @@ import com.itextpdf.text.PageSize
 import java.io.File
 import kotlin.math.ceil
 
-fun setUpContentVisibilityResumeSecondOne(textView: TextView, content: String?, label: TextView?) {
-    if (content != null) {
+fun setUpContentVisibilityResumeSecondOne(textView: TextView, content: String?, label: View?) {
+    if (content?.isNotEmpty() == true) {       // null နဲ့စစ်လို့မရဘူး never null တဲ့ empty string ပဲဖြစ်နိုင်တယ်
         textView.text = content
         label?.visibility = View.VISIBLE
         textView.visibility = View.VISIBLE

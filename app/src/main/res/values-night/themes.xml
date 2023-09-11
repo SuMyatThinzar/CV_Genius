@@ -18,5 +18,7 @@
     <style name="Theme.CVGenius.TransparentStatusBar" parent="Theme.CVGenius">
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+        <!-- Disable automatic color adaptation -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 </resources>

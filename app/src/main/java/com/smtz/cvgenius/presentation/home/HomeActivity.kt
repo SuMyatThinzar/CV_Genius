@@ -28,7 +28,6 @@ import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
 import com.smtz.cvgenius.presentation.preview.PreviewActivity
-import com.smtz.cvgenius.presentation.profile.ProfileActivity
 import com.smtz.cvgenius.presentation.template.SampleTemplateActivity
 import com.smtz.cvgenius.utils.BACK_PRESSED
 import com.smtz.cvgenius.utils.CREATE_CV_ACTIVITY
@@ -125,6 +124,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
         // check if ad is loaded or not loaded.
         if (mInterstitialAd != null) {
             //ad is loaded.
+            showNextActivity(NEXT_ACTIVITY)     // *****
             mInterstitialAd!!.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdClicked() {
                     super.onAdClicked()
@@ -137,7 +137,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
                     // called when ad is dismissed/closed.
                     Log.d(INTERSTITIAL_TAG, "AdDismissedFullScreenContent: ")
                     mInterstitialAd = null
-                    showNextActivity(NEXT_ACTIVITY)    // *****
+//                    showNextActivity(NEXT_ACTIVITY)    // *****
                     if (NEXT_ACTIVITY != BACK_PRESSED)  loadInterstitialAd()
                 }
 
@@ -146,7 +146,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
                     // called when ad is failed to show.
                     Log.d(INTERSTITIAL_TAG, "AdFailedToShowFullScreenContent: ${adError.message}")
                     mInterstitialAd = null
-                    showNextActivity(NEXT_ACTIVITY)     // *****
+//                    showNextActivity(NEXT_ACTIVITY)     // *****
                 }
 
                 override fun onAdImpression() {
@@ -246,7 +246,6 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
             binding.drawerLayout.openDrawer(GravityCompat.START)
         }
         binding.fabCreateNewCV.setOnClickListener {
-//            startActivity(Intent(this, SampleTemplateActivity::class.java))
             startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
         }
 //        binding.btnProfile.setOnClickListener {

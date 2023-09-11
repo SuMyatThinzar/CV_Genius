@@ -12,9 +12,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -39,10 +37,10 @@ import com.smtz.cvgenius.presentation.details.projectDetails.ProjectDetailActivi
 import com.smtz.cvgenius.presentation.details.signature.SignatureActivity
 import com.smtz.cvgenius.presentation.details.skills.SkillActivity
 import com.smtz.cvgenius.presentation.details.workExperiences.WorkExperienceActivity
+import com.smtz.cvgenius.presentation.details.reference.ReferenceActivity
 import com.smtz.cvgenius.presentation.home.HomeActivity
 import com.smtz.cvgenius.presentation.preview.PreviewActivity
 import com.smtz.cvgenius.utils.BACK_PRESSED
-import com.smtz.cvgenius.utils.CREATE_CV_ACTIVITY
 import com.smtz.cvgenius.utils.INTERSTITIAL_TAG
 import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
 
@@ -128,7 +126,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
                 achievements = mutableListOf(),
                 objective = null,
                 signature = null,
-                references = null,
+                references = mutableListOf(),
                 projectDetails = mutableListOf()
             )
             Log.d("assasdfasdf", "new null cv created")
@@ -253,7 +251,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             achievements = mutableListOf(),
             objective = null,
             signature = null,
-            references = null,
+            references = mutableListOf(),
             projectDetails = mutableListOf()
         )
     }
@@ -265,10 +263,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
         val adRequest = AdRequest.Builder().build()
 
-        InterstitialAd.load(
-            applicationContext,
-            BuildConfig.INTERSTITIAL_AD_ID,
-            adRequest,
+        InterstitialAd.load(applicationContext, BuildConfig.INTERSTITIAL_AD_ID, adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d("adsdfsdfsd", "AdFailedToLoad: ${adError.message}")
@@ -287,6 +282,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
     private fun showInterstitialAd(NEXT_ACTIVITY: String) {
         // check if ad is loaded or not loaded.
         if (mInterstitialAd != null) {
+            showNextActivity(NEXT_ACTIVITY)    // *****
             //ad is loaded.
             mInterstitialAd!!.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdClicked() {
@@ -300,8 +296,8 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
                     // called when ad is dismissed/closed.
                     Log.d("adsdfsdfsd", "AdDismissedFullScreenContent: ")
                     mInterstitialAd = null
-                    showNextActivity(NEXT_ACTIVITY)    // *****
                     if (NEXT_ACTIVITY != BACK_PRESSED) loadInterstitialAd()
+//                    showNextActivity(NEXT_ACTIVITY)    // *****
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError) {
@@ -309,8 +305,8 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
                     // called when ad is failed to show.
                     Log.d("adsdfsdfsd", "AdFailedToShowFullScreenContent: ${adError.message}")
                     mInterstitialAd = null
-                    showNextActivity(NEXT_ACTIVITY)     // *****
                     if (NEXT_ACTIVITY != BACK_PRESSED)  loadInterstitialAd()
+//                    showNextActivity(NEXT_ACTIVITY)     // *****
                 }
 
                 override fun onAdImpression() {
@@ -360,7 +356,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             6 -> startActivity(ObjectiveActivity.newIntent(this))
             7 -> startActivity(ProjectDetailActivity.newIntent(this))
             8 -> startActivity(SignatureActivity.newIntent(this))
-            9 -> Toast.makeText(applicationContext, id.toString(), Toast.LENGTH_SHORT).show()
+            9 -> startActivity(Intent(applicationContext, ReferenceActivity::class.java))
         }
     }
 

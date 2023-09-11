@@ -32,7 +32,6 @@ import com.smtz.cvgenius.utils.projectDetail
 import com.smtz.cvgenius.utils.signature
 import com.smtz.cvgenius.utils.skill
 import com.smtz.cvgenius.utils.workExperience
-import kotlin.math.sign
 
 class ResumeSecondTwoViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -58,8 +57,8 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
     private lateinit var containerSecondPageRightSide: LinearLayout
     private lateinit var containerSecondPageLeftSide: LinearLayout
 
-    private lateinit var currentPageLayoutRight: LinearLayout         // containerFirstPageRightSide  containerSecondPageRightSide
-    private lateinit var currentPageLayoutLeft: LinearLayout         // containerFirstPageLeftSide  containerSecondPageLeftSide
+    private lateinit var currentPageLayoutRight: LinearLayout     // FirstPageRightSide  SecondPageRightSide
+    private lateinit var currentPageLayoutLeft: LinearLayout      // FirstPageLeftSide   SecondPageLeftSide
 
     private var mCvVO: CvVO? = null
     private var isInitialSetupDone = false
@@ -76,14 +75,16 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
     // 2 left
     private var rootViewAbsoluteHeightLeft = 0
 
-    private var pageHeightRight = 0F            // 5ခု
+    // Left 5 - 1 fixed     1.Image, 2.Contact, 3.Education, 4.Achievement, 5.Reference
+    private var pageHeightLeft = 0F          // 2ခု
+    private var pageLeft1to0 = 0F     // Edu -> Achi
+
+    // Right 7 - 2 fixed     1.Name, 2.Position, 3.Objective, 4.Experience, 5.Project, 6.Skill, 7.Sign
+    private var pageHeightRight = 0F           // 5ခု
     private var pageRight4to3 = 0F    // Obj -> Sign Skill Proj Exp
     private var pageRight3to2 = 0F    // Exp -> Sign Skill Proj
     private var pageRight2to1 = 0F    // Pro -> Sign Skill
 //    private var pageRight1to0 = 0F    // Skill -> Sign   မလိုတော့ဘူး no heading for signature
-
-    private var pageHeightLeft = 0F        // 2ခု
-    private var pageLeft1to0 = 0F     // Edu -> Achi
 
     override fun onFinishInflate() {
         binding = ViewPodZresumeSecondTwoBinding.bind(this)
@@ -149,10 +150,11 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
         binding.tvName.text = name
         binding.tvPosition.text = mCvVO?.personalDetails?.professionalTitle
         binding.apply {
-            setUpContentVisibilityResumeSecondOne(tvAddress, mCvVO?.personalDetails?.address, tvLabelAddress)
-            setUpContentVisibilityResumeSecondOne(tvPhone, mCvVO?.personalDetails?.contact, tvLabelPhone)
-            setUpContentVisibilityResumeSecondOne(tvEmail, mCvVO?.personalDetails?.email, tvLabelEmail)
-            setUpContentVisibilityResumeSecondOne(tvDateOfBirth, mCvVO?.personalDetails?.dateOfBirth, tvLabelDoB)
+            setUpContentVisibilityResumeSecondOne(tvAddress, mCvVO?.personalDetails?.address, containerAddress)
+            setUpContentVisibilityResumeSecondOne(tvPhone, mCvVO?.personalDetails?.contact, containerPhone)
+            setUpContentVisibilityResumeSecondOne(tvEmail, mCvVO?.personalDetails?.email, containerEmail)
+            setUpContentVisibilityResumeSecondOne(tvDateOfBirth, mCvVO?.personalDetails?.dateOfBirth, containerDoB)
+            setUpContentVisibilityResumeSecondOne(tvNationality, mCvVO?.personalDetails?.nationality, containerNationality)
             setUpContentVisibilityResumeSecondOne(tvObjective, mCvVO?.objective, null)
         }
 
@@ -163,9 +165,9 @@ class ResumeSecondTwoViewPod @JvmOverloads constructor(
 
         } else binding.ivSignature.visibility = View.GONE
 
-        if (mCvVO?.workExperiences?.isNotEmpty() == true) {
+        if (mCvVO?.workExperiences?.isNotEmpty() == true) {       // null နဲ့စစ်လို့မရဘူး never null တဲ့ empty string ပဲဖြစ်နိုင်တယ်
             mWorkExperienceList = mCvVO?.workExperiences!!
-            setUpWorkExp()       // content တွေကိုအရင်ထည့်လိုက်တယ် ဆန့်ဆန့်မဆန့်ဆန့်
+            setUpWorkExp()        // content တွေကိုအရင်ထည့်လိုက်တယ် ဆန့်ဆန့်မဆန့်ဆန့်
         } else {
             containerWorkExp.visibility = View.GONE
         }

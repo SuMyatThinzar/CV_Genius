@@ -52,28 +52,69 @@
                     android:id="@+id/tvAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_small"
                     android:fontFamily="@font/nunito_medium"
                     android:text="Address: 123 Anywhere St. Any city"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_content_resume_free_one" />
 
-                <TextView
-                    android:id="@+id/tvPhone"
-                    android:layout_width="wrap_content"
+                <GridLayout
+                    android:id="@+id/gridLayoutPersonalDetail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_medium"
-                    android:text="Phone: +123 456 789"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_content_resume_free_one" />
+                    android:columnCount="2">
 
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_medium"
-                    android:text="Email: abcd@gmail.com"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_content_resume_free_one" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvPhone"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/margin_small"-->
+<!--                        android:fontFamily="@font/nunito_medium"-->
+<!--                        android:text="Phone: +123 456 789"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/text_content_resume_free_one" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvEmail"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/margin_small"-->
+<!--                        android:fontFamily="@font/nunito_medium"-->
+<!--                        android:text="Email: abcd@gmail.com"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/text_content_resume_free_one" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvDateOfBirth"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/margin_small"-->
+<!--                        android:fontFamily="@font/nunito_medium"-->
+<!--                        android:text="Date of Birth: 17.11.2000"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/text_content_resume_free_one" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvNationality"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/margin_small"-->
+<!--                        android:fontFamily="@font/nunito_medium"-->
+<!--                        android:text="Nationality: Myanmar"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/text_content_resume_free_one" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvWebsite"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="@dimen/margin_small"-->
+<!--                        android:fontFamily="@font/nunito_medium"-->
+<!--                        android:text="Website: abcd@gmail.com"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/text_content_resume_free_one" />-->
+
+                </GridLayout>
 
             </LinearLayout>
 
@@ -117,7 +158,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_medium"
-                android:text="lausfadsfjlajsfhjsdfaslifjasfdhaasfdasdfasfdasdfasfdasdfasfdasfdasdadsfasdihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslifjasfdhaihsausdfhausfadsfjsdfahldshfasjidfhlajsfhjsdfaslifjasfdhaihsausdfhausfhlajsfhjsdfaslifjasfdhaihsausdfhausf"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_content_resume_free_one" />
 
@@ -429,6 +469,13 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <!--  Signature  -->
+                <ImageView
+                    android:id="@+id/ivSignature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@drawable/profile_image"/>
 
             </LinearLayout>
 

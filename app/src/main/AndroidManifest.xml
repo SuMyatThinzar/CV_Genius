@@ -24,58 +24,51 @@
             android:exported="false" />
         <activity
             android:name=".presentation.details.signature.SignatureActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".presentation.details.objectives.ObjectiveActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".presentation.details.achievements.AchievementActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".presentation.details.skills.SkillActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".presentation.details.workExperiences.WorkExperienceActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".presentation.details.projectDetails.ProjectDetailActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".presentation.details.educationDetails.EducationDetailActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".presentation.details.personalDetails.PersonalDetailActivity"
-            android:exported="true"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".presentation.details.reference.ReferenceActivity"
+            android:exported="false"/>
 
         <activity
             android:name=".presentation.createcv.CreateCvActivity"
             android:exported="true"/>
 
-        <activity
-            android:name=".presentation.profile.ProfileActivity"
-            android:exported="true">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
 
         <activity
             android:name=".presentation.template.SampleTemplateActivity"
@@ -92,7 +85,8 @@
         </activity>
         <activity
             android:name=".presentation.splash.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.CVGeniusSplash">
 
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
