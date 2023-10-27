@@ -40,7 +40,6 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
     private var personalId: Long = 0
 
     private var mCvModel: CvModel = CvModelImpl
-    private var gender: String? = null
 
     override val binding: ActivityPersonalDetailBinding by lazy {
         ActivityPersonalDetailBinding.inflate(layoutInflater)
@@ -93,6 +92,7 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
             val firstName = binding.etFirstName.text.toString().trim()
             val lastName = binding.etLastName.text.toString().trim()
             val contact = binding.etContact.text.toString().trim()
+            val website = binding.etWebsite.text.toString().trim()
             val nationality = binding.etNationality.text.toString().trim()
             val dateOfBirth = binding.etDateOfBirth.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
@@ -108,7 +108,7 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
                     contact = contact,
                     nationality = nationality,
                     dateOfBirth = dateOfBirth,
-                    gender = gender,
+                    gender = website,
                     email = email,
                     address = address,
                     professionalTitle = professionalTitle
@@ -132,20 +132,23 @@ class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {
         setUpError(binding.etFirstName, binding.errorName)
         setUpError(binding.etContact, binding.errorContact)
 
-        binding.spinnerGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
-                (view as TextView).setTextColor(resources.getColor(R.color.colorSecondaryText)) //Change selected text color
-                gender = view.text as String?
-            }
+        // spinner
+//        binding.spinnerGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View,
+//                position: Int,
+//                id: Long
+//            ) {
+//                (view as TextView).setTextColor(resources.getColor(R.color.colorSecondaryText)) //Change selected text color
+//                gender = view.text as String?
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {}
+//        }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
 
+        // scroll to hide show
 //        binding.nestedScrollView.viewTreeObserver
 //            .addOnScrollChangedListener(object : OnScrollChangedListener {
 //                var y = 0f

@@ -7,14 +7,17 @@ import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.defaultPrefs
 import com.smtz.cvgenius.common.get
+import com.smtz.cvgenius.common.set
 import com.smtz.cvgenius.databinding.ActivitySplashBinding
 import com.smtz.cvgenius.presentation.home.HomeActivity
 
@@ -38,9 +41,11 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             val preference = defaultPrefs(applicationContext)
-            val user = preference.get("new_user", "")
+            val user = preference.get("new_user", "no")
 
-            if (user.isNotEmpty()) {
+            Log.d("asfasfdaf", "$user ")
+            
+            if (user.equals("yes", ignoreCase = false)) {
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish() // remove from activity stack
             } else
@@ -64,6 +69,10 @@ class SplashActivity : AppCompatActivity() {
         binding.btnGetStarted.setOnClickListener {
             val intent = Intent(applicationContext, HomeActivity::class.java)
 //            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+
+            val preference = defaultPrefs(applicationContext)
+            preference.set("new_user", "yes")
+
             startActivity(intent)
             finish()
         }

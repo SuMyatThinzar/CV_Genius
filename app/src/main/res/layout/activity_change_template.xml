@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ChangeTemplateActivity"
+    android:background="@color/colorPrimary"
     android:layout_centerHorizontal="true">
 
     <androidx.core.widget.NestedScrollView
@@ -17,7 +18,8 @@
             <FrameLayout
                 android:id="@+id/flFreeOne"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_xxlarge">
 
                 <include
                     android:id="@+id/vpFreeOne"
@@ -31,6 +33,7 @@
                 android:id="@+id/flSecondOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_xxlarge"
                 android:visibility="gone">
 
                 <include
@@ -45,6 +48,7 @@
                 android:id="@+id/flSecondTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_xxlarge"
                 android:visibility="gone">
 
                 <include
@@ -59,6 +63,7 @@
                 android:id="@+id/flSecondThree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_xxlarge"
                 android:visibility="gone">
 
                 <include
@@ -72,5 +77,15 @@
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bannerAdView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="@dimen/margin_xlarge_n"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_banner_id" />
 
 </RelativeLayout>

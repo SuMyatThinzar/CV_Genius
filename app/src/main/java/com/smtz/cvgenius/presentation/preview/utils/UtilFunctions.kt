@@ -40,6 +40,40 @@ fun getCurrentPageHeight(containerToCheckHeight: LinearLayout, childCountToReduc
 }
 
 
+// အပေါ်ရောအောက်ရောဘယ်ရောညာရော ထည့်ချင်မှခေါ်
+fun setUpMargins(view: TextView, top: Int?, bottom: Int?, start: Int?, end: Int?): TextView {
+//    var marginTop = 0
+//    top?.let {
+//        val array = it.split("top")
+//        marginTop = array[1].toInt()
+//    }
+//
+//    var marginBottom = 0
+//    bottom?.let {
+//        val array = it.split("bottom")
+//        marginBottom = array[1].toInt()
+//    }
+//
+//    var marginStart = 0
+//    start?.let {
+//        val array = it.split("start")
+//        marginStart = array[1].toInt()
+//    }
+//
+//    var marginEnd = 0
+//    end?.let {
+//        val array = it.split("end")
+//        marginEnd = array[1].toInt()
+//    }
+
+    view.setPadding(start?:0, top?:0, end?:0, bottom?:0)
+//    layoutParams.setMargins(marginStart, marginTop, marginEnd, marginBottom)
+//    view.layoutParams = layoutParams
+
+    return view
+}
+
+
 fun convertToPdfDocument(context: Context, viewPodLayout: View): PdfDocument {
     val document = PdfDocument()
 

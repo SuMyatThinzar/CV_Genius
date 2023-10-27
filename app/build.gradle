@@ -24,6 +24,7 @@ android {
 
         buildConfigField("String", "INTERSTITIAL_AD_ID", "\"${properties.getProperty("INTERSTITIAL_AD_ID")}\"")
         buildConfigField("String", "APP_OPEN_AD_ID", "\"${properties.getProperty("APP_OPEN_AD_ID")}\"")
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
@@ -43,7 +44,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
 }
 
 dependencies {

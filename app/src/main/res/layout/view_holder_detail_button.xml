@@ -5,6 +5,7 @@
     app:neumorph_shapeType="flat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="-2dp"
     app:neumorph_insetTop="8.6dp"
     app:neumorph_insetStart="8.6dp"
     app:neumorph_insetEnd="8.6dp"

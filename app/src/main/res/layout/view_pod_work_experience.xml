@@ -44,8 +44,9 @@
         android:id="@+id/containerExpanded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium_2"
+        android:paddingBottom="@dimen/margin_medium_2"
         android:orientation="vertical"
+        android:background="@color/white"
         android:visibility="gone">
 
         <TextView

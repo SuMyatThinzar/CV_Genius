@@ -30,6 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:backgroundTint="@color/colorAccent"
             android:text="Cancel"
             android:textColor="@color/colorToolbar"
             android:textSize="@dimen/text_regular"/>
@@ -39,6 +42,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Abandon"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:backgroundTint="@color/colorAccent"
             android:textColor="@color/colorToolbar"
             android:textSize="@dimen/text_regular"/>
 

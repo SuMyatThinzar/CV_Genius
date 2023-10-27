@@ -2,6 +2,7 @@ package com.smtz.cvgenius.presentation.template
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -16,9 +17,11 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.common.delegates.SampleTemplateDelegate
 import com.smtz.cvgenius.common.dummy.templateList
+import com.smtz.cvgenius.common.setUpLayoutParams
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivitySampleTemplateBinding
 import com.smtz.cvgenius.domain.model.TemplateVO
@@ -68,6 +71,7 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
         val adRequest = AdRequest.Builder().build()
         mBannerAdView.loadAd(adRequest)
 
+        setUpMarginsAndPaddingAccordingToAndroidVersions()
         setUpToolBar()
         setUpTemplates()
         setUpTabLayout()
@@ -141,9 +145,16 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
 
     private fun setUpTemplates() {
         templateList.forEachIndexed { index, template ->
-            if (index <=1 ) freeTemplateList.add(template)
-            if (index in 2..6) secondTemplateList.add(template)
-            if (index > 6) thirdTemplateList.add(template)
+//            if (index <=1 ) freeTemplateList.add(template)
+//            if (index in 2..6) secondTemplateList.add(template)
+//            if (index > 6) thirdTemplateList.add(template)
+
+            if (index <=2 ) freeTemplateList.add(template)
+            if (index in 3..4) secondTemplateList.add(template)
+            if (index > 4) {
+                template.available = false
+                thirdTemplateList.add(template)
+            }
         }
     }
 
@@ -166,6 +177,17 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
                     finish()
                 }
             }
+        }
+    }
+
+    private fun setUpMarginsAndPaddingAccordingToAndroidVersions() {
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            val marginMediumN = resources.getDimensionPixelSize(R.dimen.margin_medium_n)
+            val marginMedium2 = resources.getDimensionPixelSize(R.dimen.margin_medium_2)
+
+            binding.llTabLayout.layoutParams = setUpLayoutParams(binding.llTabLayout, 0, top = marginMediumN, 0, 0)
+            binding.rvCreatedCV.setPadding(marginMedium2,0,0, 300)
         }
     }
 }

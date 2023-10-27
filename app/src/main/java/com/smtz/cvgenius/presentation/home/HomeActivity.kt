@@ -1,16 +1,13 @@
 package com.smtz.cvgenius.presentation.home
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,10 +15,13 @@ import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.smtz.cvgenius.R
 import com.smtz.cvgenius.BuildConfig
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.common.checkInternetConnection
+import com.smtz.cvgenius.common.setUpLayoutParams
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivityHomeBinding
 import com.smtz.cvgenius.domain.model.CvVO
@@ -70,6 +70,7 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
             loadInterstitialAd()
         }
 
+        setUpMarginsAndPaddingAccordingToAndroidVersions()
         setUpAdListener()
         setUpToolBar()
         setUpListener()
@@ -256,6 +257,9 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
         binding.btnShare.setOnClickListener {
             shareApp()
         }
+        binding.btnTemplates.setOnClickListener {
+            startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
+        }
     }
 
     private fun shareApp() {
@@ -337,4 +341,19 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 //        shareDocument(this, )
 //        Snackbar.make(window.decorView, "Successfully Shared", Snackbar.LENGTH_SHORT).show()
 //    }
+
+    private fun setUpMarginsAndPaddingAccordingToAndroidVersions() {
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            val marginMediumN = resources.getDimensionPixelSize(R.dimen.margin_medium_n)
+            val marginMedium2 = resources.getDimensionPixelSize(R.dimen.margin_medium_2)
+            val marginCardMedium3 = resources.getDimensionPixelSize(R.dimen.margin_card_medium_3)
+            val marginXLarge = resources.getDimensionPixelSize(R.dimen.margin_xxlarge)
+
+            binding.llRecyclerView.layoutParams = setUpLayoutParams(binding.llRecyclerView, left = marginMediumN, top = marginMedium2, right = marginMediumN, bottom = marginCardMedium3)
+            binding.fabImage.layoutParams = setUpLayoutParams(binding.fabImage, left = 0, top = marginMedium2, right = 0, bottom = 0)
+            binding.rvCreatedCV.setPadding(0,0,0, marginXLarge)
+        }
+    }
+
 }

@@ -16,6 +16,7 @@
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_toolbar"
+            android:background="@color/colorAccent"
             app:collapsedTitleTextColor="@color/colorToolbar"
             app:contentScrim="@color/colorAccent"
             app:expandedTitleTextColor="@android:color/transparent"
@@ -55,15 +56,17 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView"
         style="@style/Widget.Neumorph.CardView"
         app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
         app:neumorph_backgroundColor="@color/colorPrimary"
         app:neumorph_shapeType="pressed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_xxlarge_n"
         android:layout_marginStart="-10.5dp"
         android:layout_marginEnd="-10.5dp"
+        android:layout_marginTop="@dimen/margin_xxlarge_n"
+        android:paddingBottom="@dimen/margin_xxxlarge"
         android:padding="@dimen/margin_large"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -272,6 +275,17 @@
     </androidx.core.widget.NestedScrollView>
 
     </soup.neumorphism.NeumorphCardView>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bannerAdView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="@dimen/margin_xlarge_n"
+        android:elevation="1dp"
+        android:layout_gravity="bottom"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/admob_banner_id" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

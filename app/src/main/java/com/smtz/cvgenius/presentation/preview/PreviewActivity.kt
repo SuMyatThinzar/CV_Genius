@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
@@ -36,6 +39,7 @@ class PreviewActivity : AppCompatActivity() {
 
     private val REQUEST_CODE_PERMISSION_STORAGE = 100
     private lateinit var binding: ActivityPreviewBinding
+    private lateinit var mBannerAdView: AdView
 
     var cacheFile: File? = null
 
@@ -56,7 +60,7 @@ class PreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPreviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setViewsClickable(false)
 
 //        val documentsDirectory = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)  /storage/emulated/0/Android/data/com.smtz.cvgenius/files/Documents
         val documentsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) //storage/emulated/0/Documents
@@ -65,9 +69,25 @@ class PreviewActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION_STORAGE)
 
         mCvVO = CvSingleton.instance.cvVO     // get from singleton
+
+        // initializing AdMob
+        MobileAds.initialize(this) {}
+
+        // banner Ad
+        mBannerAdView = binding.bannerAdView
+        val adRequest = AdRequest.Builder().build()
+        mBannerAdView.loadAd(adRequest)
+
         setUpTemplate()
         setUpListeners()
 
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            setViewsClickable(true)    // View တွေ setUp လုပ်လို့မပြီးသေးရင် delay ဖြစ်နေမှာစိုးလို့
+        }
     }
 
     private fun setUpTemplate() {
@@ -274,6 +294,7 @@ class PreviewActivity : AppCompatActivity() {
         binding.btnPrint.isClickable = clickable
         binding.btnShare.isClickable = clickable
         binding.btnChangeTemplate.isClickable = clickable
+        binding.flPreview.isClickable = clickable
 
         if (!clickable) {
             binding.progressBar.visibility = View.VISIBLE

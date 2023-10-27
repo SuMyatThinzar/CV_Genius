@@ -2,19 +2,22 @@
 <resources>
 
     <!--  Generic Dimensions   -->
-    <dimen name ="margin_small">4dp</dimen >
-    <dimen name ="margin_card_medium">6dp</dimen>
-    <dimen name ="margin_medium">8dp</dimen>
-    <dimen name="ten_dp">10dp</dimen>
-    <dimen name ="margin_card_medium_2">12dp</dimen>
-    <dimen name ="margin_medium_2">16dp</dimen>
+    <dimen name = "margin_ultra_small">2dp</dimen>
+    <dimen name = "margin_small">4dp</dimen>
+    <dimen name = "margin_card_medium">6dp</dimen>
+    <dimen name = "margin_medium">8dp</dimen>
+    <dimen name = "ten_dp">10dp</dimen>
+    <dimen name = "margin_card_medium_2">12dp</dimen>
+    <dimen name = "margin_medium_2">16dp</dimen>
+    <dimen name = "margin_card_medium_3">18dp</dimen>
     <dimen name = "margin_medium_3">20dp</dimen>
     <dimen name = "margin_medium_4">28dp</dimen>
     <dimen name = "margin_medium_5">38dp</dimen>
     <dimen name = "margin_large" >24dp</dimen>
     <dimen name = "margin_xlarge">32dp</dimen>
     <dimen name = "margin_xxlarge">48dp</dimen>
-    <dimen name = "margin_xxxlarge">78dp</dimen>
+    <dimen name = "margin_xxxlarge">74dp</dimen>
+    <dimen name = "margin_xxxxlarge">100dp</dimen>
 
     <dimen name = "margin_small_n">-4dp</dimen>
     <dimen name = "margin_card_medium_n">-6dp</dimen>
@@ -23,7 +26,7 @@
     <dimen name = "margin_medium_2_n">-16dp</dimen>
     <dimen name = "margin_medium_3_n">-18dp</dimen>
     <dimen name = "margin_medium_4_n">-22dp</dimen>
-    <dimen name = "margin_large_n">-24dp</dimen>
+    <dimen name = "margin_large_n">-26dp</dimen>
     <dimen name = "margin_xlarge_n">-32dp</dimen>
     <dimen name = "margin_xxlarge_n">-38dp</dimen>
     <dimen name = "margin_xxxlarge_n">-48dp</dimen>
@@ -32,7 +35,8 @@
     <dimen name = "text_small">12sp</dimen>
     <dimen name = "text_regular">14sp</dimen>
     <dimen name = "text_regular_2x">16sp</dimen>
-    <dimen name = "text_regular_3x">28sp</dimen>
+    <dimen name = "text_regular_3x">20sp</dimen>
+    <dimen name = "text_regular_4x">28sp</dimen>
     <dimen name = "text_heading_1x">24sp</dimen>
     <dimen name = "text_heading_2x">32sp</dimen>
     <dimen name = "text_big">40sp</dimen>
@@ -52,7 +56,7 @@
     <dimen name="margin_detail_button_bottom">28dp</dimen>
 
     <dimen name="text_name_resume_free_one">22.87sp</dimen>
-    <dimen name="text_heading_resume_free_one">9.92sp</dimen>
+    <dimen name="text_heading_resume_free_one">9.95sp</dimen>
     <dimen name="text_content_resume_free_one">7.13sp</dimen>
 
     <dimen name="text_name_resume_second_one">19.2sp</dimen>

@@ -5,7 +5,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.DetailButtonLabel
 
 //val templateList = mapOf<Int, Int>(
@@ -32,8 +31,8 @@ val detailButtonList = listOf(
     DetailButtonLabel(5, R.drawable.ic_achievement, "Achievements"),
     DetailButtonLabel(6, R.drawable.ic_objective, "Objectives"),
     DetailButtonLabel(7, R.drawable.ic_project, "Project Detail"),
-    DetailButtonLabel(8, R.drawable.ic_signature, "Signature"),
-    DetailButtonLabel(9, R.drawable.ic_information, "Reference"),
+    DetailButtonLabel(8, R.drawable.ic_reference, "Reference"),
+    DetailButtonLabel(9, R.drawable.ic_signature, "Signature"),
 )
 
 fun setUpTitleAndButton(expand: Boolean, tvTitle: TextView, btnBack: ImageView, frameLayout: FrameLayout) {
@@ -56,6 +55,9 @@ fun setUpTitleAndButton(expand: Boolean, tvTitle: TextView, btnBack: ImageView, 
     }
 }
 const val INTERSTITIAL_TAG = "INTERSTITIAL_AD_TAG"
+const val name = "NAME"
+const val contact = "CONTACT"
+const val objective = "OBJECTIVE"
 const val skill = "SKILL"
 const val achievement = "ACHIEVEMENT"
 const val workExperience = "WORK EXPERIENCE"
@@ -63,6 +65,19 @@ const val projectDetail = "PROJECT DETAIL"
 const val education = "EDUCATION DETAIL"
 const val signature = "SIGNATURE"
 const val reference = "REFERENCE"
+
+const val resumeFreeOneTopOne = "resumeFreeOneTopOne"
+const val resumeFreeOneTopTwo = "resumeFreeOneTopTwo"
+
+const val leftSide = "LEFT"
+const val rightSide = "RIGHT"
+const val mid = "MID"
+const val topMargin = "TOP MARGIN"
+const val bottomMargin = "BOTTOM MARGIN"
+const val topBottomMargin = "TOP BOTTOM MARGIN"
+const val endMargin = "END MARGIN"
+const val startMargin = "START MARGIN"
+const val boldText = "BOLD"
 
 const val PREVIEW_ACTIVITY = "PreviewActivity"
 const val CREATE_CV_ACTIVITY = "CreateCVActivity"

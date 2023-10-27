@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -24,6 +25,7 @@ import com.smtz.cvgenius.BuildConfig
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.common.checkInternetConnection
+import com.smtz.cvgenius.common.setUpLayoutParams
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivityCreateCvBinding
 import com.smtz.cvgenius.domain.model.CvVO
@@ -48,6 +50,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
     private lateinit var binding: ActivityCreateCvBinding
     private var mAddDetailButtonAdapter: AddDetailButtonAdapter = AddDetailButtonAdapter(this)
+    private lateinit var mBannerAdView: AdView
 
     // Declare a loading flag
     var isInterstitialAdLoading = false
@@ -82,6 +85,11 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         // initializing AdMob
         MobileAds.initialize(this) {}
 
+        // banner Ad
+        mBannerAdView = binding.bannerAdView
+        val adRequest = AdRequest.Builder().build()
+        mBannerAdView.loadAd(adRequest)
+
         // load interstitial ad.
         isInternetAvailable = checkInternetConnection(applicationContext)
         Log.d(INTERSTITIAL_TAG, "internet connection $isInternetAvailable")
@@ -90,6 +98,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
 
         mTemplateId = intent.getIntExtra(EXTRA_TEMPLATE_ID, 10000)
+        setUpMarginsAndPaddingAccordingToAndroidVersions()
         setUpToolBar()
         setUpAdapter()
         setUpListener()
@@ -355,8 +364,8 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
             5 -> startActivity(AchievementActivity.newIntent(this))
             6 -> startActivity(ObjectiveActivity.newIntent(this))
             7 -> startActivity(ProjectDetailActivity.newIntent(this))
-            8 -> startActivity(SignatureActivity.newIntent(this))
-            9 -> startActivity(Intent(applicationContext, ReferenceActivity::class.java))
+            8 -> startActivity(Intent(applicationContext, ReferenceActivity::class.java))
+            9 -> startActivity(SignatureActivity.newIntent(this))
         }
     }
 
@@ -396,6 +405,17 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
     }
 
+
+    private fun setUpMarginsAndPaddingAccordingToAndroidVersions() {
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            val marginMedium3 = resources.getDimensionPixelSize(R.dimen.margin_medium_3)
+            val marginCardMedium3 = resources.getDimensionPixelSize(R.dimen.margin_card_medium_3)
+
+            binding.rvDetailButton.layoutParams = setUpLayoutParams(binding.rvDetailButton, left = marginMedium3, top = 0, right = marginCardMedium3, bottom = 0)
+//            binding.neumorphCardView.setPadding(marginLargeN, marginMedium3, marginMedium3, marginXXXLarge)
+        }
+    }
 }
 
 private const val IMAGE_REQUEST_CODE = 100

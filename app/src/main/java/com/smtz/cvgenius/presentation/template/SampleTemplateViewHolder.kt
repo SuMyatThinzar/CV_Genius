@@ -1,5 +1,6 @@
 package com.smtz.cvgenius.presentation.template
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.smtz.cvgenius.common.delegates.SampleTemplateDelegate
 import com.smtz.cvgenius.databinding.ViewHolderSampleTemplateBinding
@@ -15,7 +16,6 @@ class SampleTemplateViewHolder(private val binding: ViewHolderSampleTemplateBind
             mTemplate?.let {
                 delegate.onTapSampleTemplate(it.id)
             }
-
         }
     }
 
@@ -24,5 +24,15 @@ class SampleTemplateViewHolder(private val binding: ViewHolderSampleTemplateBind
 
         binding.ivSampleTemplate.setImageResource(template.image)
 //        binding.tv.text = template.toString()
+
+        if (!template.available) {
+            itemView.isClickable = false
+            binding.darkenBackground.visibility = View.VISIBLE
+            binding.ivComingSoon.visibility = View.VISIBLE
+        } else {
+            itemView.isClickable = true
+            binding.darkenBackground.visibility = View.INVISIBLE
+            binding.ivComingSoon.visibility = View.INVISIBLE
+        }
     }
 }

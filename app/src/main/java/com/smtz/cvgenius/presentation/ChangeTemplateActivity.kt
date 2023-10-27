@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.core.BaseActivity
@@ -15,6 +18,7 @@ class ChangeTemplateActivity : BaseActivity<ActivityChangeTemplateBinding>() {
 
     private var mCvVO: CvVO? = null
     private lateinit var mTemplateViewPod: BaseViewPod
+    private lateinit var mBannerAdView: AdView
 
     override val binding: ActivityChangeTemplateBinding by lazy {
         ActivityChangeTemplateBinding.inflate(layoutInflater)
@@ -30,6 +34,15 @@ class ChangeTemplateActivity : BaseActivity<ActivityChangeTemplateBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mCvVO = CvSingleton.instance.cvVO!!
+
+        // initializing AdMob
+        MobileAds.initialize(this) {}
+
+        // banner Ad
+        mBannerAdView = binding.bannerAdView
+        val adRequest = AdRequest.Builder().build()
+        mBannerAdView.loadAd(adRequest)
+
         setUpTemplate()
     }
 

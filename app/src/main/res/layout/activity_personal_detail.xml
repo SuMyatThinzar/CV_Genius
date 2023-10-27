@@ -232,7 +232,7 @@
 
             </LinearLayout>
 
-            <!-- Gender, Contact-->
+            <!-- Website, Contact-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
                 android:layout_marginBottom="@dimen/margin_medium"
                 android:orientation="horizontal">
 
-                <!-- Gender -->
+                <!-- Website -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -252,17 +252,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/margin_card_medium"
-                        android:text="@string/lbl_gender"
+                        android:text="@string/lbl_website"
                         android:textColor="@color/colorSecondaryText"
                         android:textSize="@dimen/text_regular" />
 
-                    <Spinner
-                        android:id="@+id/spinnerGender"
-                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etWebsite"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_xlarge"
-                        android:background="@drawable/background_spinner"
-                        android:entries="@array/gender" />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_edit_text"
+                        android:digits="01234567890.+"
+                        android:hint="github.com/***"
+                        android:inputType="number"
+                        android:padding="@dimen/margin_medium"
+                        android:singleLine="true"
+                        android:textColor="@color/colorSecondaryText"
+                        android:textColorHint="@color/colorProfileText"
+                        android:textCursorDrawable="@drawable/custom_cursor"
+                        android:textSize="@dimen/text_regular"
+                        android:nextFocusDown="@id/etNationality" />
 
                 </LinearLayout>
 

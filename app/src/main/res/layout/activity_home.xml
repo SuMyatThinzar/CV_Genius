@@ -22,6 +22,7 @@
                 android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_toolbar"
+                android:background="@color/colorAccent"
                 app:collapsedTitleTextColor="@color/colorToolbar"
                 app:contentScrim="@color/colorAccent"
                 app:expandedTitleTextColor="@android:color/transparent"
@@ -58,7 +59,8 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <soup.neumorphism.NeumorphFloatingActionButton
+        <!--   Floating Action Button  -->
+        <soup.neumorphism.NeumorphCardView
             style="@style/Widget.Neumorph.FloatingActionButton"
             android:id="@+id/fabCreateNewCV"
             android:layout_width="85dp"
@@ -67,9 +69,17 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="@dimen/margin_medium_3"
             android:layout_marginBottom="@dimen/margin_xxlarge"
-            android:padding="26dp"
-            app:neumorph_backgroundColor="@color/colorPrimary"
-            android:src="@drawable/ic_fab_add" />
+            app:neumorph_backgroundColor="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/fabImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_xlarge"
+                android:src="@drawable/ic_fab_add"/>
+
+        </soup.neumorphism.NeumorphCardView>
 
         <!--  Empty View  -->
         <soup.neumorphism.NeumorphCardView
@@ -120,18 +130,26 @@
             android:layout_marginTop="@dimen/margin_xlarge_n"
             android:layout_marginStart="-10.5dp"
             android:layout_marginEnd="-10.5dp"
-            android:padding="@dimen/margin_large"
             app:neumorph_backgroundColor="@color/colorPrimary"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCreatedCV"
+            <LinearLayout
+                android:id="@+id/llRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
                 android:paddingTop="@dimen/margin_medium"
-                android:paddingBottom="@dimen/margin_xxlarge" />
+                android:paddingStart="@dimen/margin_large"
+                android:paddingEnd="@dimen/margin_large">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCreatedCV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingBottom="@dimen/margin_xxxlarge" />
+
+            </LinearLayout>
 
         </soup.neumorphism.NeumorphCardView>
 
@@ -139,7 +157,8 @@
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/bannerAdView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="120dp"
+            android:layout_marginBottom="@dimen/margin_xlarge_n"
             android:elevation="1dp"
             android:layout_gravity="bottom"
             ads:adSize="BANNER"
@@ -257,33 +276,33 @@
 <!--                android:layout_marginBottom="@dimen/margin_medium_2"-->
 <!--                android:background="@drawable/line" />-->
 
-                        <LinearLayout
-                            android:id="@+id/btnPrivacyPolicy"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/margin_medium_2">
+<!--                        <LinearLayout-->
+<!--                            android:id="@+id/btnPrivacyPolicy"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginBottom="@dimen/margin_medium_2">-->
 
-                            <ImageView
-                                android:layout_width="@dimen/size_drawer_icon"
-                                android:layout_height="@dimen/size_drawer_icon"
-                                android:src="@drawable/ic_privacy_policy" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/size_drawer_icon"-->
+<!--                                android:layout_height="@dimen/size_drawer_icon"-->
+<!--                                android:src="@drawable/ic_privacy_policy" />-->
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="@dimen/margin_medium_2"
-                                android:text="@string/lbl_privacy_policy"
-                                android:textColor="@color/colorToolbar"
-                                android:textSize="@dimen/text_regular" />
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center_vertical"-->
+<!--                                android:layout_marginStart="@dimen/margin_medium_2"-->
+<!--                                android:text="@string/lbl_privacy_policy"-->
+<!--                                android:textColor="@color/colorToolbar"-->
+<!--                                android:textSize="@dimen/text_regular" />-->
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_marginBottom="@dimen/margin_medium_2"
-                            android:background="@drawable/line" />
+<!--                        <View-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="2dp"-->
+<!--                            android:layout_marginBottom="@dimen/margin_medium_2"-->
+<!--                            android:background="@drawable/line" />-->
 
             <LinearLayout
                 android:id="@+id/btnRate"

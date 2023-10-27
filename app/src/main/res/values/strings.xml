@@ -58,4 +58,5 @@
     <string name="lbl_references">Reference</string>
     <string name="lbl_phone_number">Phone Number</string>
     <string name="lbl_email_address">Email Address</string>
+    <string name="lbl_website">Website</string>
 </resources>
