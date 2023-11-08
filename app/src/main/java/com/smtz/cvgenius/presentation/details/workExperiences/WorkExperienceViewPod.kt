@@ -12,14 +12,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.data.repository.CvModelImpl
+import com.smtz.cvgenius.common.collapseCardView
+import com.smtz.cvgenius.common.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodWorkExperienceBinding
-import com.smtz.cvgenius.domain.model.CvVO
-import com.smtz.cvgenius.domain.model.EducationDetailVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
-import com.smtz.cvgenius.domain.repository.CvModel
-import java.util.*
-import kotlin.math.exp
+import java.util.Calendar
 
 class WorkExperienceViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -42,6 +39,8 @@ class WorkExperienceViewPod @JvmOverloads constructor(
     private var mWorkExpVO: WorkExperienceVO? = null
     private var mId: Long = System.currentTimeMillis()
 
+    private var isExpanded = false
+
     override fun onFinishInflate() {
 
         binding = ViewPodWorkExperienceBinding.bind(this)
@@ -55,6 +54,7 @@ class WorkExperienceViewPod @JvmOverloads constructor(
             binding.btnDelete.setImageResource(R.drawable.ic_add)
             binding.btnDelete.isClickable = false                  // make btnDelete unclickable
             binding.containerExpanded.visibility = View.VISIBLE
+            isExpanded = true
         }
         setDelegate(delegate)
     }
@@ -82,11 +82,15 @@ class WorkExperienceViewPod @JvmOverloads constructor(
     }
 
     private fun setUpListeners() {
-        binding.containerCollapsed.setOnClickListener {
-            expandCardView()
-        }
-        binding.tvDetailNameExpanded.setOnClickListener {
-            collapseCardView()
+
+        binding.root.setOnClickListener {
+            isExpanded = if (!isExpanded) {
+                expandCardView(binding.containerExpanded,binding.containerCollapsed, binding.root)
+                true
+            } else {
+                collapseCardView(binding.containerExpanded,binding.containerCollapsed, binding.root)
+                false
+            }
         }
 
         binding.btnSave.setOnClickListener {
@@ -118,7 +122,7 @@ class WorkExperienceViewPod @JvmOverloads constructor(
                 binding.endDate.text = ""
                 binding.cbEndDate.isChecked = false
 
-                collapseCardView()
+                collapseCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
             }
             if (position.isEmpty())    binding.errorWorkPosition.visibility = View.VISIBLE
             if (company.isEmpty())    binding.errorCompany.visibility = View.VISIBLE
@@ -142,7 +146,7 @@ class WorkExperienceViewPod @JvmOverloads constructor(
                 }
             }
         }
-//
+
         binding.startDate.setOnClickListener {
             val dialogView = LayoutInflater.from(binding.root.context).inflate(R.layout.dialog_month_year_picker, null)
             showDatePickerDialog(dialogView, binding.startDate, true).apply {
@@ -162,17 +166,19 @@ class WorkExperienceViewPod @JvmOverloads constructor(
         setUpError(binding.etCompany, null, binding.errorCompany)
     }
 
-    private fun collapseCardView() {
-        binding.containerCollapsed.visibility = View.VISIBLE
-        binding.containerExpanded.visibility = View.GONE
-        binding.root.radius = 8F
-    }
-
-    private fun expandCardView() {
-        binding.containerCollapsed.visibility = View.GONE
-        binding.containerExpanded.visibility = View.VISIBLE
-        binding.root.radius = 48F
-    }
+//    private fun collapseCardView() {
+//
+//        binding.containerCollapsed.visibility = View.VISIBLE
+//        binding.containerExpanded.visibility = View.GONE
+//        binding.root.radius = 8F
+//    }
+//
+//    private fun expandCardView() {
+//
+//        binding.containerCollapsed.visibility = View.GONE
+//        binding.containerExpanded.visibility = View.VISIBLE
+//        binding.root.radius = 48F
+//    }
 
     private fun showDatePickerDialog(dialogView: View, bindView: TextView, startDate: Boolean): AlertDialog {
 

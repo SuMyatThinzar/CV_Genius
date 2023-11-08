@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/margin_large"
             android:paddingTop="@dimen/margin_large"
-            android:paddingEnd="@dimen/margin_medium_2"
+            android:paddingEnd="@dimen/margin_xxlarge"
             android:paddingBottom="@dimen/margin_large"
             android:singleLine="true"
             android:text="@string/lbl_education_details"

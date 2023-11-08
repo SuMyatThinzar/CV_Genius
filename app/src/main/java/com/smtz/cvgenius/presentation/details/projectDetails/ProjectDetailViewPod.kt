@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
+import com.smtz.cvgenius.common.collapseCardView
+import com.smtz.cvgenius.common.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodProjectDetailBinding
 import com.smtz.cvgenius.domain.model.ProjectDetailVO
 import java.util.*
@@ -38,6 +40,8 @@ class ProjectDetailViewPod @JvmOverloads constructor(
     private var mProjectDetailVO: ProjectDetailVO? = null
     private var mId: Long = System.currentTimeMillis()
 
+    private var isExpanded = false
+
     override fun onFinishInflate() {
 
         binding = ViewPodProjectDetailBinding.bind(this)
@@ -51,6 +55,7 @@ class ProjectDetailViewPod @JvmOverloads constructor(
             binding.btnDelete.setImageResource(R.drawable.ic_add)
             binding.btnDelete.isClickable = false                  // make btnDelete unclickable
             binding.containerExpanded.visibility = View.VISIBLE
+            isExpanded = true
         }
         setDelegate(delegate)
     }
@@ -79,12 +84,17 @@ class ProjectDetailViewPod @JvmOverloads constructor(
     }
 
     private fun setUpListeners() {
-        binding.containerCollapsed.setOnClickListener {
-            expandCardView()
+
+        binding.root.setOnClickListener {
+            isExpanded = if (!isExpanded) {
+                expandCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
+                true
+            } else {
+                collapseCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
+                false
+            }
         }
-        binding.tvDetailNameExpanded.setOnClickListener {
-            collapseCardView()
-        }
+
 
         binding.btnSave.setOnClickListener {
             title = binding.etProjectTitle.text.toString().trim()
@@ -118,7 +128,7 @@ class ProjectDetailViewPod @JvmOverloads constructor(
                 binding.endDate.text = ""
                 binding.cbEndDate.isChecked = false
 
-                collapseCardView()
+                collapseCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
             }
 
             if (title.isEmpty())    binding.errorProjectTitle.visibility = View.VISIBLE
@@ -161,17 +171,17 @@ class ProjectDetailViewPod @JvmOverloads constructor(
         setUpError(binding.etProjectTitle, null, binding.errorProjectTitle)
     }
 
-    private fun collapseCardView() {
-        binding.containerCollapsed.visibility = View.VISIBLE
-        binding.containerExpanded.visibility = View.GONE
-        binding.root.radius = 8F
-    }
-
-    private fun expandCardView() {
-        binding.containerCollapsed.visibility = View.GONE
-        binding.containerExpanded.visibility = View.VISIBLE
-        binding.root.radius = 48F
-    }
+//    private fun collapseCardView() {
+//        binding.containerCollapsed.visibility = View.VISIBLE
+//        binding.containerExpanded.visibility = View.GONE
+//        binding.root.radius = 8F
+//    }
+//
+//    private fun expandCardView() {
+//        binding.containerCollapsed.visibility = View.GONE
+//        binding.containerExpanded.visibility = View.VISIBLE
+//        binding.root.radius = 48F
+//    }
 
     private fun showDatePickerDialog(dialogView: View, bindView: TextView, startDate: Boolean): AlertDialog {
 

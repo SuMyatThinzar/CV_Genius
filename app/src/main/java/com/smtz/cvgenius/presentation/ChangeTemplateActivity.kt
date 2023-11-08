@@ -33,6 +33,7 @@ class ChangeTemplateActivity : BaseActivity<ActivityChangeTemplateBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         mCvVO = CvSingleton.instance.cvVO!!
 
         // initializing AdMob

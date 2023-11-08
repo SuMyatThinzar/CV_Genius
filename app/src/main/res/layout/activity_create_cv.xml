@@ -17,12 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_toolbar"
             android:background="@color/colorAccent"
-            app:collapsedTitleTextColor="@color/colorToolbar"
+            app:collapsedTitleTextColor="@android:color/transparent"
             app:contentScrim="@color/colorAccent"
             app:expandedTitleTextColor="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:statusBarScrim="@android:color/transparent"
-            app:title="@string/lbl_create_my_cv">
+            app:statusBarScrim="@android:color/transparent">
 
             <ImageView
                 android:id="@+id/btnBack"
@@ -35,10 +34,11 @@
                 android:src="@drawable/ic_back" />
 
             <TextView
+                android:id="@+id/tvHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:text="@string/lbl_create_my_cv"
                 android:textColor="@color/colorToolbar"
                 android:textSize="@dimen/text_heading_1x"

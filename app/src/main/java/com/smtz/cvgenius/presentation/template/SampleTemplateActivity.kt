@@ -21,6 +21,7 @@ import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.common.delegates.SampleTemplateDelegate
 import com.smtz.cvgenius.common.dummy.templateList
+import com.smtz.cvgenius.common.setUpAppBarTitleManually
 import com.smtz.cvgenius.common.setUpLayoutParams
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivitySampleTemplateBinding
@@ -83,6 +84,8 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = ""
 
+        setUpAppBarTitleManually(binding.appBarLayout, binding.tvHeading, binding.collapsingToolbarLayout, true)
+
         val parentView = binding.btnBack.parent as ViewGroup
         parentView.removeView(binding.btnBack)
 
@@ -94,7 +97,7 @@ class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {
         binding.btnBack.layoutParams = layoutParamsExpanded
 
         binding.collapsingToolbarLayout.addView(binding.btnBack)
-        binding.collapsingToolbarLayout.collapsedTitleGravity = Gravity.CENTER_HORIZONTAL
+//        binding.collapsingToolbarLayout.collapsedTitleGravity = Gravity.CENTER_HORIZONTAL
 
     }
 

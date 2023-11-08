@@ -21,8 +21,11 @@ import com.smtz.cvgenius.R
 import com.smtz.cvgenius.BuildConfig
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.common.checkInternetConnection
+import com.smtz.cvgenius.common.setUpAppBarTitleManually
 import com.smtz.cvgenius.common.setUpLayoutParams
+import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
+import com.smtz.cvgenius.databinding.ActivityCreateCvBinding
 import com.smtz.cvgenius.databinding.ActivityHomeBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
@@ -34,9 +37,13 @@ import com.smtz.cvgenius.utils.CREATE_CV_ACTIVITY
 import com.smtz.cvgenius.utils.INTERSTITIAL_TAG
 import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
 
-class HomeActivity : AppCompatActivity(), CvDelegate {
+class HomeActivity : BaseActivity<ActivityHomeBinding>(), CvDelegate {
 
-    private lateinit var binding: ActivityHomeBinding
+
+    override val binding: ActivityHomeBinding by lazy {
+        ActivityHomeBinding.inflate(layoutInflater)
+    }
+
     private lateinit var mBannerAdView: AdView
 
     private val mCvListAdapter = CvListAdapter(delegate = this)
@@ -52,8 +59,6 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         // initializing AdMob
         MobileAds.initialize(this) {}
@@ -119,6 +124,147 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
                     isInterstitialAdLoading = false
                 }
             })
+    }
+
+    private fun requestData() {
+        mCvModel.getAllCv()?.observe(this) {
+            mCvVoList = it
+
+            if (it.isNotEmpty())  hideEmptyView()
+            else                  showEmptyView()
+
+            mCvListAdapter.setNewData(it)
+        }
+    }
+
+    private fun setUpAdapter() {
+
+        binding.rvCreatedCV.apply {
+            adapter = mCvListAdapter
+            layoutManager =
+                LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun hideEmptyView() {
+        binding.hideEmptyView.visibility = View.VISIBLE
+        binding.llEmptyView.visibility = View.GONE
+    }
+
+    private fun showEmptyView() {
+        binding.hideEmptyView.visibility = View.GONE
+        binding.llEmptyView.visibility = View.VISIBLE
+    }
+
+    private fun setUpListener() {
+        binding.btnMenu.setOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+        binding.fabCreateNewCV.setOnClickListener {
+            startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
+        }
+        binding.btnShare.setOnClickListener {
+            shareApp()
+        }
+        binding.btnTemplates.setOnClickListener {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
+        }
+    }
+
+    private fun shareApp() {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this app!")
+        shareIntent.putExtra(Intent.EXTRA_TEXT,
+            "Hey! I found this amazing app that can create professional Resume easily. Download it on Google Play: [App Store Link]."
+        )
+
+        val chooser = Intent.createChooser(shareIntent, "Share app via ...")
+        startActivity(chooser)
+    }
+
+    private fun setUpToolBar() {
+        setSupportActionBar(binding.toolBar)
+
+        setUpAppBarTitleManually(binding.appBarLayout, binding.tvHeading, binding.collapsingToolbarLayout)
+
+        val parentView = binding.btnMenu.parent as ViewGroup
+        parentView.removeView(binding.btnMenu)
+
+        val layoutParamsExpanded = binding.btnMenu.layoutParams as CollapsingToolbarLayout.LayoutParams
+        layoutParamsExpanded.topMargin = 46
+        layoutParamsExpanded.bottomMargin = 32
+        layoutParamsExpanded.collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
+        layoutParamsExpanded.gravity = Gravity.CENTER_VERTICAL
+        binding.btnMenu.layoutParams = layoutParamsExpanded
+
+        binding.collapsingToolbarLayout.addView(binding.btnMenu)
+//        binding.collapsingToolbarLayout.collapsedTitleGravity = Gravity.CENTER_HORIZONTAL
+
+    }
+
+    private fun showNextActivity(activityToStart: String) {
+
+        when (activityToStart) {
+            PREVIEW_ACTIVITY -> startActivity(PreviewActivity.newIntent(this))
+            CREATE_CV_ACTIVITY -> startActivity(CreateCvActivity.newIntent(this, templateId = null)) // will be replaced in requestData()
+            BACK_PRESSED -> super.onBackPressed()
+        }
+    }
+
+    override fun onBackPressed() {
+        when {
+            binding.drawerLayout.isDrawerOpen(GravityCompat.START) ->
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            else -> {
+                showInterstitialAd(BACK_PRESSED)
+            }
+        }
+    }
+
+    override fun onTapCv(cvVO: CvVO) {
+        CvSingleton.instance.cvVO = cvVO
+        showInterstitialAd(CREATE_CV_ACTIVITY)
+//        startActivity(CreateCvActivity.newIntent(this, templateId = null)) // will be replaced in requestData()
+    }
+
+    override fun onTapViewCv(cvVO: CvVO) {
+        CvSingleton.instance.cvVO = cvVO
+        showInterstitialAd(PREVIEW_ACTIVITY)
+//        startActivity(PreviewActivity.newIntent(this))  //showInterstitialAd is the Asynchronous function and starting Activity will go first
+    }
+
+    override fun onTapDeleteCv(cvId: Long) {
+        mCvModel.deleteCv(cvId)
+        Snackbar.make(window.decorView, "Successfully deleted", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onTapDuplicate(cvVO: CvVO) {
+        val copiedCv = cvVO.copy(cvId = System.currentTimeMillis())
+        mCvModel.insertCV(copiedCv)
+        Snackbar.make(window.decorView, "Resume Duplicated ", Snackbar.LENGTH_SHORT).show()
+    }
+
+//    override fun onTapShare(viewPodId: Int) {
+//        val viewPodLayout = findViewById<BaseViewPod>(mViewPodId)
+//        val pdfDocu = convertToPdf(this,)
+//        shareDocument(this, )
+//        Snackbar.make(window.decorView, "Successfully Shared", Snackbar.LENGTH_SHORT).show()
+//    }
+
+    private fun setUpMarginsAndPaddingAccordingToAndroidVersions() {
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+            val marginMediumN = resources.getDimensionPixelSize(R.dimen.margin_medium_n)
+            val marginMedium2 = resources.getDimensionPixelSize(R.dimen.margin_medium_2)
+            val marginCardMedium3 = resources.getDimensionPixelSize(R.dimen.margin_card_medium_3)
+            val marginXLarge = resources.getDimensionPixelSize(R.dimen.margin_xxlarge)
+
+            binding.llRecyclerView.layoutParams = setUpLayoutParams(binding.llRecyclerView, left = marginMediumN, top = marginMedium2, right = marginMediumN, bottom = marginCardMedium3)
+            binding.fabImage.layoutParams = setUpLayoutParams(binding.fabImage, left = 0, top = marginMedium2, right = 0, bottom = 0)
+            binding.rvCreatedCV.setPadding(0,0,0, marginXLarge)
+        }
     }
 
     private fun showInterstitialAd(NEXT_ACTIVITY: String) {
@@ -205,154 +351,6 @@ class HomeActivity : AppCompatActivity(), CvDelegate {
                 // covers the screen.
 //                Toast.makeText(this@HomeActivity, "ad visible", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun requestData() {
-        mCvModel.getAllCv()?.observe(this) {
-            mCvVoList = it
-
-            if (it.isNotEmpty()) {
-                hideEmptyView()
-            } else {
-                showEmptyView()
-            }
-            mCvListAdapter.setNewData(it)
-        }
-    }
-
-    private fun setUpAdapter() {
-
-        binding.rvCreatedCV.apply {
-            adapter = mCvListAdapter
-            layoutManager =
-                LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-        }
-    }
-
-    private fun hideEmptyView() {
-//        if (mCvVoList.isNotEmpty()) {
-            binding.hideEmptyView.visibility = View.VISIBLE
-            binding.llEmptyView.visibility = View.GONE
-//        }
-    }
-
-    private fun showEmptyView() {
-        binding.hideEmptyView.visibility = View.GONE
-        binding.llEmptyView.visibility = View.VISIBLE
-    }
-
-    private fun setUpListener() {
-        binding.btnMenu.setOnClickListener {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
-        binding.fabCreateNewCV.setOnClickListener {
-            startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
-        }
-//        binding.btnProfile.setOnClickListener {
-//            Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
-//            binding.drawerLayout.closeDrawer(GravityCompat.START)
-//            startActivity(Intent(this, ProfileActivity::class.java))
-//        }
-        binding.btnShare.setOnClickListener {
-            shareApp()
-        }
-        binding.btnTemplates.setOnClickListener {
-            startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
-        }
-    }
-
-    private fun shareApp() {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this app!")
-        shareIntent.putExtra(
-            Intent.EXTRA_TEXT,
-            "Hey! I found this amazing app that can create professional Resume easily. Download it on Google Play: [App Store Link]."
-        )
-
-        val chooser = Intent.createChooser(shareIntent, "Share app via ...")
-        startActivity(chooser)
-    }
-
-    private fun setUpToolBar() {
-        setSupportActionBar(binding.toolBar)
-
-        val parentView = binding.btnMenu.parent as ViewGroup
-        parentView.removeView(binding.btnMenu)
-
-        val layoutParamsExpanded = binding.btnMenu.layoutParams as CollapsingToolbarLayout.LayoutParams
-        layoutParamsExpanded.topMargin = 46
-        layoutParamsExpanded.bottomMargin = 32
-        layoutParamsExpanded.collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
-        layoutParamsExpanded.gravity = Gravity.CENTER_VERTICAL
-        binding.btnMenu.layoutParams = layoutParamsExpanded
-
-        binding.collapsingToolbarLayout.addView(binding.btnMenu)
-        binding.collapsingToolbarLayout.collapsedTitleGravity = Gravity.CENTER_HORIZONTAL
-
-    }
-
-    private fun showNextActivity(activityToStart: String) {
-
-        when (activityToStart) {
-            PREVIEW_ACTIVITY -> startActivity(PreviewActivity.newIntent(this))
-            CREATE_CV_ACTIVITY -> startActivity(CreateCvActivity.newIntent(this, templateId = null)) // will be replaced in requestData()
-            BACK_PRESSED -> super.onBackPressed()
-        }
-    }
-
-    override fun onBackPressed() {
-        when {
-            binding.drawerLayout.isDrawerOpen(GravityCompat.START) ->
-                binding.drawerLayout.closeDrawer(GravityCompat.START)
-            else -> {
-                showInterstitialAd(BACK_PRESSED)
-            }
-        }
-    }
-
-    override fun onTapCv(cvVO: CvVO) {
-        CvSingleton.instance.cvVO = cvVO
-        showInterstitialAd(CREATE_CV_ACTIVITY)
-//        startActivity(CreateCvActivity.newIntent(this, templateId = null)) // will be replaced in requestData()
-    }
-
-    override fun onTapViewCv(cvVO: CvVO) {
-        CvSingleton.instance.cvVO = cvVO
-        showInterstitialAd(PREVIEW_ACTIVITY)
-//        startActivity(PreviewActivity.newIntent(this))  //showInterstitialAd is the Asynchronous function and starting Activity will go first
-    }
-
-    override fun onTapDeleteCv(cvId: Long) {
-        mCvModel.deleteCv(cvId)
-        Snackbar.make(window.decorView, "Successfully deleted", Snackbar.LENGTH_SHORT).show()
-    }
-
-    override fun onTapDuplicate(cvVO: CvVO) {
-        val copiedCv = cvVO.copy(cvId = System.currentTimeMillis())
-        mCvModel.insertCV(copiedCv)
-        Snackbar.make(window.decorView, "Resume Duplicated ", Snackbar.LENGTH_SHORT).show()
-    }
-
-//    override fun onTapShare(viewPodId: Int) {
-//        val viewPodLayout = findViewById<BaseViewPod>(mViewPodId)
-//        val pdfDocu = convertToPdf(this,)
-//        shareDocument(this, )
-//        Snackbar.make(window.decorView, "Successfully Shared", Snackbar.LENGTH_SHORT).show()
-//    }
-
-    private fun setUpMarginsAndPaddingAccordingToAndroidVersions() {
-
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
-            val marginMediumN = resources.getDimensionPixelSize(R.dimen.margin_medium_n)
-            val marginMedium2 = resources.getDimensionPixelSize(R.dimen.margin_medium_2)
-            val marginCardMedium3 = resources.getDimensionPixelSize(R.dimen.margin_card_medium_3)
-            val marginXLarge = resources.getDimensionPixelSize(R.dimen.margin_xxlarge)
-
-            binding.llRecyclerView.layoutParams = setUpLayoutParams(binding.llRecyclerView, left = marginMediumN, top = marginMedium2, right = marginMediumN, bottom = marginCardMedium3)
-            binding.fabImage.layoutParams = setUpLayoutParams(binding.fabImage, left = 0, top = marginMedium2, right = 0, bottom = 0)
-            binding.rvCreatedCV.setPadding(0,0,0, marginXLarge)
         }
     }
 

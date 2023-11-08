@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
@@ -49,6 +50,8 @@ class WorkExperienceActivity : BaseActivity<ActivityWorkExperienceBinding>(), Bu
         super.onCreate(savedInstanceState)
 
         mCvVO = CvSingleton.instance.cvVO
+
+        binding.root.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
 
 //        setUpTitleAndButton(expand = true, binding.tvTitle, binding.btnBack, binding.frameLayout)
         setUpViewPods()

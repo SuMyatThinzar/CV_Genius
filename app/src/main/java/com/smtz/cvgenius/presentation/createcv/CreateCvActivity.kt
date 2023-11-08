@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -16,17 +17,23 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.smtz.cvgenius.BuildConfig
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
 import com.smtz.cvgenius.common.checkInternetConnection
+import com.smtz.cvgenius.common.setUpAppBarTitleManually
 import com.smtz.cvgenius.common.setUpLayoutParams
+import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
+import com.smtz.cvgenius.databinding.ActivityChangeTemplateBinding
 import com.smtz.cvgenius.databinding.ActivityCreateCvBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
@@ -46,9 +53,12 @@ import com.smtz.cvgenius.utils.BACK_PRESSED
 import com.smtz.cvgenius.utils.INTERSTITIAL_TAG
 import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
 
-class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
+class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDelegate {
 
-    private lateinit var binding: ActivityCreateCvBinding
+    override val binding: ActivityCreateCvBinding by lazy {
+        ActivityCreateCvBinding.inflate(layoutInflater)
+    }
+
     private var mAddDetailButtonAdapter: AddDetailButtonAdapter = AddDetailButtonAdapter(this)
     private lateinit var mBannerAdView: AdView
 
@@ -68,7 +78,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
     companion object {
 
         private const val EXTRA_TEMPLATE_ID = "EXTRA TEMPLATE ID"
-
         fun newIntent(context: Context, templateId: Int?): Intent {
             val intent = Intent(context, CreateCvActivity::class.java)
 //            intent.putExtra(EXTRA_ID, cvId)
@@ -79,8 +88,6 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCreateCvBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         // initializing AdMob
         MobileAds.initialize(this) {}
@@ -98,6 +105,7 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
 
         mTemplateId = intent.getIntExtra(EXTRA_TEMPLATE_ID, 10000)
+
         setUpMarginsAndPaddingAccordingToAndroidVersions()
         setUpToolBar()
         setUpAdapter()
@@ -197,11 +205,12 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
     private fun setUpToolBar() {
         setSupportActionBar(binding.toolBar)
 
+        setUpAppBarTitleManually(binding.appBarLayout, binding.tvHeading, binding.collapsingToolbarLayout)
+
         val parentView = binding.btnBack.parent as ViewGroup
         parentView.removeView(binding.btnBack)
 
-        val layoutParamsExpanded =
-            binding.btnBack.layoutParams as CollapsingToolbarLayout.LayoutParams
+        val layoutParamsExpanded = binding.btnBack.layoutParams as CollapsingToolbarLayout.LayoutParams
         layoutParamsExpanded.topMargin = 46
         layoutParamsExpanded.bottomMargin = 32
         layoutParamsExpanded.collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
@@ -209,7 +218,8 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         binding.btnBack.layoutParams = layoutParamsExpanded
 
         binding.collapsingToolbarLayout.addView(binding.btnBack)
-        binding.collapsingToolbarLayout.collapsedTitleGravity = Gravity.CENTER_HORIZONTAL
+//        binding.collapsingToolbarLayout.collapsedTitleGravity = Gravity.CENTER_HORIZONTAL  // CollapsingToolbarLayout ထဲက build in ပါပြီးသား title or toolBar ထဲက ပါပြီးသား title ကို set up လုပ်တာ
+
 
     }
 
@@ -405,9 +415,9 @@ class CreateCvActivity : AppCompatActivity(), DetailButtonDelegate {
         }
     }
 
-
     private fun setUpMarginsAndPaddingAccordingToAndroidVersions() {
 
+        // for Android 10 above
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             val marginMedium3 = resources.getDimensionPixelSize(R.dimen.margin_medium_3)
             val marginCardMedium3 = resources.getDimensionPixelSize(R.dimen.margin_card_medium_3)

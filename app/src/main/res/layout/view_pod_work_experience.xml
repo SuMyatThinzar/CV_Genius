@@ -17,11 +17,11 @@
 
         <TextView
             android:id="@+id/tvDetailName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/margin_large"
             android:paddingTop="@dimen/margin_large"
-            android:paddingEnd="@dimen/margin_medium_2"
+            android:paddingEnd="@dimen/margin_xxlarge"
             android:paddingBottom="@dimen/margin_large"
             android:singleLine="true"
             android:text="@string/lbl_work_experience"
@@ -44,10 +44,16 @@
         android:id="@+id/containerExpanded"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/margin_medium_2"
         android:orientation="vertical"
         android:background="@color/white"
         android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/margin_medium_2"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tvDetailNameExpanded"
@@ -65,7 +71,7 @@
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold" />
 
-        <!-- Position  -->
+    <!-- Position  -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -272,6 +278,8 @@
             android:text="@string/lbl_save"
             android:textAllCaps="false"
             android:textColor="@color/colorSecondaryText"/>
+
+    </LinearLayout>
 
     </LinearLayout>
 

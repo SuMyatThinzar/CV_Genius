@@ -22,12 +22,15 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
+import com.smtz.cvgenius.databinding.ActivityChangeTemplateBinding
 import com.smtz.cvgenius.databinding.ActivityPreviewBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.ChangeTemplateActivity
 import com.smtz.cvgenius.presentation.preview.templateViewPods.BaseViewPod
+import com.smtz.cvgenius.presentation.preview.utils.attachDocumentToGmail
 import com.smtz.cvgenius.presentation.preview.utils.convertToPdfDocument
 import com.smtz.cvgenius.presentation.preview.utils.createTemporaryPdfFile
 import com.smtz.cvgenius.presentation.preview.utils.shareDocument
@@ -35,10 +38,13 @@ import com.smtz.cvgenius.presentation.template.SampleTemplateActivity
 import kotlinx.coroutines.*
 import java.io.*
 
-class PreviewActivity : AppCompatActivity() {
+class PreviewActivity : BaseActivity<ActivityPreviewBinding>() {
+
+    override val binding: ActivityPreviewBinding by lazy {
+        ActivityPreviewBinding.inflate(layoutInflater)
+    }
 
     private val REQUEST_CODE_PERMISSION_STORAGE = 100
-    private lateinit var binding: ActivityPreviewBinding
     private lateinit var mBannerAdView: AdView
 
     var cacheFile: File? = null
@@ -58,8 +64,6 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPreviewBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         setViewsClickable(false)
 
 //        val documentsDirectory = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)  /storage/emulated/0/Android/data/com.smtz.cvgenius/files/Documents
@@ -127,6 +131,12 @@ class PreviewActivity : AppCompatActivity() {
         binding.btnShare.setOnClickListener {
             handleCacheFile(viewPodLayout, callback = { cache ->
                 shareDocument(this, cache)
+            })
+        }
+
+        binding.btnSend.setOnClickListener {
+            handleCacheFile(viewPodLayout, callback = { cache ->
+                attachDocumentToGmail(this, cache)
             })
         }
 

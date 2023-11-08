@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
+import com.smtz.cvgenius.common.collapseCardView
+import com.smtz.cvgenius.common.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodSkillAchievementBinding
 import com.smtz.cvgenius.domain.model.*
 import com.smtz.cvgenius.utils.achievement
@@ -32,6 +34,8 @@ class SkillAchievementViewPod @JvmOverloads constructor(
     private var mSkillVO: SkillsVO? = null
     private var mAchievementVO: AchievementVO? = null
     private var mId: Long = System.currentTimeMillis()
+
+    private var isExpanded = false
 
     override fun onFinishInflate() {
 
@@ -59,10 +63,12 @@ class SkillAchievementViewPod @JvmOverloads constructor(
 
     //Function to call from ViewHolder
     fun setUpSkillData(skillVO: SkillsVO) {
+        isExpanded = true
         mSkillVO = skillVO
         bindData()
     }
     fun setUpAchievementData(achievementVO: AchievementVO) {
+        isExpanded = true
         mAchievementVO = achievementVO
         bindData()
     }
@@ -99,11 +105,15 @@ class SkillAchievementViewPod @JvmOverloads constructor(
     }
 
     private fun setUpListeners() {
-        binding.containerCollapsed.setOnClickListener {
-            expandCardView()
-        }
-        binding.tvDetailNameExpanded.setOnClickListener {
-            collapseCardView()
+
+        binding.root.setOnClickListener {
+            isExpanded = if (!isExpanded) {
+                expandCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
+                true
+            } else {
+                collapseCardView(binding.containerExpanded,binding.containerCollapsed, binding.root)
+                false
+            }
         }
 
         setUpError(binding.etTitle, binding.error)
@@ -143,7 +153,7 @@ class SkillAchievementViewPod @JvmOverloads constructor(
         mId = System.currentTimeMillis()
         binding.etTitle.setText("")
 
-        collapseCardView()
+        collapseCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
     }
 
     private fun collapseCardView() {

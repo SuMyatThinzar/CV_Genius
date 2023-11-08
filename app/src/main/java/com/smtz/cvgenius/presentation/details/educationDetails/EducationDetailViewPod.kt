@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
+import com.smtz.cvgenius.common.collapseCardView
+import com.smtz.cvgenius.common.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodEducationDetailBinding
 import com.smtz.cvgenius.domain.model.EducationDetailVO
 import java.util.*
@@ -39,6 +41,7 @@ class EducationDetailViewPod @JvmOverloads constructor(
     private var mEduVO: EducationDetailVO? = null
     private var mId: Long = System.currentTimeMillis()
 
+    private var isExpanded = false
     override fun onFinishInflate() {
 
         binding = ViewPodEducationDetailBinding.bind(this)
@@ -52,6 +55,7 @@ class EducationDetailViewPod @JvmOverloads constructor(
             binding.btnDelete.setImageResource(R.drawable.ic_add)
             binding.btnDelete.isClickable = false                  // make btnDelete unclickable
             binding.containerExpanded.visibility = View.VISIBLE
+            isExpanded = true
         }
         setDelegate(delegate)
     }
@@ -81,11 +85,15 @@ class EducationDetailViewPod @JvmOverloads constructor(
     }
 
     private fun setUpListeners() {
-        binding.containerCollapsed.setOnClickListener {
-            expandCardView()
-        }
-        binding.tvDetailNameExpanded.setOnClickListener {
-            collapseCardView()
+
+        binding.root.setOnClickListener {
+            isExpanded = if (!isExpanded) {
+                expandCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
+                true
+            } else {
+                collapseCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
+                false
+            }
         }
 
         binding.btnSave.setOnClickListener {
@@ -121,7 +129,7 @@ class EducationDetailViewPod @JvmOverloads constructor(
                     binding.endDate.text = ""
                     binding.cbEndDate.isChecked = false
 
-                    collapseCardView()
+                    collapseCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
                 }
             }
             if (dipName.isEmpty())    binding.errorDegreeName.visibility = View.VISIBLE

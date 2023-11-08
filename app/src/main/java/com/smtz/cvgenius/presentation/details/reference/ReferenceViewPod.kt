@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
+import com.smtz.cvgenius.common.collapseCardView
+import com.smtz.cvgenius.common.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodReferencesBinding
 import com.smtz.cvgenius.domain.model.ProjectDetailVO
 import com.smtz.cvgenius.domain.model.ReferenceVO
@@ -38,6 +40,8 @@ class ReferenceViewPod  @JvmOverloads constructor(
     private var mReferenceVO: ReferenceVO? = null
     private var mId: Long = System.currentTimeMillis()
 
+    private var isExpanded = false
+
     override fun onFinishInflate() {
 
         binding = ViewPodReferencesBinding.bind(this)
@@ -51,6 +55,7 @@ class ReferenceViewPod  @JvmOverloads constructor(
             binding.btnDelete.setImageResource(R.drawable.ic_add)
             binding.btnDelete.isClickable = false                  // make btnDelete unclickable
             binding.containerExpanded.visibility = View.VISIBLE
+            isExpanded = true
         }
         setDelegate(delegate)
     }
@@ -79,11 +84,15 @@ class ReferenceViewPod  @JvmOverloads constructor(
     }
 
     private fun setUpListeners() {
-        binding.containerCollapsed.setOnClickListener {
-            expandCardView()
-        }
-        binding.tvDetailNameExpanded.setOnClickListener {
-            collapseCardView()
+
+        binding.root.setOnClickListener {
+            isExpanded = if (!isExpanded) {
+                expandCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
+                true
+            } else {
+                collapseCardView(binding.containerExpanded,binding.containerCollapsed, binding.root)
+                false
+            }
         }
 
         binding.btnSave.setOnClickListener {
@@ -114,7 +123,7 @@ class ReferenceViewPod  @JvmOverloads constructor(
                 binding.etPhoneNumber.setText("")
                 binding.etOthers.setText("")
 
-                collapseCardView()
+                collapseCardView(binding.containerExpanded, binding.containerCollapsed, binding.root)
             }
 
             if (referenceName.isEmpty())   binding.errorReferenceName.visibility = View.VISIBLE
@@ -127,17 +136,17 @@ class ReferenceViewPod  @JvmOverloads constructor(
         setUpError(binding.etReferenceName, null, binding.errorReferenceName)
     }
 
-    private fun collapseCardView() {
-        binding.containerCollapsed.visibility = View.VISIBLE
-        binding.containerExpanded.visibility = View.GONE
-        binding.root.radius = 8F
-    }
-
-    private fun expandCardView() {
-        binding.containerCollapsed.visibility = View.GONE
-        binding.containerExpanded.visibility = View.VISIBLE
-        binding.root.radius = 48F
-    }
+//    private fun collapseCardView() {
+//        binding.containerCollapsed.visibility = View.VISIBLE
+//        binding.containerExpanded.visibility = View.GONE
+//        binding.root.radius = 8F
+//    }
+//
+//    private fun expandCardView() {
+//        binding.containerCollapsed.visibility = View.GONE
+//        binding.containerExpanded.visibility = View.VISIBLE
+//        binding.root.radius = 48F
+//    }
 
     private fun setUpError(editText: EditText?, textView: TextView?, error: TextView) {
         if (editText == null) {

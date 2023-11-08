@@ -154,3 +154,19 @@ fun shareDocument(context: Context, pdfFile: File) {
         e.printStackTrace()
     }
 }
+
+fun attachDocumentToGmail(context: Context, pdfFile: File) {
+    val fileUri = FileProvider.getUriForFile(context, "com.smtz.cvgenius.fileprovider", pdfFile)
+
+    val emailIntent = Intent(Intent.ACTION_SEND)
+    emailIntent.setPackage("com.google.android.gm")   //
+    emailIntent.type = "application/pdf"
+    emailIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+    emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+    try {
+        context.startActivity(emailIntent)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
