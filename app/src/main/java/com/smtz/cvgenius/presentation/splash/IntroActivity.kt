@@ -12,23 +12,21 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.common.defaultPrefs
 import com.smtz.cvgenius.common.get
 import com.smtz.cvgenius.common.set
-import com.smtz.cvgenius.databinding.ActivitySplashBinding
+import com.smtz.cvgenius.databinding.ActivityIntroBinding
 import com.smtz.cvgenius.presentation.home.HomeActivity
 
-@SuppressLint("CustomSplashScreen")
-class SplashActivity : AppCompatActivity() {
+class IntroActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivitySplashBinding
+    private lateinit var binding : ActivityIntroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // statusBar color ကို screen color အလိုက် ပြောင်းအောင်
@@ -44,7 +42,7 @@ class SplashActivity : AppCompatActivity() {
             val user = preference.get("new_user", "no")
 
             Log.d("asfasfdaf", "$user ")
-            
+
             if (user.equals("yes", ignoreCase = false)) {
                 startActivity(Intent(applicationContext, HomeActivity::class.java))
                 finish() // remove from activity stack
@@ -53,7 +51,7 @@ class SplashActivity : AppCompatActivity() {
 
         }, 1500L)
 
-        backgroundColorAnimation()                   // Background colors change Animation
+//        backgroundColorAnimation()                   // Background colors change Animation
         crossFadeTextChangeAnimation()               // Texts fade in/out Animation
         setUpListeners()
     }
@@ -78,6 +76,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    // Button fade in
     private fun crossFadeAnimation(view: View) {
         view.alpha = 0.0f              // 0% visible
 
@@ -113,8 +112,8 @@ class SplashActivity : AppCompatActivity() {
         }, 500)
     }
 
-    private fun backgroundColorAnimation() {
-        // 1. set 2bg_list.xml in drawable, 2.set bg in layout, 3.
+    private fun backgroundColorAnimation() {          // having glitch between changing color
+        // 1. set 2bg_list.xml in drawable, 2. set bg in layout (android:background="@drawable/splash_background_list"), 3.
         val animationDrawable: AnimationDrawable = binding.root.background as AnimationDrawable
 
         animationDrawable.apply {
@@ -124,7 +123,6 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("ResourceType")
     private fun moveImageAnimation() {
         // 1. set direction in xml, 2.
         binding.ivSplash.startAnimation(AnimationUtils.loadAnimation(

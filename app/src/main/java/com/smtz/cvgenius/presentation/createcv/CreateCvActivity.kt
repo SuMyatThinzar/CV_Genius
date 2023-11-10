@@ -3,6 +3,7 @@ package com.smtz.cvgenius.presentation.createcv
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,9 +16,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.ads.*
@@ -52,6 +56,7 @@ import com.smtz.cvgenius.presentation.preview.PreviewActivity
 import com.smtz.cvgenius.utils.BACK_PRESSED
 import com.smtz.cvgenius.utils.INTERSTITIAL_TAG
 import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
+import com.theartofdev.edmodo.cropper.CropImage
 
 class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDelegate {
 
@@ -63,7 +68,8 @@ class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDe
     private lateinit var mBannerAdView: AdView
 
     // Declare a loading flag
-    var isInterstitialAdLoading = false
+    private val REQUEST_CODE_PERMISSION_STORAGE = 100
+    private var isInterstitialAdLoading = false
     private var isInternetAvailable = false
     private var mCvId = System.currentTimeMillis()
     private var mCvModel: CvModel = CvModelImpl
@@ -71,7 +77,6 @@ class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDe
     private var nullCv: CvVO? = null
     private var selectedImage: ByteArray? = null
     private var mTemplateId: Int? = null
-
     // interstitial ad
     private var mInterstitialAd: InterstitialAd? = null
 
@@ -105,6 +110,8 @@ class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDe
         }
 
         mTemplateId = intent.getIntExtra(EXTRA_TEMPLATE_ID, 10000)
+
+        requestStoragePermission()
 
         setUpMarginsAndPaddingAccordingToAndroidVersions()
         setUpToolBar()
@@ -181,10 +188,22 @@ class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDe
             onBackPressed()
         }
         binding.btnUploadPhoto.setOnClickListener {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png")) // Add more supported image formats if needed
-            startActivityForResult(intent, IMAGE_REQUEST_CODE)
+//            val intent = Intent(Intent.ACTION_GET_CONTENT)
+//            intent.type = "image/*"
+//            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png")) // Add more supported image formats if needed
+//            startActivityForResult(intent, IMAGE_REQUEST_CODE)
+
+//            val builder = AlertDialog.Builder(this)
+//                .setTitle("Pick Image From")
+//                .setPositiveButton("Gallery") { dialog, _->
+                    if (checkStoragePermission()) {
+                        CropImage.activity().start(this)
+                    } else {
+                        requestStoragePermission()
+                    }
+//                }
+
+//            builder.show()
         }
         binding.btnRemovePhoto.setOnClickListener {
             binding.ivSelectedImage.setImageResource(R.drawable.ic_select_photo)
@@ -382,11 +401,18 @@ class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDe
     override fun onActivityResult(requestCode:Int,resultCode:Int , data:Intent? ) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK && data?.data != null) {
-            val selectedImageUri = data.data
-            binding.ivSelectedImage.setImageURI(selectedImageUri)
+        // Default Image Picker
+//        if(requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK && data?.data != null) {
+//            val selectedImageUri = data.data
+//            binding.ivSelectedImage.setImageURI(selectedImageUri)
 
-            val inputStream = contentResolver.openInputStream(selectedImageUri!!)
+        // Crop Image
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            val result = CropImage.getActivityResult(data).uri
+            binding.ivSelectedImage.setImageURI(result)
+
+            // Change to ByteArray to save in Database
+            val inputStream = contentResolver.openInputStream(result!!)
             val byteArray = inputStream?.readBytes()
             inputStream?.close()
 
@@ -409,15 +435,40 @@ class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDe
         if (mCvVo!!.personalDetails != null) {
             mCvModel.insertCV(mCvVo!!)  // save new changes
             showInterstitialAd(BACK_PRESSED)
+            super.onBackPressed()
 
         } else {
             showDialogOnBackPressedAndPreview("")
         }
     }
 
+    private fun checkStoragePermission(): Boolean {
+        return ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestStoragePermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSION_STORAGE)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSION_STORAGE) {
+            if (grantResults.size >= 0) {
+                val writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
+                if (writeStorageAccepted)
+                    CropImage.activity().start(this)
+                else
+                    Toast.makeText(applicationContext, "Please Enable Storage Permission", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun setUpMarginsAndPaddingAccordingToAndroidVersions() {
 
-        // for Android 10 above
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
             val marginMedium3 = resources.getDimensionPixelSize(R.dimen.margin_medium_3)
             val marginCardMedium3 = resources.getDimensionPixelSize(R.dimen.margin_card_medium_3)

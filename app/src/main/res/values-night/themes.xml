@@ -15,6 +15,10 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="Theme.CVGeniusSplash" parent="SameThemeDarkLight">
+        <item name="android:windowBackground">@drawable/splash_logo_with_background</item>
+    </style>
+
     <style name="Theme.CVGenius.TransparentStatusBar" parent="Theme.CVGenius">
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:statusBarColor">@color/colorPrimaryVariant</item>

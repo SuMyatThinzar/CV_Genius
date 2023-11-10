@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:name=".CVGeniusApplication"
@@ -69,7 +70,6 @@
             android:name=".presentation.createcv.CreateCvActivity"
             android:exported="true"/>
 
-
         <activity
             android:name=".presentation.template.SampleTemplateActivity"
             android:exported="true"/>
@@ -83,20 +83,20 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
+
         <activity
-            android:name=".presentation.splash.SplashActivity"
+            android:name=".presentation.splash.IntroActivity"
             android:exported="true"
             android:theme="@style/Theme.CVGeniusSplash">
 
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
 
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-        <!--   For cache file saving     -->
+        <!-- For cache file saving -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.smtz.cvgenius.fileprovider"
@@ -110,6 +110,10 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id"/>
+
+        <!-- For Crop Image -->
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/> <!-- optional (needed if default theme has no action bar) -->
 
     </application>
 

@@ -246,7 +246,7 @@ class PreviewActivity : BaseActivity<ActivityPreviewBinding>() {
             // create in public default directory
             val fileName = "${mCvVO?.personalDetails?.firstName ?: System.currentTimeMillis()} ${mCvVO?.personalDetails?.lastName} ${System.currentTimeMillis()}.pdf"
 
-            // above Api 29, to save the file in the public directory, you need to use the MediaStore API to save in that directory. Unless you have to save in your specific directory with your app's package name
+            // above Api 29(10), to save the file in the public directory, you need to use the MediaStore API to save in that directory. Unless you have to save in your specific directory with your app's package name
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val contentValues = ContentValues().apply {
                     put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)

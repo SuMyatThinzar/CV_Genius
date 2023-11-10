@@ -1,6 +1,5 @@
 package com.smtz.cvgenius.presentation.home
 
-import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.smtz.cvgenius.R
 import com.smtz.cvgenius.databinding.ViewHolderCvListBinding
 import com.smtz.cvgenius.domain.model.CvVO
 
-@SuppressLint("RestrictedApi")
 class CvListViewHolder(private var binding: ViewHolderCvListBinding, private val delegate: CvDelegate) : RecyclerView.ViewHolder(binding.root) {
 
     private var mDataVO : CvVO ? = null

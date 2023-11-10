@@ -15,7 +15,7 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="Theme.CVGeniusSplash" parent="Theme.CVGenius">
+    <style name="Theme.CVGeniusSplash" parent="SameThemeDarkLight">
         <item name="android:windowBackground">@drawable/splash_logo_with_background</item>
     </style>
 

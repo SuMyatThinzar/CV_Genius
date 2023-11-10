@@ -82,4 +82,10 @@
         <item name="neumorph_cornerSizeBottomRight">12dp</item>
     </style>
 
+    <!--  Neumorphism Get Started button  -->
+    <style name="CustomShapeAppearanceGetStarted">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">4dp</item>
+    </style>
+
 </resources>
