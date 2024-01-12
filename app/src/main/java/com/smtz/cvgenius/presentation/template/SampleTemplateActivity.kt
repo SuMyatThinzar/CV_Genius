@@ -4,32 +4,27 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.browseractions.BrowserActionsIntent.EXTRA_TYPE
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.common.delegates.SampleTemplateDelegate
 import com.smtz.cvgenius.common.dummy.templateList
-import com.smtz.cvgenius.common.setUpAppBarTitleManually
-import com.smtz.cvgenius.common.setUpLayoutParams
+import com.smtz.cvgenius.common.utils.setUpAppBarTitleManually
+import com.smtz.cvgenius.common.utils.setUpLayoutParams
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivitySampleTemplateBinding
 import com.smtz.cvgenius.domain.model.TemplateVO
 import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
 import com.smtz.cvgenius.presentation.preview.PreviewActivity
-import com.smtz.cvgenius.utils.PREVIEW_ACTIVITY
 import com.smtz.cvgenius.utils.tabList
 
 class SampleTemplateActivity : AppCompatActivity(), SampleTemplateDelegate {

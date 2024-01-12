@@ -2,18 +2,14 @@ package com.smtz.cvgenius.presentation.details.reference
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.MobileAds
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.core.BaseActivity
-import com.smtz.cvgenius.data.repository.CvModelImpl
-import com.smtz.cvgenius.databinding.ActivityProjectDetailBinding
 import com.smtz.cvgenius.databinding.ActivityReferenceBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.ReferenceVO
-import com.smtz.cvgenius.domain.repository.CvModel
 
 class ReferenceActivity : BaseActivity<ActivityReferenceBinding>(), ButtonSaveReferenceDelegate {
 

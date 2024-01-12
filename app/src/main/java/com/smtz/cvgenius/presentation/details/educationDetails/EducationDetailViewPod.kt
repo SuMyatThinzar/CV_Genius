@@ -9,12 +9,11 @@ import android.view.View
 import android.widget.EditText
 import android.widget.NumberPicker
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.collapseCardView
-import com.smtz.cvgenius.common.expandCardView
+import com.smtz.cvgenius.common.utils.collapseCardView
+import com.smtz.cvgenius.common.utils.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodEducationDetailBinding
 import com.smtz.cvgenius.domain.model.EducationDetailVO
 import java.util.*

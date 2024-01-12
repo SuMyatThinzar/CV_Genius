@@ -8,7 +8,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.databinding.ActivityChangeTemplateBinding
 import com.smtz.cvgenius.domain.model.CvVO

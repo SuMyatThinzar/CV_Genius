@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/background_edit_text"/>
+    <item android:drawable="@drawable/ic_arrow_drop_down_24dp"
+        android:gravity="end|center_vertical"
+        android:end="@dimen/margin_medium"/>
+</layer-list>

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.smtz.cvgenius.presentation.details.educationDetails.EducationDetailViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="@dimen/margin_medium_3"
+    android:layout_marginEnd="@dimen/margin_medium_3"
+    android:layout_marginBottom="@dimen/margin_medium_3"
+    app:cardCornerRadius="@dimen/margin_card_medium"
+    app:cardElevation="10dp">
+
+    <RelativeLayout
+        android:id="@+id/containerCollapsed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorCardView">
+
+        <TextView
+            android:id="@+id/tvDetailName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingTop="@dimen/margin_large"
+            android:paddingEnd="@dimen/margin_xxlarge"
+            android:paddingBottom="@dimen/margin_large"
+            android:singleLine="true"
+            android:text="@string/lbl_education_details"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="@dimen/margin_medium_3"
+            android:layout_height="@dimen/margin_medium_3"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:src="@drawable/ic_bin" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/containerExpanded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_medium_2"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvDetailNameExpanded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="@dimen/margin_large"
+            android:paddingEnd="@dimen/margin_medium_2"
+            android:background="@color/colorCardView"
+            android:paddingTop="@dimen/margin_large"
+            android:paddingBottom="@dimen/margin_large"
+            android:singleLine="true"
+            android:text="@string/lbl_education_details"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <!-- Degree/Diploma Name  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_medium_2"
+            android:paddingEnd="@dimen/margin_medium_2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_small"
+                android:text="@string/lbl_degree_diploma_name"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/text_regular" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDegreeDiplomaName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_edit_text"
+                android:hint="Computer Science"
+                android:inputType="text"
+                android:padding="@dimen/margin_medium"
+                android:singleLine="true"
+                android:textColor="@color/colorSecondaryText"
+                android:textColorHint="@color/colorProfileText"
+                android:textCursorDrawable="@drawable/custom_cursor"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:id="@+id/errorDegreeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_small"
+                android:text="Field is mandatory"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/text_small"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+        <!-- Level of Education  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_card_medium_n"
+            android:paddingStart="@dimen/margin_medium_2"
+            android:paddingEnd="@dimen/margin_medium_2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_small"
+                android:text="@string/highest_level_of_education"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/text_regular" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLevelOfEdu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_edit_text"
+                android:hint="B.Sc"
+                android:inputType="text"
+                android:padding="@dimen/margin_medium"
+                android:singleLine="true"
+                android:textColor="@color/colorSecondaryText"
+                android:textColorHint="@color/colorProfileText"
+                android:textCursorDrawable="@drawable/custom_cursor"
+                android:textSize="@dimen/text_small" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/errorLevelOfEdu"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:paddingStart="@dimen/margin_small"-->
+<!--                android:text="Field is mandatory"-->
+<!--                android:textColor="@android:color/holo_red_dark"-->
+<!--                android:textSize="@dimen/text_small"-->
+<!--                android:visibility="invisible" />-->
+
+        </LinearLayout>
+
+        <!-- School/College/University Name  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_medium_2"
+            android:paddingEnd="@dimen/margin_medium_2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_small"
+                android:text="@string/lbl_school_college_university_name"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/text_regular" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUniversityName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_edit_text"
+                android:hint="Harvard University"
+                android:inputType="text"
+                android:padding="@dimen/margin_medium"
+                android:singleLine="true"
+                android:textColor="@color/colorSecondaryText"
+                android:textColorHint="@color/colorProfileText"
+                android:textCursorDrawable="@drawable/custom_cursor"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:id="@+id/errorUniversityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_small"
+                android:text="Field is mandatory"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/text_small"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <!-- Credential URL  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_card_medium_n"
+            android:paddingStart="@dimen/margin_medium_2"
+            android:paddingEnd="@dimen/margin_medium_2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_small"
+                android:text="@string/lbl_credential_url"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="@dimen/text_regular" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCredentialURL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_edit_text"
+                android:hint="https://smtz.com/cvgenius/"
+                android:inputType="text"
+                android:padding="@dimen/margin_medium"
+                android:singleLine="true"
+                android:textColor="@color/colorSecondaryText"
+                android:textColorHint="@color/colorProfileText"
+                android:textCursorDrawable="@drawable/custom_cursor"
+                android:textSize="@dimen/text_small" />
+
+            <TextView
+                android:id="@+id/errorCredentialURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_small"
+                android:text="@string/lbl_field_is_mandatory"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/text_small"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+        <!-- Date  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_card_medium_n"
+            android:paddingEnd="@dimen/margin_medium_2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/margin_medium_2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
+                    android:text="From"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/text_regular" />
+
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_edit_text"
+                    android:hint="06/2012"
+                    android:padding="@dimen/margin_medium"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textColorHint="@color/colorProfileText"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:textSize="@dimen/text_small"/>
+
+                <TextView
+                    android:id="@+id/errorStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/margin_small"
+                    android:text="Field is mandatory"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="@dimen/text_small"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/margin_medium_2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_small"
+                    android:text="To"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="@dimen/text_regular" />
+
+                <TextView
+                    android:id="@+id/endDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_edit_text"
+                    android:hint="04/2016"
+                    android:padding="@dimen/margin_medium"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textColorHint="@color/colorProfileText"
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:textSize="@dimen/text_small" />
+
+                <TextView
+                    android:id="@+id/errorEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/margin_small"
+                    android:text="Field is mandatory"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="@dimen/text_small"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/cbEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_card_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2_n"
+            android:paddingEnd="@dimen/margin_medium_2"
+            android:buttonTint="@color/colorProfileText"
+            android:text="Currently studying"
+            android:textColor="@color/colorProfileText"
+            android:textSize="@dimen/text_small"/>
+
+        <soup.neumorphism.NeumorphButton
+            style="@style/Widget.Neumorph.Button"
+            app:neumorph_shapeType="flat"
+            app:neumorph_shapeAppearance="@style/CustomShapeAppearanceTextButton"
+            app:neumorph_backgroundColor="@color/colorAccent"
+            app:neumorph_shadowColorLight="#FFFDF4"
+            app:neumorph_insetTop="8dp"
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_button"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="@dimen/margin_medium_2"
+            android:text="@string/lbl_save"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSecondaryText"/>
+
+    </LinearLayout>
+
+    </com.smtz.cvgenius.presentation.details.educationDetails.EducationDetailViewPod>

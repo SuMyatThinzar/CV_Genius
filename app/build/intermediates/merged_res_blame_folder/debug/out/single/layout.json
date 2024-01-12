@@ -1,0 +1,150 @@
+[
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_education_detail.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_education_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_add_reference.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_add_reference.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_sample_template.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_sample_template.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_zresume_second_two.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_zresume_second_two.xml"
+    },
+    {
+        "merged": "com.smtz.cvgenius.app-mergeDebugResources-49:/layout/activity_signature.xml",
+        "source": "com.smtz.cvgenius.app-main-52:/layout/activity_signature.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\dialog_layout.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\dialog_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_home.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_project_detail.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_project_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_zresume_second_one.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_zresume_second_one.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_detail_button.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_detail_button.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_skill_achievement.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_skill_achievement.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_personal_detail.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_personal_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_change_template.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_change_template.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_signature.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_signature.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_add_skill_achievement_objective_sign.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_add_skill_achievement_objective_sign.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\dialog_month_year_picker.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\dialog_month_year_picker.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_add_project_details.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_add_project_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_achievement.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_achievement.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_work_experience.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_work_experience.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_create_cv.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_create_cv.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_zresume_second_three.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_zresume_second_three.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\menu_item_layout.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\menu_item_layout.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_skill.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_skill.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_references.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_references.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_add_work_experience.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_add_work_experience.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_objective.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_objective.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_work_experience.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_work_experience.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_zresume_free_one.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_zresume_free_one.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_preview.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_preview.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\popup_menu.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\popup_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_reference.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_reference.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_cv_list.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_cv_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_education_detail.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_education_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_add_education_details.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_add_education_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_pod_project_detail.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_pod_project_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\activity_intro.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\activity_intro.xml"
+    },
+    {
+        "merged": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-mergeDebugResources-49:\\layout\\view_holder_sample_template.xml",
+        "source": "C:\\Users\\ASUS\\.gradle\\daemon\\8.0\\com.smtz.cvgenius.app-main-52:\\layout\\view_holder_sample_template.xml"
+    }
+]

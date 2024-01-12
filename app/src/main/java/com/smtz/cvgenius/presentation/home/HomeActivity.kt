@@ -1,36 +1,34 @@
 package com.smtz.cvgenius.presentation.home
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.smtz.cvgenius.R
 import com.smtz.cvgenius.BuildConfig
-import com.smtz.cvgenius.common.CvSingleton
-import com.smtz.cvgenius.common.checkInternetConnection
-import com.smtz.cvgenius.common.setUpAppBarTitleManually
-import com.smtz.cvgenius.common.setUpLayoutParams
+import com.smtz.cvgenius.common.components.CvSingleton
+import com.smtz.cvgenius.common.utils.checkInternetConnection
+import com.smtz.cvgenius.common.utils.setUpAppBarTitleManually
+import com.smtz.cvgenius.common.utils.setUpLayoutParams
+import com.smtz.cvgenius.common.utils.launchMarket
 import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
-import com.smtz.cvgenius.databinding.ActivityCreateCvBinding
 import com.smtz.cvgenius.databinding.ActivityHomeBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
 import com.smtz.cvgenius.presentation.preview.PreviewActivity
+import com.smtz.cvgenius.common.utils.shareApp
 import com.smtz.cvgenius.presentation.template.SampleTemplateActivity
 import com.smtz.cvgenius.utils.BACK_PRESSED
 import com.smtz.cvgenius.utils.CREATE_CV_ACTIVITY
@@ -141,8 +139,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), CvDelegate {
 
         binding.rvCreatedCV.apply {
             adapter = mCvListAdapter
-            layoutManager =
-                LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
         }
     }
 
@@ -164,24 +161,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), CvDelegate {
             startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
         }
         binding.btnShare.setOnClickListener {
-            shareApp()
+            shareApp(this)
+        }
+        binding.btnRate.setOnClickListener {
+            launchMarket(this)
         }
         binding.btnTemplates.setOnClickListener {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
             startActivity(SampleTemplateActivity.newIntent(this, SampleTemplateActivity.CREATE_NEW))
         }
-    }
-
-    private fun shareApp() {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Check out this app!")
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-            "Hey! I found this amazing app that can create professional Resume easily. Download it on Google Play: [App Store Link]."
-        )
-
-        val chooser = Intent.createChooser(shareIntent, "Share app via ...")
-        startActivity(chooser)
     }
 
     private fun setUpToolBar() {

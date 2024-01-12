@@ -2,7 +2,7 @@ package com.smtz.cvgenius
 
 import android.app.Application
 import com.google.android.gms.ads.MobileAds
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.common.ads.AppOpenAdManager
 import com.smtz.cvgenius.data.repository.CvModelImpl
 

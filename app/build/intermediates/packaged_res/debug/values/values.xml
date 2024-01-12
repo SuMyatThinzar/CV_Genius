@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <color name="black">#FF000000</color>
+    <color name="colorAccent">#FFDE67</color>
+    <color name="colorCardView">#FFF5D0</color>
+    <color name="colorCardViewTransparent">#80CAC5AF</color>
+    <color name="colorLinkText">#709DFF</color>
+    <color name="colorPrimary">#F4F4F4</color>
+    <color name="colorPrimaryDark">#161c24</color>
+    <color name="colorPrimaryLight">#eeeeee</color>
+    <color name="colorPrimaryVariant">#D0B555</color>
+    <color name="colorPrimaryVariantTransparent">#80AAA27B</color>
+    <color name="colorProfileText">#9F987F</color>
+    <color name="colorResumeSecondOne">#323b4c</color>
+    <color name="colorResumeSecondThree">#545454</color>
+    <color name="colorResumeSecondTwo">#3f3d86</color>
+    <color name="colorSecondaryText">#5F542A</color>
+    <color name="colorToolbar">#37311B</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="height_back_btn">26dp</dimen>
+    <dimen name="height_button">66dp</dimen>
+    <dimen name="height_detail_toolbar">120dp</dimen>
+    <dimen name="height_toolbar">145dp</dimen>
+    <dimen name="margin_bottom_get_started">100dp</dimen>
+    <dimen name="margin_card_medium">6dp</dimen>
+    <dimen name="margin_card_medium_2">12dp</dimen>
+    <dimen name="margin_card_medium_2_n">-12dp</dimen>
+    <dimen name="margin_card_medium_3">18dp</dimen>
+    <dimen name="margin_card_medium_n">-6dp</dimen>
+    <dimen name="margin_detail_button">34dp</dimen>
+    <dimen name="margin_detail_button_bottom">28dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_large_n">-26dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_medium_2">16dp</dimen>
+    <dimen name="margin_medium_2_n">-16dp</dimen>
+    <dimen name="margin_medium_3">20dp</dimen>
+    <dimen name="margin_medium_3_n">-18dp</dimen>
+    <dimen name="margin_medium_4">28dp</dimen>
+    <dimen name="margin_medium_4_n">-22dp</dimen>
+    <dimen name="margin_medium_5">38dp</dimen>
+    <dimen name="margin_medium_n">-8dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_small_n">-4dp</dimen>
+    <dimen name="margin_ultra_small">2dp</dimen>
+    <dimen name="margin_xlarge">32dp</dimen>
+    <dimen name="margin_xlarge_n">-32dp</dimen>
+    <dimen name="margin_xxlarge">48dp</dimen>
+    <dimen name="margin_xxlarge_n">-38dp</dimen>
+    <dimen name="margin_xxxlarge">74dp</dimen>
+    <dimen name="margin_xxxlarge_n">-48dp</dimen>
+    <dimen name="margin_xxxxlarge">100dp</dimen>
+    <dimen name="size_drawer_icon">20dp</dimen>
+    <dimen name="ten_dp">10dp</dimen>
+    <dimen name="text_big">40sp</dimen>
+    <dimen name="text_big_2x">60sp</dimen>
+    <dimen name="text_big_3x">88sp</dimen>
+    <dimen name="text_content_resume_free_one">7.13sp</dimen>
+    <dimen name="text_content_resume_second_one">6.5sp</dimen>
+    <dimen name="text_drawer_heading">20sp</dimen>
+    <dimen name="text_heading_1x">24sp</dimen>
+    <dimen name="text_heading_2x">32sp</dimen>
+    <dimen name="text_heading_resume_free_one">9.95sp</dimen>
+    <dimen name="text_heading_resume_second_one">11.5sp</dimen>
+    <dimen name="text_medium">18sp</dimen>
+    <dimen name="text_name_resume_free_one">22.87sp</dimen>
+    <dimen name="text_name_resume_second_one">19.2sp</dimen>
+    <dimen name="text_regular">14sp</dimen>
+    <dimen name="text_regular_2x">16sp</dimen>
+    <dimen name="text_regular_3x">20sp</dimen>
+    <dimen name="text_regular_4x">28sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_smaller">8sp</dimen>
+    <dimen name="text_title_resume_second_one">7.5sp</dimen>
+    <dimen name="width_back_btn">24dp</dimen>
+    <string name="admob_app_id" translatable="false">ca-app-pub-4196466051386479~2501989655</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-4196466051386479/6761617101</string>
+    <string name="app_name">CV Genius</string>
+    <string name="drawer_close">" Close Drawer"</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="highest_level_of_education">Highest Level of Education</string>
+    <string name="lbl_achievements">Achievements</string>
+    <string name="lbl_address">Address</string>
+    <string name="lbl_change_template">Change Template</string>
+    <string name="lbl_choose_templates">Choose Templates</string>
+    <string name="lbl_clear">Clear</string>
+    <string name="lbl_company">Company</string>
+    <string name="lbl_contact">Contact</string>
+    <string name="lbl_create_job_professional_cv_in_minutes">Create Job-professional CV in minutes!</string>
+    <string name="lbl_create_my_cv">Create My CV</string>
+    <string name="lbl_create_your_cv_more_professional">Create Your CV \n More Professional</string>
+    <string name="lbl_credential_url">Credential URL</string>
+    <string name="lbl_cv_templates">CV Templates</string>
+    <string name="lbl_date_of_birth">Date of Birth</string>
+    <string name="lbl_degree_diploma_name">Degree/Diploma Name</string>
+    <string name="lbl_delete">Delete</string>
+    <string name="lbl_description">Description</string>
+    <string name="lbl_duplicate">Duplicate</string>
+    <string name="lbl_edit_my_cv">Edit My CV</string>
+    <string name="lbl_education">Educations</string>
+    <string name="lbl_education_details">Education Details</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_email_address">Email Address</string>
+    <string name="lbl_feedback">Feedback</string>
+    <string name="lbl_field_is_mandatory">Field is mandatory</string>
+    <string name="lbl_first_name">First Name</string>
+    <string name="lbl_gender">Gender</string>
+    <string name="lbl_get_started">Get Started</string>
+    <string name="lbl_last_name">Last Name</string>
+    <string name="lbl_logout">Logout</string>
+    <string name="lbl_my_profile">My Profile</string>
+    <string name="lbl_nationality">Nationality</string>
+    <string name="lbl_objective">Objective</string>
+    <string name="lbl_personal_details">Personal Details</string>
+    <string name="lbl_phone_number">Phone Number</string>
+    <string name="lbl_position">Position</string>
+    <string name="lbl_privacy_policy">Privacy Policy</string>
+    <string name="lbl_professional_title">Professional Title</string>
+    <string name="lbl_project_details">Project Details</string>
+    <string name="lbl_project_title">Project Title</string>
+    <string name="lbl_rate_us">Rate Us</string>
+    <string name="lbl_references">Reference</string>
+    <string name="lbl_remove">Remove</string>
+    <string name="lbl_save">Save</string>
+    <string name="lbl_school_college_university_name">School /College /University Name</string>
+    <string name="lbl_select_your_profile_photo">Select your profile photo</string>
+    <string name="lbl_share">Share</string>
+    <string name="lbl_share_app">Share App</string>
+    <string name="lbl_signature">Signature</string>
+    <string name="lbl_skills">Skills</string>
+    <string name="lbl_upload_photo">Upload Photo</string>
+    <string name="lbl_view_my_cv">View My CV</string>
+    <string name="lbl_website">Website</string>
+    <string name="lbl_work_experience">Work Experience</string>
+    <style name="CustomAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/colorSecondaryText</item>
+        <item name="colorOnPrimary">@color/colorSecondaryText</item>
+        <item name="android:textColorSecondary">@color/colorSecondaryText</item>
+    </style>
+    <style name="CustomShapeAppearance">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        
+        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_xlarge</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/margin_xlarge</item>
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_xlarge</item>
+        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_xlarge</item>
+    </style>
+    <style name="CustomShapeAppearanceGetStarted">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">4dp</item>
+    </style>
+    <style name="CustomShapeAppearanceImageButton">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        
+        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_small</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/margin_small</item>
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_small</item>
+        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_small</item>
+    </style>
+    <style name="CustomShapeAppearanceTabBarBottom">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        
+        <item name="neumorph_cornerSizeTopLeft">0dp</item>
+        <item name="neumorph_cornerSizeTopRight">0dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">12dp</item>
+        <item name="neumorph_cornerSizeBottomRight">12dp</item>
+    </style>
+    <style name="CustomShapeAppearanceTextButton">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        
+        <item name="neumorph_cornerSizeTopLeft">@dimen/margin_medium</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/margin_medium</item>
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/margin_medium</item>
+        <item name="neumorph_cornerSizeBottomRight">@dimen/margin_medium</item>
+    </style>
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="textAllCaps">false</item>
+    </style>
+    <style name="SameThemeDarkLight" parent="Theme.CVGenius.TransparentStatusBar">
+        
+        <item name="android:forceDarkAllowed" ns1:targetApi="q">false</item>
+    </style>
+    <style name="Theme.CVGenius" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">@color/colorAccent</item>
+
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="Theme.CVGenius.TransparentStatusBar" parent="Theme.CVGenius">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+        
+
+    </style>
+    <style name="Theme.CVGeniusSplash" parent="SameThemeDarkLight">
+        <item name="android:windowBackground">@drawable/splash_logo_with_background</item>
+    </style>
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <declare-styleable name="CollapsibleHeaderView">
+        <attr format="dimension" name="expandedHeight"/>
+        <attr format="dimension" name="collapsedHeight"/>
+    </declare-styleable>
+    <declare-styleable name="RoundedCornerImageView">
+        <attr format="dimension" name="cornerRadius"/>
+    </declare-styleable>
+</resources>

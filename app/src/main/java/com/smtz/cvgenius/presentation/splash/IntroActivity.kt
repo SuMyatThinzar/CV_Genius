@@ -1,6 +1,5 @@
 package com.smtz.cvgenius.presentation.splash
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
@@ -14,9 +13,9 @@ import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.defaultPrefs
-import com.smtz.cvgenius.common.get
-import com.smtz.cvgenius.common.set
+import com.smtz.cvgenius.common.components.defaultPrefs
+import com.smtz.cvgenius.common.components.get
+import com.smtz.cvgenius.common.components.set
 import com.smtz.cvgenius.databinding.ActivityIntroBinding
 import com.smtz.cvgenius.presentation.home.HomeActivity
 

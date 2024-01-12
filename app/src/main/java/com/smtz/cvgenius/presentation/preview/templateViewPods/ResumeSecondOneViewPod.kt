@@ -12,11 +12,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.databinding.ViewPodZresumeSecondOneBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
-import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
+import com.smtz.cvgenius.common.utils.setUpContentVisibilityResumeSecondOne
 
 // not used
 class ResumeSecondOneViewPod(context: Context, attrs: AttributeSet? = null) :

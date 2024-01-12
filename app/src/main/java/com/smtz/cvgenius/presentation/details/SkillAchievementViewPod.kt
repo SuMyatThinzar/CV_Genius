@@ -9,8 +9,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.collapseCardView
-import com.smtz.cvgenius.common.expandCardView
+import com.smtz.cvgenius.common.utils.collapseCardView
+import com.smtz.cvgenius.common.utils.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodSkillAchievementBinding
 import com.smtz.cvgenius.domain.model.*
 import com.smtz.cvgenius.utils.achievement

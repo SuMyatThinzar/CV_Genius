@@ -1,24 +1,18 @@
 package com.smtz.cvgenius.presentation.details.educationDetails
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.ViewTreeObserver
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivityEducationDetailBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.EducationDetailVO
 import com.smtz.cvgenius.domain.repository.CvModel
-import com.smtz.cvgenius.utils.setUpTitleAndButton
 
 class EducationDetailActivity : BaseActivity<ActivityEducationDetailBinding>(),
     ButtonSaveEducationDelegate {

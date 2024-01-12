@@ -12,8 +12,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.collapseCardView
-import com.smtz.cvgenius.common.expandCardView
+import com.smtz.cvgenius.common.utils.collapseCardView
+import com.smtz.cvgenius.common.utils.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodWorkExperienceBinding
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
 import java.util.Calendar

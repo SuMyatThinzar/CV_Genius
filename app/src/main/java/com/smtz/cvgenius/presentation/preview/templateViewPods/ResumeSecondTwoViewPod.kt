@@ -16,7 +16,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.databinding.ViewPodZresumeSecondTwoBinding
 import com.smtz.cvgenius.domain.model.AchievementVO
 import com.smtz.cvgenius.domain.model.CvVO
@@ -25,8 +25,7 @@ import com.smtz.cvgenius.domain.model.ProjectDetailVO
 import com.smtz.cvgenius.domain.model.ReferenceVO
 import com.smtz.cvgenius.domain.model.SkillsVO
 import com.smtz.cvgenius.domain.model.WorkExperienceVO
-import com.smtz.cvgenius.presentation.preview.utils.getCurrentPageHeight
-import com.smtz.cvgenius.presentation.preview.utils.setUpContentVisibilityResumeSecondOne
+import com.smtz.cvgenius.common.utils.getCurrentPageHeight
 import com.smtz.cvgenius.utils.achievement
 import com.smtz.cvgenius.utils.contact
 import com.smtz.cvgenius.utils.education

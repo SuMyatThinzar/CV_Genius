@@ -1,16 +1,12 @@
 package com.smtz.cvgenius.presentation.details.skills
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.ViewTreeObserver
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivitySkillBinding
@@ -19,7 +15,6 @@ import com.smtz.cvgenius.domain.repository.CvModel
 import com.smtz.cvgenius.presentation.details.AddSkillAchievementAdapter
 import com.smtz.cvgenius.presentation.details.ButtonSaveSkillAchievementDelegate
 import com.smtz.cvgenius.presentation.details.SkillAchievementViewPod
-import com.smtz.cvgenius.utils.setUpTitleAndButton
 import com.smtz.cvgenius.utils.skill
 
 class SkillActivity : BaseActivity<ActivitySkillBinding>(),

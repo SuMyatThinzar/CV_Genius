@@ -10,7 +10,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -18,26 +17,21 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.smtz.cvgenius.BuildConfig
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
-import com.smtz.cvgenius.common.checkInternetConnection
-import com.smtz.cvgenius.common.setUpAppBarTitleManually
-import com.smtz.cvgenius.common.setUpLayoutParams
+import com.smtz.cvgenius.common.components.CvSingleton
+import com.smtz.cvgenius.common.utils.checkInternetConnection
+import com.smtz.cvgenius.common.utils.setUpAppBarTitleManually
+import com.smtz.cvgenius.common.utils.setUpLayoutParams
 import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
-import com.smtz.cvgenius.databinding.ActivityChangeTemplateBinding
 import com.smtz.cvgenius.databinding.ActivityCreateCvBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.repository.CvModel
@@ -460,7 +454,7 @@ class CreateCvActivity : BaseActivity<ActivityCreateCvBinding>(), DetailButtonDe
             if (grantResults.size >= 0) {
                 val writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
                 if (writeStorageAccepted)
-                    CropImage.activity().start(this)
+//                    CropImage.activity().start(this)
                 else
                     Toast.makeText(applicationContext, "Please Enable Storage Permission", Toast.LENGTH_SHORT).show()
             }

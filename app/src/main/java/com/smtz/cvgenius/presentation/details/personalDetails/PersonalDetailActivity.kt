@@ -1,31 +1,20 @@
 package com.smtz.cvgenius.presentation.details.personalDetails
 
-import android.animation.ValueAnimator
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.nfc.NfcAdapter.EXTRA_ID
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.ViewTreeObserver.OnScrollChangedListener
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
-import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
-import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.CvSingleton
+import com.smtz.cvgenius.common.components.CvSingleton
 import com.smtz.cvgenius.core.BaseActivity
 import com.smtz.cvgenius.data.repository.CvModelImpl
 import com.smtz.cvgenius.databinding.ActivityPersonalDetailBinding
 import com.smtz.cvgenius.domain.model.CvVO
 import com.smtz.cvgenius.domain.model.PersonalDetailVO
 import com.smtz.cvgenius.domain.repository.CvModel
-import com.smtz.cvgenius.presentation.createcv.CreateCvActivity
-import com.smtz.cvgenius.utils.setUpTitleAndButton
 
 
 class PersonalDetailActivity : BaseActivity<ActivityPersonalDetailBinding>() {

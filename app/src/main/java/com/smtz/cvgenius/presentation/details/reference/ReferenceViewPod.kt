@@ -4,21 +4,15 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
-import android.widget.NumberPicker
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.smtz.cvgenius.R
-import com.smtz.cvgenius.common.collapseCardView
-import com.smtz.cvgenius.common.expandCardView
+import com.smtz.cvgenius.common.utils.collapseCardView
+import com.smtz.cvgenius.common.utils.expandCardView
 import com.smtz.cvgenius.databinding.ViewPodReferencesBinding
-import com.smtz.cvgenius.domain.model.ProjectDetailVO
 import com.smtz.cvgenius.domain.model.ReferenceVO
-import com.smtz.cvgenius.presentation.details.projectDetails.ButtonSaveProjectDelegate
-import java.util.Calendar
 
 class ReferenceViewPod  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
